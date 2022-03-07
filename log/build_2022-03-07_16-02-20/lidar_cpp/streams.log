@@ -1,0 +1,312 @@
+[0.023s] Invoking command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake /home/arvid/Documents/ros2/lidar-ws/src/lidar_cpp -DCMAKE_INSTALL_PREFIX=/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp
+[0.038s] -- Found ament_cmake: 1.1.5 (/opt/ros/galactic/share/ament_cmake/cmake)
+[0.065s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.065s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.136s] -- Found rclcpp: 9.2.0 (/opt/ros/galactic/share/rclcpp/cmake)
+[0.174s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.178s] -- Found rosidl_adapter: 2.2.1 (/opt/ros/galactic/share/rosidl_adapter/cmake)
+[0.336s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.393s] -- Found rmw_implementation_cmake: 3.3.1 (/opt/ros/galactic/share/rmw_implementation_cmake/cmake)
+[0.394s] -- Found rmw_cyclonedds_cpp: 0.22.4 (/opt/ros/galactic/share/rmw_cyclonedds_cpp/cmake)
+[0.416s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[0.569s] -- Found sensor_msgs: 2.2.4 (/opt/ros/galactic/share/sensor_msgs/cmake)
+[0.721s] -- Eigen found (include: /usr/include/eigen3, version: 3.3.7)
+[0.833s] -- The imported target "vtkParseOGLExt" references the file
+[0.834s]    "/usr/bin/vtkParseOGLExt-7.1"
+[0.834s] but this file does not exist.  Possible reasons include:
+[0.835s] * The file was deleted, renamed, or moved to another location.
+[0.835s] * An install or uninstall procedure did not complete successfully.
+[0.835s] * The installation package was faulty and contained
+[0.835s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.836s] but not all the files it references.
+[0.836s] 
+[0.836s] -- The imported target "vtkRenderingPythonTkWidgets" references the file
+[0.836s]    "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+[0.837s] but this file does not exist.  Possible reasons include:
+[0.837s] * The file was deleted, renamed, or moved to another location.
+[0.837s] * An install or uninstall procedure did not complete successfully.
+[0.837s] * The installation package was faulty and contained
+[0.838s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.838s] but not all the files it references.
+[0.838s] 
+[0.838s] -- The imported target "vtk" references the file
+[0.839s]    "/usr/bin/vtk"
+[0.839s] but this file does not exist.  Possible reasons include:
+[0.839s] * The file was deleted, renamed, or moved to another location.
+[0.839s] * An install or uninstall procedure did not complete successfully.
+[0.840s] * The installation package was faulty and contained
+[0.840s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.840s] but not all the files it references.
+[0.840s] 
+[0.840s] -- The imported target "pvtk" references the file
+[0.841s]    "/usr/bin/pvtk"
+[0.841s] but this file does not exist.  Possible reasons include:
+[0.841s] * The file was deleted, renamed, or moved to another location.
+[0.841s] * An install or uninstall procedure did not complete successfully.
+[0.842s] * The installation package was faulty and contained
+[0.842s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.842s] but not all the files it references.
+[0.842s] 
+[0.863s] -- Checking for module 'libusb-1.0'
+[0.868s] --   No package 'libusb-1.0' found
+[0.875s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.875s] -- OpenNI disabled because libusb-1.0 not found.
+[0.875s] ** WARNING ** io features related to openni will be disabled
+[0.883s] -- Checking for module 'libusb-1.0'
+[0.887s] --   No package 'libusb-1.0' found
+[0.894s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.894s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[0.894s] ** WARNING ** io features related to openni2 will be disabled
+[0.894s] ** WARNING ** io features related to pcap will be disabled
+[0.895s] ** WARNING ** io features related to png will be disabled
+[0.915s] -- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
+[0.915s] ** WARNING ** io features related to libusb-1.0 will be disabled
+[0.920s] -- Checking for module 'libusb-1.0'
+[0.925s] --   No package 'libusb-1.0' found
+[0.932s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.932s] -- OpenNI disabled because libusb-1.0 not found.
+[0.932s] ** WARNING ** visualization features related to openni will be disabled
+[0.942s] -- Checking for module 'libusb-1.0'
+[0.949s] --   No package 'libusb-1.0' found
+[0.955s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.955s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[0.955s] ** WARNING ** visualization features related to openni2 will be disabled
+[0.976s] -- QHULL found (include: /usr/include, lib: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so)
+[0.984s] -- Checking for module 'libusb-1.0'
+[0.991s] --   No package 'libusb-1.0' found
+[0.997s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.998s] -- OpenNI disabled because libusb-1.0 not found.
+[0.998s] ** WARNING ** apps features related to openni will be disabled
+[1.022s] -- looking for PCL_COMMON
+[1.022s] -- looking for PCL_KDTREE
+[1.023s] -- looking for PCL_OCTREE
+[1.024s] -- looking for PCL_SEARCH
+[1.025s] -- looking for PCL_SAMPLE_CONSENSUS
+[1.026s] -- looking for PCL_FILTERS
+[1.026s] -- looking for PCL_2D
+[1.027s] -- looking for PCL_GEOMETRY
+[1.028s] -- looking for PCL_IO
+[1.028s] -- looking for PCL_FEATURES
+[1.029s] -- looking for PCL_ML
+[1.030s] -- looking for PCL_SEGMENTATION
+[1.032s] -- looking for PCL_VISUALIZATION
+[1.033s] -- looking for PCL_SURFACE
+[1.033s] -- looking for PCL_REGISTRATION
+[1.034s] -- looking for PCL_KEYPOINTS
+[1.035s] -- looking for PCL_TRACKING
+[1.036s] -- looking for PCL_RECOGNITION
+[1.036s] -- looking for PCL_STEREO
+[1.037s] -- looking for PCL_APPS
+[1.038s] -- looking for PCL_IN_HAND_SCANNER
+[1.039s] -- looking for PCL_POINT_CLOUD_EDITOR
+[1.039s] -- looking for PCL_OUTOFCORE
+[1.040s] -- looking for PCL_PEOPLE
+[1.042s] -- Found rosidl_default_generators: 1.1.1 (/opt/ros/galactic/share/rosidl_default_generators/cmake)
+[1.082s] -- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+[1.216s] -- Found ament_cmake_ros: 0.9.2 (/opt/ros/galactic/share/ament_cmake_ros/cmake)
+[1.347s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.356s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.387s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") 
+[1.390s] -- Found python_cmake_module: 0.8.1 (/opt/ros/galactic/share/python_cmake_module/cmake)
+[1.427s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") 
+[1.428s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.428s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8
+[1.428s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+[1.454s] -- Found PythonExtra: .so  
+[1.516s] -- Found ament_lint_auto: 0.10.6 (/opt/ros/galactic/share/ament_lint_auto/cmake)
+[1.536s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.537s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.540s] -- Configured cppcheck include dirs: /home/arvid/Documents/ros2/lidar-ws/src/lidar_cpp/include
+[1.540s] -- Configured cppcheck exclude dirs and/or files: 
+[1.540s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.540s] -- Configured cpplint exclude dirs and/or files: 
+[1.541s] -- Added test 'lint_cmake' to check CMake code style
+[1.542s] -- Added test 'uncrustify' to check C / C++ code style
+[1.542s] -- Configured uncrustify additional arguments: 
+[1.542s] -- Added test 'xmllint' to check XML markup files
+[1.549s] -- Configuring done
+[1.628s] -- Generating done
+[1.632s] -- Build files have been written to: /home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp
+[1.644s] Invoked command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp' returned '0': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake /home/arvid/Documents/ros2/lidar-ws/src/lidar_cpp -DCMAKE_INSTALL_PREFIX=/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp
+[1.650s] Invoking command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake --build /home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp -- -j12 -l12
+[1.708s] [35m[1mScanning dependencies of target lidar_cpp__cpp[0m
+[1.712s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[1.713s] [35m[1mScanning dependencies of target lidar[0m
+[1.723s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[1.799s] [  9%] [32mBuilding CXX object CMakeFiles/lidar.dir/src/lidar_publisher.cpp.o[0m
+[1.992s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_generator_c[0m
+[2.005s] [ 12%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_generator_c.dir/rosidl_generator_c/lidar_cpp/srv/detail/lidar_service__functions.c.o[0m
+[2.014s] [ 12%] Built target lidar_cpp__cpp
+[2.024s] [ 15%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[2.025s] [ 18%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[2.025s] [ 21%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[2.062s] [ 24%] [32m[1mLinking C shared library liblidar_cpp__rosidl_generator_c.so[0m
+[2.113s] [ 24%] Built target lidar_cpp__rosidl_generator_c
+[2.124s] [ 27%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[2.131s] [ 30%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[2.264s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_cpp[0m
+[2.278s] [ 33%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/lidar_cpp/srv/lidar_service__type_support.cpp.o[0m
+[2.291s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_cpp[0m
+[2.291s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_cpp[0m
+[2.311s] [ 36%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/lidar_cpp/srv/detail/lidar_service__type_support.cpp.o[0m
+[2.317s] [ 39%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/lidar_cpp/srv/detail/dds_fastrtps/lidar_service__type_support.cpp.o[0m
+[2.381s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_c[0m
+[2.397s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_c[0m
+[2.399s] [ 42%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_c.dir/rosidl_typesupport_c/lidar_cpp/srv/lidar_service__type_support.cpp.o[0m
+[2.414s] [ 45%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lidar_cpp/srv/detail/lidar_service__type_support.c.o[0m
+[2.450s] [ 48%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_c.so[0m
+[2.458s] [ 51%] [32m[1mLinking C shared library liblidar_cpp__rosidl_typesupport_introspection_c.so[0m
+[2.498s] [ 51%] Built target lidar_cpp__rosidl_typesupport_introspection_c
+[2.505s] [ 51%] Built target lidar_cpp__rosidl_typesupport_c
+[2.629s] [ 54%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_cpp.so[0m
+[2.677s] [ 57%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_introspection_cpp.so[0m
+[2.680s] [ 57%] Built target lidar_cpp__rosidl_typesupport_cpp
+[2.746s] [ 57%] Built target lidar_cpp__rosidl_typesupport_introspection_cpp
+[2.817s] [ 60%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_fastrtps_cpp.so[0m
+[2.922s] [ 60%] Built target lidar_cpp__rosidl_typesupport_fastrtps_cpp
+[2.936s] [ 63%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[3.205s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_c[0m
+[3.234s] [ 66%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/lidar_cpp/srv/detail/lidar_service__type_support_c.cpp.o[0m
+[3.656s] [ 69%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_fastrtps_c.so[0m
+[3.753s] [ 69%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c
+[3.768s] [35m[1mScanning dependencies of target lidar_cpp[0m
+[3.782s] [ 69%] Built target lidar_cpp
+[3.793s] [35m[1mScanning dependencies of target lidar_cpp__py[0m
+[3.804s] [ 72%] [34m[1mGenerating Python code for ROS interfaces[0m
+[4.312s] [ 72%] Built target lidar_cpp__py
+[4.325s] [35m[1mScanning dependencies of target lidar_cpp__python[0m
+[4.355s] [ 75%] [32mBuilding C object CMakeFiles/lidar_cpp__python.dir/rosidl_generator_py/lidar_cpp/srv/_lidar_service_s.c.o[0m
+[4.470s] [ 78%] [32m[1mLinking C shared library rosidl_generator_py/lidar_cpp/liblidar_cpp__python.so[0m
+[4.526s] [ 78%] Built target lidar_cpp__python
+[4.539s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_c__pyext[0m
+[4.542s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_c__pyext[0m
+[4.542s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_c__pyext[0m
+[4.561s] [ 81%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/lidar_cpp/_lidar_cpp_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[4.561s] [ 84%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/lidar_cpp/_lidar_cpp_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[4.562s] [ 87%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/lidar_cpp/_lidar_cpp_s.ep.rosidl_typesupport_c.c.o[0m
+[4.656s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/lidar_cpp/lidar_cpp_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so[0m
+[4.657s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/lidar_cpp/lidar_cpp_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so[0m
+[4.661s] [ 96%] [32m[1mLinking CXX shared library rosidl_generator_py/lidar_cpp/lidar_cpp_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so[0m
+[4.692s] [ 96%] Built target lidar_cpp__rosidl_typesupport_c__pyext
+[4.692s] [ 96%] Built target lidar_cpp__rosidl_typesupport_introspection_c__pyext
+[4.734s] [ 96%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c__pyext
+[11.436s] [100%] [32m[1mLinking CXX executable lidar[0m
+[12.306s] [100%] Built target lidar
+[12.327s] Invoked command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp' returned '0': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake --build /home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp -- -j12 -l12
+[12.397s] Invoking command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake --install /home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp
+[12.405s] -- Install configuration: ""
+[12.406s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/rosidl_interfaces/lidar_cpp
+[12.406s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp
+[12.406s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv
+[12.406s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/lidar_service.h
+[12.407s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail
+[12.407s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__functions.h
+[12.407s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__struct.h
+[12.407s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__type_support.h
+[12.408s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__functions.c
+[12.408s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/msg
+[12.408s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/msg/rosidl_generator_c__visibility_control.h
+[12.408s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/library_path.sh
+[12.409s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/library_path.dsv
+[12.409s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_generator_c.so
+[12.409s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_generator_c.so" to ""
+[12.409s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp
+[12.409s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv
+[12.410s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail
+[12.410s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__rosidl_typesupport_fastrtps_c.h
+[12.410s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/msg
+[12.410s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[12.411s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_fastrtps_c.so
+[12.411s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_fastrtps_c.so" to ""
+[12.411s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp
+[12.411s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv
+[12.412s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail
+[12.412s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__rosidl_typesupport_fastrtps_cpp.hpp
+[12.412s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/dds_fastrtps
+[12.413s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/msg
+[12.413s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[12.413s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_fastrtps_cpp.so
+[12.413s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_fastrtps_cpp.so" to ""
+[12.414s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp
+[12.414s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv
+[12.414s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail
+[12.415s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__rosidl_typesupport_introspection_c.h
+[12.415s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__type_support.c
+[12.415s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/msg
+[12.415s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[12.415s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_introspection_c.so
+[12.415s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_introspection_c.so" to ""
+[12.415s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_c.so
+[12.415s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_c.so" to ""
+[12.416s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp
+[12.416s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv
+[12.416s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail
+[12.416s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__builder.hpp
+[12.416s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__struct.hpp
+[12.416s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__traits.hpp
+[12.416s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/lidar_service.hpp
+[12.416s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp
+[12.416s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv
+[12.416s] -- Up-to-date: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail
+[12.417s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__rosidl_typesupport_introspection_cpp.hpp
+[12.417s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/include/lidar_cpp/srv/detail/lidar_service__type_support.cpp
+[12.417s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_introspection_cpp.so
+[12.417s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_introspection_cpp.so" to ""
+[12.417s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_cpp.so
+[12.417s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__rosidl_typesupport_cpp.so" to ""
+[12.417s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/pythonpath.sh
+[12.417s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/pythonpath.dsv
+[12.417s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/__init__.py
+[12.447s] Compiling '/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/__init__.py'...
+[12.454s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/srv
+[12.454s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/srv/_lidar_service_s.c
+[12.455s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/srv/_lidar_service.py
+[12.455s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/srv/__init__.py
+[12.455s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/lidar_cpp_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so
+[12.456s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/lidar_cpp_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so" to ""
+[12.456s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/lidar_cpp_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so
+[12.456s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/lidar_cpp_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so" to ""
+[12.456s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/lidar_cpp_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so
+[12.457s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages/lidar_cpp/lidar_cpp_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so" to ""
+[12.457s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__python.so
+[12.457s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/liblidar_cpp__python.so" to ""
+[12.458s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/srv/LidarService.idl
+[12.458s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/srv/LidarService.srv
+[12.458s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/srv/LidarService_Request.msg
+[12.458s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/srv/LidarService_Response.msg
+[12.459s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/lidar_cpp/lidar
+[12.461s] -- Set runtime path of "/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/lib/lidar_cpp/lidar" to ""
+[12.461s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/package_run_dependencies/lidar_cpp
+[12.461s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/parent_prefix_path/lidar_cpp
+[12.462s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/ament_prefix_path.sh
+[12.462s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/ament_prefix_path.dsv
+[12.462s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/path.sh
+[12.463s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/path.dsv
+[12.463s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.bash
+[12.463s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.sh
+[12.463s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.zsh
+[12.463s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.dsv
+[12.464s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/package.dsv
+[12.464s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/packages/lidar_cpp
+[12.464s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_generator_cExport.cmake
+[12.464s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_generator_cExport-noconfig.cmake
+[12.464s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_typesupport_introspection_cExport.cmake
+[12.465s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[12.465s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_typesupport_cExport.cmake
+[12.465s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_typesupport_cExport-noconfig.cmake
+[12.465s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_generator_cppExport.cmake
+[12.465s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_typesupport_introspection_cppExport.cmake
+[12.465s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[12.466s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_typesupport_cppExport.cmake
+[12.466s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cpp__rosidl_typesupport_cppExport-noconfig.cmake
+[12.466s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/rosidl_cmake-extras.cmake
+[12.466s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/ament_cmake_export_dependencies-extras.cmake
+[12.466s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/ament_cmake_export_libraries-extras.cmake
+[12.467s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/ament_cmake_export_targets-extras.cmake
+[12.467s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/ament_cmake_export_include_directories-extras.cmake
+[12.467s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[12.467s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[12.467s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cppConfig.cmake
+[12.467s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cppConfig-version.cmake
+[12.467s] -- Installing: /home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp/share/lidar_cpp/package.xml
+[12.471s] Invoked command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp' returned '0': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake --install /home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp

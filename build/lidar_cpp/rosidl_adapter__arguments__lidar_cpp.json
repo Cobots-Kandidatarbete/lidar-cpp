@@ -1,0 +1,6 @@
+{
+  "package_name": "lidar_cpp",
+  "non_idl_tuples": [
+    "/home/arvid/Documents/ros2/lidar-ws/src/lidar_cpp:srv/LidarService.srv"
+  ]
+}
