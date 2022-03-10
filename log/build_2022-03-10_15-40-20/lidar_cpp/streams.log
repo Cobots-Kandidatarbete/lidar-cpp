@@ -1,0 +1,142 @@
+[0.016s] Invoking command in '/home/student/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=/home/student/lidar-ws/install/custom:/home/student/lidar-ws/install/lidar_cpp:/home/student/ws/install/case_bringup:/home/student/ia_ws/install/viz_dynamic:/home/student/ia_ws/install/viz_tools_msgs:/home/student/ia_ws/install/viz_bringup:/home/student/ia_ws/install/ur_script_generator:/home/student/ia_ws/install/ur_script_controller:/home/student/ia_ws/install/ur_tools_msgs:/home/student/ia_ws/install/ur_script_driver:/home/student/ia_ws/install/ur_script_msgs:/home/student/ia_ws/install/ur_description:/home/student/ia_ws/install/ur_bringup:/home/student/ia_ws/install/tf_sms:/home/student/ia_ws/install/tf_bringup:/home/student/ia_ws/install/tf_tools_msgs:/home/student/ia_ws/install/opcua_ros2_bridge:/home/student/ia_ws/install/mp_msgs:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8
+[0.050s] -- Found ament_cmake: 1.1.4 (/opt/ros/galactic/share/ament_cmake/cmake)
+[0.081s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.166s] -- Found rclcpp: 9.2.0 (/opt/ros/galactic/share/rclcpp/cmake)
+[0.210s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.215s] -- Found rosidl_adapter: 2.2.1 (/opt/ros/galactic/share/rosidl_adapter/cmake)
+[0.347s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.395s] -- Found rmw_implementation_cmake: 3.3.1 (/opt/ros/galactic/share/rmw_implementation_cmake/cmake)
+[0.398s] -- Found rmw_cyclonedds_cpp: 0.22.3 (/opt/ros/galactic/share/rmw_cyclonedds_cpp/cmake)
+[0.425s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[0.561s] -- Found sensor_msgs: 2.2.3 (/opt/ros/galactic/share/sensor_msgs/cmake)
+[0.681s] -- Eigen found (include: /usr/include/eigen3, version: 3.3.7)
+[0.774s] -- The imported target "vtkParseOGLExt" references the file
+[0.774s]    "/usr/bin/vtkParseOGLExt-7.1"
+[0.775s] but this file does not exist.  Possible reasons include:
+[0.775s] * The file was deleted, renamed, or moved to another location.
+[0.775s] * An install or uninstall procedure did not complete successfully.
+[0.775s] * The installation package was faulty and contained
+[0.775s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.775s] but not all the files it references.
+[0.775s] 
+[0.775s] -- The imported target "vtkRenderingPythonTkWidgets" references the file
+[0.775s]    "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+[0.775s] but this file does not exist.  Possible reasons include:
+[0.775s] * The file was deleted, renamed, or moved to another location.
+[0.775s] * An install or uninstall procedure did not complete successfully.
+[0.776s] * The installation package was faulty and contained
+[0.776s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.776s] but not all the files it references.
+[0.776s] 
+[0.776s] -- The imported target "vtk" references the file
+[0.776s]    "/usr/bin/vtk"
+[0.776s] but this file does not exist.  Possible reasons include:
+[0.776s] * The file was deleted, renamed, or moved to another location.
+[0.776s] * An install or uninstall procedure did not complete successfully.
+[0.776s] * The installation package was faulty and contained
+[0.776s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.776s] but not all the files it references.
+[0.777s] 
+[0.777s] -- The imported target "pvtk" references the file
+[0.777s]    "/usr/bin/pvtk"
+[0.777s] but this file does not exist.  Possible reasons include:
+[0.777s] * The file was deleted, renamed, or moved to another location.
+[0.777s] * An install or uninstall procedure did not complete successfully.
+[0.777s] * The installation package was faulty and contained
+[0.777s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.777s] but not all the files it references.
+[0.777s] 
+[0.795s] -- Checking for module 'libusb-1.0'
+[0.799s] --   No package 'libusb-1.0' found
+[0.806s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.806s] -- OpenNI disabled because libusb-1.0 not found.
+[0.806s] ** WARNING ** io features related to openni will be disabled
+[0.813s] -- Checking for module 'libusb-1.0'
+[0.818s] --   No package 'libusb-1.0' found
+[0.823s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.823s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[0.824s] ** WARNING ** io features related to openni2 will be disabled
+[0.824s] ** WARNING ** io features related to pcap will be disabled
+[0.824s] ** WARNING ** io features related to png will be disabled
+[0.842s] -- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
+[0.842s] ** WARNING ** io features related to libusb-1.0 will be disabled
+[0.847s] -- Checking for module 'libusb-1.0'
+[0.850s] --   No package 'libusb-1.0' found
+[0.855s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.855s] -- OpenNI disabled because libusb-1.0 not found.
+[0.856s] ** WARNING ** visualization features related to openni will be disabled
+[0.860s] -- Checking for module 'libusb-1.0'
+[0.864s] --   No package 'libusb-1.0' found
+[0.868s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.868s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[0.868s] ** WARNING ** visualization features related to openni2 will be disabled
+[0.882s] -- QHULL found (include: /usr/include, lib: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so)
+[0.887s] -- Checking for module 'libusb-1.0'
+[0.890s] --   No package 'libusb-1.0' found
+[0.895s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.895s] -- OpenNI disabled because libusb-1.0 not found.
+[0.895s] ** WARNING ** apps features related to openni will be disabled
+[0.912s] -- looking for PCL_COMMON
+[0.912s] -- looking for PCL_KDTREE
+[0.913s] -- looking for PCL_OCTREE
+[0.914s] -- looking for PCL_SEARCH
+[0.915s] -- looking for PCL_SAMPLE_CONSENSUS
+[0.915s] -- looking for PCL_FILTERS
+[0.916s] -- looking for PCL_2D
+[0.917s] -- looking for PCL_GEOMETRY
+[0.917s] -- looking for PCL_IO
+[0.918s] -- looking for PCL_FEATURES
+[0.919s] -- looking for PCL_ML
+[0.919s] -- looking for PCL_SEGMENTATION
+[0.920s] -- looking for PCL_VISUALIZATION
+[0.921s] -- looking for PCL_SURFACE
+[0.922s] -- looking for PCL_REGISTRATION
+[0.923s] -- looking for PCL_KEYPOINTS
+[0.923s] -- looking for PCL_TRACKING
+[0.924s] -- looking for PCL_RECOGNITION
+[0.925s] -- looking for PCL_STEREO
+[0.925s] -- looking for PCL_APPS
+[0.926s] -- looking for PCL_IN_HAND_SCANNER
+[0.927s] -- looking for PCL_POINT_CLOUD_EDITOR
+[0.927s] -- looking for PCL_OUTOFCORE
+[0.928s] -- looking for PCL_PEOPLE
+[0.930s] -- Found custom: 0.0.0 (/home/student/lidar-ws/install/custom/share/custom/cmake)
+[1.049s] -- Found ament_lint_auto: 0.10.6 (/opt/ros/galactic/share/ament_lint_auto/cmake)
+[1.121s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.122s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.123s] -- Configured cppcheck include dirs: /home/student/lidar-ws/src/lidar_cpp/include
+[1.123s] -- Configured cppcheck exclude dirs and/or files: 
+[1.124s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.124s] -- Configured cpplint exclude dirs and/or files: 
+[1.124s] -- Added test 'lint_cmake' to check CMake code style
+[1.125s] -- Added test 'uncrustify' to check C / C++ code style
+[1.125s] -- Configured uncrustify additional arguments: 
+[1.126s] -- Added test 'xmllint' to check XML markup files
+[1.128s] -- Configuring done
+[1.175s] -- Generating done
+[1.177s] -- Build files have been written to: /home/student/lidar-ws/build/lidar_cpp
+[1.240s] [ 75%] [32m[1mLinking CXX executable lidar_server[0m
+[1.240s] [ 75%] Built target lidar
+[1.998s] [100%] Built target lidar_server
+[2.012s] Invoked command in '/home/student/lidar-ws/build/lidar_cpp' returned '0': CMAKE_PREFIX_PATH=/home/student/lidar-ws/install/custom:/home/student/lidar-ws/install/lidar_cpp:/home/student/ws/install/case_bringup:/home/student/ia_ws/install/viz_dynamic:/home/student/ia_ws/install/viz_tools_msgs:/home/student/ia_ws/install/viz_bringup:/home/student/ia_ws/install/ur_script_generator:/home/student/ia_ws/install/ur_script_controller:/home/student/ia_ws/install/ur_tools_msgs:/home/student/ia_ws/install/ur_script_driver:/home/student/ia_ws/install/ur_script_msgs:/home/student/ia_ws/install/ur_description:/home/student/ia_ws/install/ur_bringup:/home/student/ia_ws/install/tf_sms:/home/student/ia_ws/install/tf_bringup:/home/student/ia_ws/install/tf_tools_msgs:/home/student/ia_ws/install/opcua_ros2_bridge:/home/student/ia_ws/install/mp_msgs:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8
+[2.046s] Invoking command in '/home/student/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=/home/student/lidar-ws/install/custom:/home/student/lidar-ws/install/lidar_cpp:/home/student/ws/install/case_bringup:/home/student/ia_ws/install/viz_dynamic:/home/student/ia_ws/install/viz_tools_msgs:/home/student/ia_ws/install/viz_bringup:/home/student/ia_ws/install/ur_script_generator:/home/student/ia_ws/install/ur_script_controller:/home/student/ia_ws/install/ur_tools_msgs:/home/student/ia_ws/install/ur_script_driver:/home/student/ia_ws/install/ur_script_msgs:/home/student/ia_ws/install/ur_description:/home/student/ia_ws/install/ur_bringup:/home/student/ia_ws/install/tf_sms:/home/student/ia_ws/install/tf_bringup:/home/student/ia_ws/install/tf_tools_msgs:/home/student/ia_ws/install/opcua_ros2_bridge:/home/student/ia_ws/install/mp_msgs:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --install /home/student/lidar-ws/build/lidar_cpp
+[2.057s] -- Install configuration: ""
+[2.057s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/lib/lidar_cpp/lidar
+[2.057s] -- Installing: /home/student/lidar-ws/install/lidar_cpp/lib/lidar_cpp/lidar_server
+[2.058s] -- Set runtime path of "/home/student/lidar-ws/install/lidar_cpp/lib/lidar_cpp/lidar_server" to ""
+[2.058s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/package_run_dependencies/lidar_cpp
+[2.059s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/parent_prefix_path/lidar_cpp
+[2.059s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/ament_prefix_path.sh
+[2.059s] -- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/ament_prefix_path.dsv
+[2.059s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/path.sh
+[2.059s] -- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/path.dsv
+[2.059s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.bash
+[2.059s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.sh
+[2.059s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.zsh
+[2.059s] -- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.dsv
+[2.060s] -- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/package.dsv
+[2.060s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/packages/lidar_cpp
+[2.060s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cppConfig.cmake
+[2.060s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cppConfig-version.cmake
+[2.060s] -- Up-to-date: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/package.xml
+[2.063s] Invoked command in '/home/student/lidar-ws/build/lidar_cpp' returned '0': CMAKE_PREFIX_PATH=/home/student/lidar-ws/install/custom:/home/student/lidar-ws/install/lidar_cpp:/home/student/ws/install/case_bringup:/home/student/ia_ws/install/viz_dynamic:/home/student/ia_ws/install/viz_tools_msgs:/home/student/ia_ws/install/viz_bringup:/home/student/ia_ws/install/ur_script_generator:/home/student/ia_ws/install/ur_script_controller:/home/student/ia_ws/install/ur_tools_msgs:/home/student/ia_ws/install/ur_script_driver:/home/student/ia_ws/install/ur_script_msgs:/home/student/ia_ws/install/ur_description:/home/student/ia_ws/install/ur_bringup:/home/student/ia_ws/install/tf_sms:/home/student/ia_ws/install/tf_bringup:/home/student/ia_ws/install/tf_tools_msgs:/home/student/ia_ws/install/opcua_ros2_bridge:/home/student/ia_ws/install/mp_msgs:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --install /home/student/lidar-ws/build/lidar_cpp

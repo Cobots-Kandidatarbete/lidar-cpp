@@ -1,0 +1,61 @@
+** WARNING ** io features related to openni will be disabled
+** WARNING ** io features related to openni2 will be disabled
+** WARNING ** io features related to pcap will be disabled
+** WARNING ** io features related to png will be disabled
+** WARNING ** io features related to libusb-1.0 will be disabled
+** WARNING ** visualization features related to openni will be disabled
+** WARNING ** visualization features related to openni2 will be disabled
+** WARNING ** apps features related to openni will be disabled
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:41:[m[K [01;31m[Kerror: [m[K‘[01m[Klidar_cpp[m[K’ was not declared in this scope
+   37 | void take_picture(const std::shared_ptr<[01;31m[Klidar_cpp[m[K::srv::LidarService::Request> request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                         [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:78:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   37 | void take_picture(const std::shared_ptr<lidar_cpp::srv::LidarService::Request[01;31m[K>[m[K request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                                                              [01;31m[K^[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:41:[m[K [01;31m[Kerror: [m[K‘[01m[Klidar_cpp[m[K’ was not declared in this scope
+   37 | void take_picture(const std::shared_ptr<[01;31m[Klidar_cpp[m[K::srv::LidarService::Request> request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                         [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:78:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   37 | void take_picture(const std::shared_ptr<lidar_cpp::srv::LidarService::Request[01;31m[K>[m[K request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                                                              [01;31m[K^[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:41:[m[K [01;31m[Kerror: [m[K‘[01m[Klidar_cpp[m[K’ was not declared in this scope
+   37 | void take_picture(const std::shared_ptr<[01;31m[Klidar_cpp[m[K::srv::LidarService::Request> request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                         [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:78:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   37 | void take_picture(const std::shared_ptr<lidar_cpp::srv::LidarService::Request[01;31m[K>[m[K request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                                                              [01;31m[K^[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:41:[m[K [01;31m[Kerror: [m[K‘[01m[Klidar_cpp[m[K’ was not declared in this scope
+   37 | void take_picture(const std::shared_ptr<[01;31m[Klidar_cpp[m[K::srv::LidarService::Request> request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                         [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:78:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   37 | void take_picture(const std::shared_ptr<lidar_cpp::srv::LidarService::Request[01;31m[K>[m[K request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                                                              [01;31m[K^[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:25:[m[K [01;31m[Kerror: [m[Kinvalid template-id
+   37 | void take_picture(const [01;31m[Kstd[m[K::shared_ptr<lidar_cpp::srv::LidarService::Request> request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                         [01;31m[K^~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:41:[m[K [01;31m[Kerror: [m[K‘[01m[Klidar_cpp[m[K’ was not declared in this scope
+   37 | void take_picture(const std::shared_ptr<[01;31m[Klidar_cpp[m[K::srv::LidarService::Request> request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                         [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:78:[m[K [01;31m[Kerror: [m[Kvariable or field ‘[01m[Ktake_picture[m[K’ declared void
+   37 | void take_picture(const std::shared_ptr<lidar_cpp::srv::LidarService::Request[01;31m[K>[m[K request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                                                              [01;31m[K^[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:19:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before ‘[01m[Kconst[m[K’
+   37 | void take_picture([01;31m[Kconst[m[K std::shared_ptr<lidar_cpp::srv::LidarService::Request> request, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                   [01;31m[K^~~~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:89:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before ‘[01m[Kconst[m[K’
+   37 | void take_picture(const std::shared_ptr<lidar_cpp::srv::LidarService::Request> request, [01;31m[Kconst[m[K std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)
+      |                                                                                         [01;31m[K^~~~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:78:21:[m[K [01;31m[Kerror: [m[K‘[01m[Klidar_cpp[m[K’ was not declared in this scope
+   78 |     rclcpp::Service<[01;31m[Klidar_cpp[m[K::srv::LidarService>::SharedPtr service =
+      |                     [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:78:49:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   78 |     rclcpp::Service<lidar_cpp::srv::LidarService[01;31m[K>[m[K::SharedPtr service =
+      |                                                 [01;31m[K^[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:78:62:[m[K [01;31m[Kerror: [m[Kqualified-id in declaration before ‘[01m[Kservice[m[K’
+   78 |     rclcpp::Service<lidar_cpp::srv::LidarService>::SharedPtr [01;31m[Kservice[m[K =
+      |                                                              [01;31m[K^~~~~~~[m[K
+make[2]: *** [CMakeFiles/lidar_server.dir/build.make:63: CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:80: CMakeFiles/lidar_server.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make: *** [Makefile:141: all] Error 2

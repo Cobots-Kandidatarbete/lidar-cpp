@@ -1,0 +1,247 @@
+[0.015s] Invoking command in '/home/student/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake /home/student/lidar-ws/src/lidar_cpp -DCMAKE_INSTALL_PREFIX=/home/student/lidar-ws/install/lidar_cpp
+[0.084s] -- The C compiler identification is GNU 9.4.0
+[0.155s] -- The CXX compiler identification is GNU 9.4.0
+[0.164s] -- Check for working C compiler: /usr/bin/cc
+[0.249s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.250s] -- Detecting C compiler ABI info
+[0.328s] -- Detecting C compiler ABI info - done
+[0.344s] -- Detecting C compile features
+[0.344s] -- Detecting C compile features - done
+[0.347s] -- Check for working CXX compiler: /usr/bin/c++
+[0.440s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.441s] -- Detecting CXX compiler ABI info
+[0.534s] -- Detecting CXX compiler ABI info - done
+[0.549s] -- Detecting CXX compile features
+[0.550s] -- Detecting CXX compile features - done
+[0.553s] -- Found ament_cmake: 1.1.4 (/opt/ros/galactic/share/ament_cmake/cmake)
+[0.584s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.584s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.704s] -- Found rclcpp: 9.2.0 (/opt/ros/galactic/share/rclcpp/cmake)
+[0.782s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.793s] -- Found rosidl_adapter: 2.2.1 (/opt/ros/galactic/share/rosidl_adapter/cmake)
+[0.890s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.919s] -- Found FastRTPS: /opt/ros/galactic/include  
+[1.043s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.118s] -- Found rmw_implementation_cmake: 3.3.1 (/opt/ros/galactic/share/rmw_implementation_cmake/cmake)
+[1.125s] -- Found rmw_cyclonedds_cpp: 0.22.3 (/opt/ros/galactic/share/rmw_cyclonedds_cpp/cmake)
+[1.153s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[1.154s] -- Looking for pthread.h
+[1.242s] -- Looking for pthread.h - found
+[1.242s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.345s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[1.345s] -- Looking for pthread_create in pthreads
+[1.414s] -- Looking for pthread_create in pthreads - not found
+[1.414s] -- Looking for pthread_create in pthread
+[1.504s] -- Looking for pthread_create in pthread - found
+[1.505s] -- Found Threads: TRUE  
+[1.669s] -- Found sensor_msgs: 2.2.3 (/opt/ros/galactic/share/sensor_msgs/cmake)
+[1.800s] -- Checking for module 'eigen3'
+[1.824s] --   Found eigen3, version 3.3.7
+[1.873s] -- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+[1.873s] -- Eigen found (include: /usr/include/eigen3, version: 3.3.7)
+[1.964s] -- Found Boost: /usr/include (found suitable version "1.71.0", minimum required is "1.55.0") found components: system filesystem date_time iostreams regex 
+[1.980s] -- Checking for module 'flann'
+[2.003s] --   Found flann, version 1.9.1
+[2.062s] -- Found FLANN: /usr/lib/x86_64-linux-gnu/libflann_cpp.so  
+[2.119s] -- The imported target "vtkParseOGLExt" references the file
+[2.119s]    "/usr/bin/vtkParseOGLExt-7.1"
+[2.119s] but this file does not exist.  Possible reasons include:
+[2.119s] * The file was deleted, renamed, or moved to another location.
+[2.119s] * An install or uninstall procedure did not complete successfully.
+[2.120s] * The installation package was faulty and contained
+[2.120s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[2.120s] but not all the files it references.
+[2.120s] 
+[2.120s] -- The imported target "vtkRenderingPythonTkWidgets" references the file
+[2.120s]    "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+[2.120s] but this file does not exist.  Possible reasons include:
+[2.120s] * The file was deleted, renamed, or moved to another location.
+[2.120s] * An install or uninstall procedure did not complete successfully.
+[2.121s] * The installation package was faulty and contained
+[2.121s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[2.121s] but not all the files it references.
+[2.121s] 
+[2.121s] -- The imported target "vtk" references the file
+[2.121s]    "/usr/bin/vtk"
+[2.121s] but this file does not exist.  Possible reasons include:
+[2.121s] * The file was deleted, renamed, or moved to another location.
+[2.121s] * An install or uninstall procedure did not complete successfully.
+[2.121s] * The installation package was faulty and contained
+[2.122s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[2.122s] but not all the files it references.
+[2.122s] 
+[2.122s] -- The imported target "pvtk" references the file
+[2.122s]    "/usr/bin/pvtk"
+[2.122s] but this file does not exist.  Possible reasons include:
+[2.122s] * The file was deleted, renamed, or moved to another location.
+[2.122s] * An install or uninstall procedure did not complete successfully.
+[2.122s] * The installation package was faulty and contained
+[2.122s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[2.122s] but not all the files it references.
+[2.123s] 
+[2.148s] -- Checking for module 'libusb-1.0'
+[2.151s] --   No package 'libusb-1.0' found
+[2.156s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[2.157s] -- OpenNI disabled because libusb-1.0 not found.
+[2.157s] ** WARNING ** io features related to openni will be disabled
+[2.162s] -- Checking for module 'libusb-1.0'
+[2.166s] --   No package 'libusb-1.0' found
+[2.170s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[2.170s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[2.171s] ** WARNING ** io features related to openni2 will be disabled
+[2.171s] ** WARNING ** io features related to pcap will be disabled
+[2.171s] ** WARNING ** io features related to png will be disabled
+[2.187s] -- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
+[2.187s] ** WARNING ** io features related to libusb-1.0 will be disabled
+[2.191s] -- Checking for module 'libusb-1.0'
+[2.195s] --   No package 'libusb-1.0' found
+[2.200s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[2.200s] -- OpenNI disabled because libusb-1.0 not found.
+[2.201s] ** WARNING ** visualization features related to openni will be disabled
+[2.207s] -- Checking for module 'libusb-1.0'
+[2.211s] --   No package 'libusb-1.0' found
+[2.217s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[2.217s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[2.217s] ** WARNING ** visualization features related to openni2 will be disabled
+[2.270s] -- Found Qhull: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so  
+[2.270s] -- QHULL found (include: /usr/include, lib: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so)
+[2.275s] -- Checking for module 'libusb-1.0'
+[2.279s] --   No package 'libusb-1.0' found
+[2.285s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[2.285s] -- OpenNI disabled because libusb-1.0 not found.
+[2.285s] ** WARNING ** apps features related to openni will be disabled
+[2.299s] -- looking for PCL_COMMON
+[2.301s] -- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  
+[2.302s] -- looking for PCL_KDTREE
+[2.303s] -- Found PCL_KDTREE: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so  
+[2.303s] -- looking for PCL_OCTREE
+[2.305s] -- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  
+[2.305s] -- looking for PCL_SEARCH
+[2.306s] -- Found PCL_SEARCH: /usr/lib/x86_64-linux-gnu/libpcl_search.so  
+[2.306s] -- looking for PCL_SAMPLE_CONSENSUS
+[2.308s] -- Found PCL_SAMPLE_CONSENSUS: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so  
+[2.308s] -- looking for PCL_FILTERS
+[2.309s] -- Found PCL_FILTERS: /usr/lib/x86_64-linux-gnu/libpcl_filters.so  
+[2.309s] -- looking for PCL_2D
+[2.310s] -- Found PCL_2D: /usr/include/pcl-1.10  
+[2.310s] -- looking for PCL_GEOMETRY
+[2.310s] -- Found PCL_GEOMETRY: /usr/include/pcl-1.10  
+[2.310s] -- looking for PCL_IO
+[2.311s] -- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  
+[2.312s] -- looking for PCL_FEATURES
+[2.313s] -- Found PCL_FEATURES: /usr/lib/x86_64-linux-gnu/libpcl_features.so  
+[2.313s] -- looking for PCL_ML
+[2.314s] -- Found PCL_ML: /usr/lib/x86_64-linux-gnu/libpcl_ml.so  
+[2.315s] -- looking for PCL_SEGMENTATION
+[2.316s] -- Found PCL_SEGMENTATION: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so  
+[2.316s] -- looking for PCL_VISUALIZATION
+[2.317s] -- Found PCL_VISUALIZATION: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so  
+[2.318s] -- looking for PCL_SURFACE
+[2.319s] -- Found PCL_SURFACE: /usr/lib/x86_64-linux-gnu/libpcl_surface.so  
+[2.319s] -- looking for PCL_REGISTRATION
+[2.321s] -- Found PCL_REGISTRATION: /usr/lib/x86_64-linux-gnu/libpcl_registration.so  
+[2.321s] -- looking for PCL_KEYPOINTS
+[2.322s] -- Found PCL_KEYPOINTS: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so  
+[2.323s] -- looking for PCL_TRACKING
+[2.325s] -- Found PCL_TRACKING: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so  
+[2.326s] -- looking for PCL_RECOGNITION
+[2.328s] -- Found PCL_RECOGNITION: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so  
+[2.329s] -- looking for PCL_STEREO
+[2.331s] -- Found PCL_STEREO: /usr/lib/x86_64-linux-gnu/libpcl_stereo.so  
+[2.332s] -- looking for PCL_APPS
+[2.333s] -- Found PCL_APPS: /usr/lib/x86_64-linux-gnu/libpcl_apps.so  
+[2.334s] -- looking for PCL_IN_HAND_SCANNER
+[2.334s] -- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.10  
+[2.335s] -- looking for PCL_POINT_CLOUD_EDITOR
+[2.335s] -- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.10  
+[2.335s] -- looking for PCL_OUTOFCORE
+[2.337s] -- Found PCL_OUTOFCORE: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so  
+[2.337s] -- looking for PCL_PEOPLE
+[2.338s] -- Found PCL_PEOPLE: /usr/lib/x86_64-linux-gnu/libpcl_people.so  
+[2.340s] -- Found PCL: pcl_common;pcl_kdtree;pcl_octree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_io;pcl_features;pcl_ml;pcl_segmentation;pcl_visualization;pcl_surface;pcl_registration;pcl_keypoints;pcl_tracking;pcl_recognition;pcl_stereo;pcl_apps;pcl_outofcore;pcl_people;/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_iostreams.so;/usr/lib/x86_64-linux-gnu/libboost_regex.so;optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so;vtkChartsCore;vtkCommonColor;vtkCommonCore;vtksys;vtkCommonDataModel;vtkCommonMath;vtkCommonMisc;vtkCommonSystem;vtkCommonTransforms;vtkCommonExecutionModel;vtkFiltersGeneral;vtkCommonComputationalGeometry;vtkFiltersCore;vtkInfovisCore;vtkFiltersExtraction;vtkFiltersStatistics;vtkImagingFourier;vtkImagingCore;vtkalglib;vtkRenderingContext2D;vtkRenderingCore;vtkFiltersGeometry;vtkFiltersSources;vtkRenderingFreeType;/usr/lib/x86_64-linux-gnu/libfreetype.so;/usr/lib/x86_64-linux-gnu/libz.so;vtkFiltersModeling;vtkImagingSources;vtkInteractionStyle;vtkInteractionWidgets;vtkFiltersHybrid;vtkImagingColor;vtkImagingGeneral;vtkImagingHybrid;vtkIOImage;vtkDICOMParser;vtkmetaio;/usr/lib/x86_64-linux-gnu/libjpeg.so;/usr/lib/x86_64-linux-gnu/libpng.so;/usr/lib/x86_64-linux-gnu/libtiff.so;vtkRenderingAnnotation;vtkRenderingVolume;vtkIOXML;vtkIOCore;vtkIOXMLParser;/usr/lib/x86_64-linux-gnu/libexpat.so;vtkIOGeometry;vtkIOLegacy;vtkIOPLY;vtkRenderingLOD;vtkViewsContext2D;vtkViewsCore;vtkRenderingContextOpenGL2;vtkRenderingOpenGL2;FLANN::FLANN  
+[2.344s] -- Found rosidl_default_generators: 1.1.1 (/opt/ros/galactic/share/rosidl_default_generators/cmake)
+[2.386s] -- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+[2.535s] -- Found ament_cmake_ros: 0.9.2 (/opt/ros/galactic/share/ament_cmake_ros/cmake)
+[2.658s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.670s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.700s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") 
+[2.703s] -- Found python_cmake_module: 0.8.1 (/opt/ros/galactic/share/python_cmake_module/cmake)
+[2.744s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") 
+[2.744s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[2.744s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8
+[2.744s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+[2.779s] -- Found PythonExtra: .so  
+[2.872s] -- Found ament_lint_auto: 0.10.6 (/opt/ros/galactic/share/ament_lint_auto/cmake)
+[2.907s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.908s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[2.910s] -- Configured cppcheck include dirs: 
+[2.910s] -- Configured cppcheck exclude dirs and/or files: 
+[2.911s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[2.912s] -- Configured cpplint exclude dirs and/or files: 
+[2.913s] -- Added test 'lint_cmake' to check CMake code style
+[2.914s] -- Added test 'uncrustify' to check C / C++ code style
+[2.914s] -- Configured uncrustify additional arguments: 
+[2.915s] -- Added test 'xmllint' to check XML markup files
+[2.922s] -- Configuring done
+[3.021s] -- Generating done
+[3.026s] -- Build files have been written to: /home/student/lidar-ws/build/lidar_cpp
+[3.048s] Invoked command in '/home/student/lidar-ws/build/lidar_cpp' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake /home/student/lidar-ws/src/lidar_cpp -DCMAKE_INSTALL_PREFIX=/home/student/lidar-ws/install/lidar_cpp
+[3.052s] Invoking command in '/home/student/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8
+[3.106s] [  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[3.107s] [35m[1mScanning dependencies of target lidar_cpp__cpp[0m
+[3.107s] [35m[1mScanning dependencies of target lidar[0m
+[3.107s] [35m[1mScanning dependencies of target lidar_server[0m
+[3.118s] [  5%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[3.205s] [  8%] [32mBuilding CXX object CMakeFiles/lidar.dir/src/lidar_publisher.cpp.o[0m
+[3.205s] [ 11%] [32mBuilding CXX object CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o[0m
+[3.410s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_generator_c[0m
+[3.425s] [ 14%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_generator_c.dir/rosidl_generator_c/lidar_cpp/srv/detail/lidar_service__functions.c.o[0m
+[3.442s] [ 14%] Built target lidar_cpp__cpp
+[3.458s] [ 22%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[3.459s] [ 22%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[3.460s] [ 22%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[3.489s] [ 25%] [32m[1mLinking C shared library liblidar_cpp__rosidl_generator_c.so[0m
+[3.528s] [ 25%] Built target lidar_cpp__rosidl_generator_c
+[3.547s] [ 28%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[3.576s] [ 31%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[3.839s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_cpp[0m
+[3.867s] [ 34%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/lidar_cpp/srv/lidar_service__type_support.cpp.o[0m
+[3.868s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_cpp[0m
+[3.887s] [ 37%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/lidar_cpp/srv/detail/lidar_service__type_support.cpp.o[0m
+[3.890s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_cpp[0m
+[3.921s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_c[0m
+[3.922s] [ 40%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/lidar_cpp/srv/detail/dds_fastrtps/lidar_service__type_support.cpp.o[0m
+[3.929s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_c[0m
+[3.943s] [ 42%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lidar_cpp/srv/detail/lidar_service__type_support.c.o[0m
+[3.966s] [ 45%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_c.dir/rosidl_typesupport_c/lidar_cpp/srv/lidar_service__type_support.cpp.o[0m
+[4.000s] [ 48%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_c.so[0m
+[4.000s] [ 51%] [32m[1mLinking C shared library liblidar_cpp__rosidl_typesupport_introspection_c.so[0m
+[4.044s] [ 51%] Built target lidar_cpp__rosidl_typesupport_introspection_c
+[4.075s] [ 51%] Built target lidar_cpp__rosidl_typesupport_c
+[4.285s] [ 54%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_introspection_cpp.so[0m
+[4.286s] [ 57%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_cpp.so[0m
+[4.331s] [ 57%] Built target lidar_cpp__rosidl_typesupport_cpp
+[4.361s] [ 57%] Built target lidar_cpp__rosidl_typesupport_introspection_cpp
+[4.493s] [ 60%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_fastrtps_cpp.so[0m
+[4.594s] [ 60%] Built target lidar_cpp__rosidl_typesupport_fastrtps_cpp
+[4.604s] [ 62%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[4.865s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_c[0m
+[4.882s] [ 65%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/lidar_cpp/srv/detail/lidar_service__type_support_c.cpp.o[0m
+[5.259s] [ 68%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_fastrtps_c.so[0m
+[5.361s] [ 68%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c
+[5.372s] [35m[1mScanning dependencies of target lidar_cpp[0m
+[5.384s] [ 68%] Built target lidar_cpp
+[5.391s] [01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:12:10:[m[K [01;31m[Kfatal error: [m[Klidar_cpp/srv/lidar_service.hpp: No such file or directory
+[5.391s]    12 | #include [01;31m[K"lidar_cpp/srv/lidar_service.hpp"[m[K
+[5.391s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[5.392s] compilation terminated.
+[5.395s] [35m[1mScanning dependencies of target lidar_cpp__py[0m
+[5.407s] make[2]: *** [CMakeFiles/lidar_server.dir/build.make:63: CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o] Error 1
+[5.408s] make[1]: *** [CMakeFiles/Makefile2:125: CMakeFiles/lidar_server.dir/all] Error 2
+[5.408s] make[1]: *** Waiting for unfinished jobs....
+[5.409s] [ 71%] [34m[1mGenerating Python code for ROS interfaces[0m
+[5.880s] [ 71%] Built target lidar_cpp__py
+[12.628s] [ 74%] [32m[1mLinking CXX executable lidar[0m
+[13.434s] [ 74%] Built target lidar
+[13.436s] make: *** [Makefile:141: all] Error 2
+[13.439s] Invoked command in '/home/student/lidar-ws/build/lidar_cpp' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8

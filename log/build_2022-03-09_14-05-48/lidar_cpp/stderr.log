@@ -1,0 +1,22 @@
+** WARNING ** io features related to openni will be disabled
+** WARNING ** io features related to openni2 will be disabled
+** WARNING ** io features related to pcap will be disabled
+** WARNING ** io features related to png will be disabled
+** WARNING ** io features related to libusb-1.0 will be disabled
+** WARNING ** visualization features related to openni will be disabled
+** WARNING ** visualization features related to openni2 will be disabled
+** WARNING ** apps features related to openni will be disabled
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_publisher.cpp:[m[K In member function ‘[01m[KLidarPublisher::pcl_ptr LidarPublisher::points_to_pcl(const rs2::points&)[m[K’:
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_publisher.cpp:47:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kstruct pcl::PointXYZ[m[K’ has no member named ‘[01m[Kptr[m[K’
+   47 |             [01;31m[Kptr[m[K++;
+      |             [01;31m[K^~~[m[K
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_publisher.cpp:[m[K In member function ‘[01m[KLidarPublisher::pcl_ptr LidarPublisher::points_to_pcl(const rs2::points&)[m[K’:
+[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_publisher.cpp:47:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kstruct pcl::PointXYZ[m[K’ has no member named ‘[01m[Kptr[m[K’
+   47 |             [01;31m[Kptr[m[K++;
+      |             [01;31m[K^~~[m[K
+make[2]: *** [CMakeFiles/lidar_server.dir/build.make:63: CMakeFiles/lidar_server.dir/src/lidar_publisher.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:125: CMakeFiles/lidar_server.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/lidar.dir/build.make:63: CMakeFiles/lidar.dir/src/lidar_publisher.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:152: CMakeFiles/lidar.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

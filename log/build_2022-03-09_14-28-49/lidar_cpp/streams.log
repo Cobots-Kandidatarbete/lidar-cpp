@@ -1,0 +1,59 @@
+[0.018s] Invoking command in '/home/student/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8
+[0.082s] [35m[1mScanning dependencies of target lidar_server[0m
+[0.095s] [  2%] Built target lidar_cpp__cpp
+[0.099s] [ 11%] Built target lidar_cpp__rosidl_generator_c
+[0.116s] [ 17%] Built target lidar
+[0.131s] [ 28%] Built target lidar_cpp__rosidl_typesupport_cpp
+[0.131s] [ 34%] Built target lidar_cpp__rosidl_typesupport_introspection_cpp
+[0.139s] [ 42%] Built target lidar_cpp__rosidl_typesupport_fastrtps_cpp
+[0.146s] [ 45%] [32mBuilding CXX object CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o[0m
+[0.148s] [ 62%] Built target lidar_cpp__rosidl_typesupport_introspection_c
+[0.148s] [ 62%] Built target lidar_cpp__rosidl_typesupport_c
+[0.174s] [ 71%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c
+[0.196s] [ 71%] Built target lidar_cpp
+[0.221s] [ 74%] Built target lidar_cpp__py
+[0.251s] [ 80%] Built target lidar_cpp__python
+[0.276s] [ 91%] Built target lidar_cpp__rosidl_typesupport_c__pyext
+[0.277s] [ 91%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c__pyext
+[0.279s] [ 97%] Built target lidar_cpp__rosidl_typesupport_introspection_c__pyext
+[6.288s] In file included from [01m[K/opt/ros/galactic/include/rclcpp/node_impl.hpp:42[m[K,
+[6.288s]                  from [01m[K/opt/ros/galactic/include/rclcpp/node.hpp:1329[m[K,
+[6.288s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[6.288s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executors.hpp:22[m[K,
+[6.288s]                  from [01m[K/opt/ros/galactic/include/rclcpp/rclcpp.hpp:156[m[K,
+[6.288s]                  from [01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:6[m[K:
+[6.289s] /opt/ros/galactic/include/rclcpp/create_service.hpp: In instantiation of ‘[01m[Ktypename rclcpp::Service<ServiceT>::SharedPtr rclcpp::create_service(std::shared_ptr<rclcpp::node_interfaces::NodeBaseInterface>, std::shared_ptr<rclcpp::node_interfaces::NodeServicesInterface>, const string&, CallbackT&&, const rmw_qos_profile_t&, rclcpp::CallbackGroup::SharedPtr) [with ServiceT = lidar_cpp::srv::LidarService; CallbackT = void (*)(std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >); typename rclcpp::Service<ServiceT>::SharedPtr = std::shared_ptr<rclcpp::Service<lidar_cpp::srv::LidarService> >; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_t; rclcpp::CallbackGroup::SharedPtr = std::shared_ptr<rclcpp::CallbackGroup>][m[K’:
+[6.289s] [01m[K/opt/ros/galactic/include/rclcpp/node_impl.hpp:148:53:[m[K   required from ‘[01m[Ktypename rclcpp::Service<ServiceT>::SharedPtr rclcpp::Node::create_service(const string&, CallbackT&&, const rmw_qos_profile_t&, rclcpp::CallbackGroup::SharedPtr) [with ServiceT = lidar_cpp::srv::LidarService; CallbackT = void (*)(std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >); typename rclcpp::Service<ServiceT>::SharedPtr = std::shared_ptr<rclcpp::Service<lidar_cpp::srv::LidarService> >; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_t; rclcpp::CallbackGroup::SharedPtr = std::shared_ptr<rclcpp::CallbackGroup>][m[K’
+[6.289s] [01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:79:90:[m[K   required from here
+[6.289s] [01m[K/opt/ros/galactic/include/rclcpp/create_service.hpp:43:3:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Krclcpp::AnyServiceCallback<lidar_cpp::srv::LidarService>::set(void (*)(std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >))[m[K’
+[6.289s]    43 |   [01;31m[Kany_service_callback[m[K.set(std::forward<CallbackT>(callback));
+[6.289s]       |   [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[6.289s] In file included from [01m[K/opt/ros/galactic/include/rclcpp/service.hpp:28[m[K,
+[6.289s]                  from [01m[K/opt/ros/galactic/include/rclcpp/callback_group.hpp:25[m[K,
+[6.289s]                  from [01m[K/opt/ros/galactic/include/rclcpp/any_executable.hpp:20[m[K,
+[6.289s]                  from [01m[K/opt/ros/galactic/include/rclcpp/memory_strategy.hpp:25[m[K,
+[6.289s]                  from [01m[K/opt/ros/galactic/include/rclcpp/memory_strategies.hpp:18[m[K,
+[6.289s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executor_options.hpp:20[m[K,
+[6.289s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executor.hpp:36[m[K,
+[6.289s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[6.290s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executors.hpp:21[m[K,
+[6.290s]                  from [01m[K/opt/ros/galactic/include/rclcpp/rclcpp.hpp:156[m[K,
+[6.290s]                  from [01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:6[m[K:
+[6.290s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:67:8:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class CallbackT, typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<lidar_cpp::srv::LidarService_Request_<std::allocator<void> > >, std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >)> >::value, void>::type* <anonymous> > void rclcpp::AnyServiceCallback<ServiceT>::set(CallbackT) [with CallbackT = CallbackT; typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<typename ServiceT::Request>, std::shared_ptr<typename ServiceT::Response>)> >::value>::type* <anonymous> = <enumerator>; ServiceT = lidar_cpp::srv::LidarService][m[K’
+[6.290s]    67 |   void [01;36m[Kset[m[K(CallbackT callback)
+[6.290s]       |        [01;36m[K^~~[m[K
+[6.290s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:67:8:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[6.290s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:65:17:[m[K [01;31m[Kerror: [m[Kno type named ‘[01m[Ktype[m[K’ in ‘[01m[Kstruct std::enable_if<false, void>[m[K’
+[6.290s]    65 |     >::type * = [01;31m[Knullptr[m[K
+[6.290s]       |                 [01;31m[K^~~~~~~[m[K
+[6.290s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:81:8:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class CallbackT, typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<rmw_request_id_t>, std::shared_ptr<lidar_cpp::srv::LidarService_Request_<std::allocator<void> > >, std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >)> >::value, void>::type* <anonymous> > void rclcpp::AnyServiceCallback<ServiceT>::set(CallbackT) [with CallbackT = CallbackT; typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<rmw_request_id_t>, std::shared_ptr<typename ServiceT::Request>, std::shared_ptr<typename ServiceT::Response>)> >::value>::type* <anonymous> = <enumerator>; ServiceT = lidar_cpp::srv::LidarService][m[K’
+[6.290s]    81 |   void [01;36m[Kset[m[K(CallbackT callback)
+[6.290s]       |        [01;36m[K^~~[m[K
+[6.290s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:81:8:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[6.290s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:79:17:[m[K [01;31m[Kerror: [m[Kno type named ‘[01m[Ktype[m[K’ in ‘[01m[Kstruct std::enable_if<false, void>[m[K’
+[6.291s]    79 |     >::type * = [01;31m[Knullptr[m[K
+[6.291s]       |                 [01;31m[K^~~~~~~[m[K
+[7.040s] make[2]: *** [CMakeFiles/lidar_server.dir/build.make:63: CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o] Error 1
+[7.041s] make[1]: *** [CMakeFiles/Makefile2:125: CMakeFiles/lidar_server.dir/all] Error 2
+[7.041s] make: *** [Makefile:141: all] Error 2
+[7.043s] Invoked command in '/home/student/lidar-ws/build/lidar_cpp' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8

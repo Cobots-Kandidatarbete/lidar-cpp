@@ -1,0 +1,25 @@
+[35m[1mScanning dependencies of target lidar_server[0m
+[ 50%] Built target lidar
+[ 75%] [32mBuilding CXX object CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o[0m
+[100%] [32m[1mLinking CXX executable lidar_server[0m
+[100%] Built target lidar_server
+-- Install configuration: ""
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/lib/lidar_cpp/lidar
+-- Set runtime path of "/home/student/lidar-ws/install/lidar_cpp/lib/lidar_cpp/lidar" to ""
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/lib/lidar_cpp/lidar_server
+-- Set runtime path of "/home/student/lidar-ws/install/lidar_cpp/lib/lidar_cpp/lidar_server" to ""
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/package_run_dependencies/lidar_cpp
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/parent_prefix_path/lidar_cpp
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/ament_prefix_path.sh
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/ament_prefix_path.dsv
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/path.sh
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/environment/path.dsv
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.bash
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.sh
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.zsh
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/local_setup.dsv
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/package.dsv
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/ament_index/resource_index/packages/lidar_cpp
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cppConfig.cmake
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/cmake/lidar_cppConfig-version.cmake
+-- Installing: /home/student/lidar-ws/install/lidar_cpp/share/lidar_cpp/package.xml

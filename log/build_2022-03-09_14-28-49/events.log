@@ -1,0 +1,137 @@
+[0.000000] (-) TimerEvent: {}
+[0.000404] (lidar_cpp) JobQueued: {'identifier': 'lidar_cpp', 'dependencies': OrderedDict()}
+[0.000476] (lidar_cpp) JobStarted: {'identifier': 'lidar_cpp'}
+[0.014713] (lidar_cpp) JobProgress: {'identifier': 'lidar_cpp', 'progress': 'cmake'}
+[0.015909] (lidar_cpp) JobProgress: {'identifier': 'lidar_cpp', 'progress': 'build'}
+[0.017311] (lidar_cpp) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/student/lidar-ws/build/lidar_cpp', '--', '-j8', '-l8'], 'cwd': '/home/student/lidar-ws/build/lidar_cpp', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'sv:en'), ('USER', 'student'), ('LC_TIME', 'sv_SE.UTF-8'), ('SSH_AGENT_PID', '1267'), ('XDG_SESSION_TYPE', 'x11'), ('GIT_ASKPASS', '/snap/code/90/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/student/lidar-ws/install/lidar_cpp/lib:/home/student/ia_ws/install/viz_tools_msgs/lib:/home/student/ia_ws/install/ur_tools_msgs/lib:/home/student/ia_ws/install/ur_script_msgs/lib:/home/student/ia_ws/install/tf_tools_msgs/lib:/home/student/ia_ws/install/mp_msgs/lib:/opt/ros/galactic/opt/yaml_cpp_vendor/lib:/opt/ros/galactic/opt/rviz_ogre_vendor/lib:/opt/ros/galactic/lib/x86_64-linux-gnu:/opt/ros/galactic/lib'), ('HOME', '/home/student'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('OLDPWD', '/home/student'), ('TERM_PROGRAM_VERSION', '1.65.1'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/var/lib/snapd/desktop/applications/code_code.desktop'), ('APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL', 'true'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/snap/code/90/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('LC_MONETARY', 'sv_SE.UTF-8'), ('VSCODE_GIT_ASKPASS_NODE', '/snap/code/90/usr/share/code/code'), ('MANAGERPID', '919'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '270424'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/student/lidar-ws/install:/home/student/ws/install:/home/student/ia_ws/install'), ('ROS_DISTRO', 'galactic'), ('LOGNAME', 'student'), ('JOURNAL_STREAM', '8:35502'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'student'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/home/student/.local/bin:/opt/ros/galactic/bin:/home/student/.cargo/bin:/home/student/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('SESSION_MANAGER', 'local/ia3:@/tmp/.ICE-unix/1781,unix/ia3:/tmp/.ICE-unix/1781'), ('INVOCATION_ID', 'c3c759cfa2264601bab7dc0fe144dacd'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'sv_SE.UTF-8'), ('BAMF_DESKTOP_FILE_HINT', '/var/lib/snapd/desktop/applications/code_code.desktop'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'sv_SE.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'sv_SE.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-2915d8ac73.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('GSETTINGS_SCHEMA_DIR', '/snap/code/90/usr/share/glib-2.0/schemas'), ('ROS_DOMAIN_ID', '3'), ('AMENT_PREFIX_PATH', '/home/student/lidar-ws/install/lidar_cpp:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ws/install/case_bringup:/home/student/ia_ws/install/viz_dynamic:/home/student/ia_ws/install/viz_tools_msgs:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/viz_bringup:/home/student/ia_ws/install/ur_script_generator:/home/student/ia_ws/install/ur_script_controller:/home/student/ia_ws/install/ur_tools_msgs:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/ur_script_driver:/home/student/ia_ws/install/ur_script_msgs:/home/student/ia_ws/install/ur_description:/home/student/ia_ws/install/ur_bringup:/home/student/ia_ws/install/tf_sms:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_bringup:/home/student/ia_ws/install/tf_tools_msgs:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/opcua_ros2_bridge:/home/student/ia_ws/install/mp_msgs:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'Unity'), ('SHELL', '/bin/bash'), ('LC_NAME', 'sv_SE.UTF-8'), ('DISABLE_WAYLAND', '1'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'sv_SE.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'sv_SE.UTF-8'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', '--ms-enable-electron-run-as-node'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/student/lidar-ws/build/lidar_cpp'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/student/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages:/home/student/ws/install/py_ctrl/lib/python3.8/site-packages:/home/student/ws/install/case_scenes/lib/python3.8/site-packages:/home/student/ia_ws/install/viz_tools_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/viz_static/lib/python3.8/site-packages:/home/student/ia_ws/install/viz_interactive/lib/python3.8/site-packages:/home/student/ia_ws/install/ur_tools_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/ur_setup/lib/python3.8/site-packages:/home/student/ia_ws/install/ur_script_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/tf_lookup/lib/python3.8/site-packages:/home/student/ia_ws/install/tf_broadcast/lib/python3.8/site-packages:/home/student/ia_ws/install/tf_tools_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/tf_scene/lib/python3.8/site-packages:/home/student/ia_ws/install/mp_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/gui_tools/lib/python3.8/site-packages:/home/student/ia_ws/install/aruco_handler/lib/python3.8/site-packages:/opt/ros/galactic/lib/python3.8/site-packages'), ('LC_NUMERIC', 'sv_SE.UTF-8'), ('LC_PAPER', 'sv_SE.UTF-8'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/student/lidar-ws/install/lidar_cpp:/home/student/ws/install/case_bringup:/home/student/ia_ws/install/viz_dynamic:/home/student/ia_ws/install/viz_tools_msgs:/home/student/ia_ws/install/viz_bringup:/home/student/ia_ws/install/ur_script_generator:/home/student/ia_ws/install/ur_script_controller:/home/student/ia_ws/install/ur_tools_msgs:/home/student/ia_ws/install/ur_script_driver:/home/student/ia_ws/install/ur_script_msgs:/home/student/ia_ws/install/ur_description:/home/student/ia_ws/install/ur_bringup:/home/student/ia_ws/install/tf_sms:/home/student/ia_ws/install/tf_bringup:/home/student/ia_ws/install/tf_tools_msgs:/home/student/ia_ws/install/opcua_ros2_bridge:/home/student/ia_ws/install/mp_msgs:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic')]), 'shell': False}
+[0.082685] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_server\x1b[0m\n'}
+[0.095495] (lidar_cpp) StdoutLine: {'line': b'[  2%] Built target lidar_cpp__cpp\n'}
+[0.099218] (-) TimerEvent: {}
+[0.099656] (lidar_cpp) StdoutLine: {'line': b'[ 11%] Built target lidar_cpp__rosidl_generator_c\n'}
+[0.116493] (lidar_cpp) StdoutLine: {'line': b'[ 17%] Built target lidar\n'}
+[0.131554] (lidar_cpp) StdoutLine: {'line': b'[ 28%] Built target lidar_cpp__rosidl_typesupport_cpp\n'}
+[0.131853] (lidar_cpp) StdoutLine: {'line': b'[ 34%] Built target lidar_cpp__rosidl_typesupport_introspection_cpp\n'}
+[0.139829] (lidar_cpp) StdoutLine: {'line': b'[ 42%] Built target lidar_cpp__rosidl_typesupport_fastrtps_cpp\n'}
+[0.146109] (lidar_cpp) StdoutLine: {'line': b'[ 45%] \x1b[32mBuilding CXX object CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o\x1b[0m\n'}
+[0.148204] (lidar_cpp) StdoutLine: {'line': b'[ 62%] Built target lidar_cpp__rosidl_typesupport_introspection_c\n'}
+[0.148428] (lidar_cpp) StdoutLine: {'line': b'[ 62%] Built target lidar_cpp__rosidl_typesupport_c\n'}
+[0.173885] (lidar_cpp) StdoutLine: {'line': b'[ 71%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c\n'}
+[0.196463] (lidar_cpp) StdoutLine: {'line': b'[ 71%] Built target lidar_cpp\n'}
+[0.199313] (-) TimerEvent: {}
+[0.221756] (lidar_cpp) StdoutLine: {'line': b'[ 74%] Built target lidar_cpp__py\n'}
+[0.250939] (lidar_cpp) StdoutLine: {'line': b'[ 80%] Built target lidar_cpp__python\n'}
+[0.276818] (lidar_cpp) StdoutLine: {'line': b'[ 91%] Built target lidar_cpp__rosidl_typesupport_c__pyext\n'}
+[0.277148] (lidar_cpp) StdoutLine: {'line': b'[ 91%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c__pyext\n'}
+[0.278987] (lidar_cpp) StdoutLine: {'line': b'[ 97%] Built target lidar_cpp__rosidl_typesupport_introspection_c__pyext\n'}
+[0.299413] (-) TimerEvent: {}
+[0.399770] (-) TimerEvent: {}
+[0.500146] (-) TimerEvent: {}
+[0.600552] (-) TimerEvent: {}
+[0.700886] (-) TimerEvent: {}
+[0.801252] (-) TimerEvent: {}
+[0.901563] (-) TimerEvent: {}
+[1.001890] (-) TimerEvent: {}
+[1.102217] (-) TimerEvent: {}
+[1.202550] (-) TimerEvent: {}
+[1.302872] (-) TimerEvent: {}
+[1.403206] (-) TimerEvent: {}
+[1.503541] (-) TimerEvent: {}
+[1.603860] (-) TimerEvent: {}
+[1.704223] (-) TimerEvent: {}
+[1.804600] (-) TimerEvent: {}
+[1.904910] (-) TimerEvent: {}
+[2.005229] (-) TimerEvent: {}
+[2.105546] (-) TimerEvent: {}
+[2.205876] (-) TimerEvent: {}
+[2.306218] (-) TimerEvent: {}
+[2.406540] (-) TimerEvent: {}
+[2.506855] (-) TimerEvent: {}
+[2.607168] (-) TimerEvent: {}
+[2.707490] (-) TimerEvent: {}
+[2.807825] (-) TimerEvent: {}
+[2.908158] (-) TimerEvent: {}
+[3.008537] (-) TimerEvent: {}
+[3.108893] (-) TimerEvent: {}
+[3.209244] (-) TimerEvent: {}
+[3.309591] (-) TimerEvent: {}
+[3.409939] (-) TimerEvent: {}
+[3.510292] (-) TimerEvent: {}
+[3.610644] (-) TimerEvent: {}
+[3.710962] (-) TimerEvent: {}
+[3.811267] (-) TimerEvent: {}
+[3.911568] (-) TimerEvent: {}
+[4.011916] (-) TimerEvent: {}
+[4.112257] (-) TimerEvent: {}
+[4.212610] (-) TimerEvent: {}
+[4.312945] (-) TimerEvent: {}
+[4.413287] (-) TimerEvent: {}
+[4.513626] (-) TimerEvent: {}
+[4.613965] (-) TimerEvent: {}
+[4.714313] (-) TimerEvent: {}
+[4.814632] (-) TimerEvent: {}
+[4.914970] (-) TimerEvent: {}
+[5.015300] (-) TimerEvent: {}
+[5.115640] (-) TimerEvent: {}
+[5.215965] (-) TimerEvent: {}
+[5.316305] (-) TimerEvent: {}
+[5.416636] (-) TimerEvent: {}
+[5.516974] (-) TimerEvent: {}
+[5.617314] (-) TimerEvent: {}
+[5.717714] (-) TimerEvent: {}
+[5.818051] (-) TimerEvent: {}
+[5.918381] (-) TimerEvent: {}
+[6.018696] (-) TimerEvent: {}
+[6.119017] (-) TimerEvent: {}
+[6.219321] (-) TimerEvent: {}
+[6.288330] (lidar_cpp) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/node_impl.hpp:42\x1b[m\x1b[K,\n'}
+[6.288713] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/node.hpp:1329\x1b[m\x1b[K,\n'}
+[6.288792] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/executors/single_threaded_executor.hpp:28\x1b[m\x1b[K,\n'}
+[6.288868] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/executors.hpp:22\x1b[m\x1b[K,\n'}
+[6.288934] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/rclcpp.hpp:156\x1b[m\x1b[K,\n'}
+[6.289002] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:6\x1b[m\x1b[K:\n'}
+[6.289071] (lidar_cpp) StderrLine: {'line': b'/opt/ros/galactic/include/rclcpp/create_service.hpp: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Ktypename rclcpp::Service<ServiceT>::SharedPtr rclcpp::create_service(std::shared_ptr<rclcpp::node_interfaces::NodeBaseInterface>, std::shared_ptr<rclcpp::node_interfaces::NodeServicesInterface>, const string&, CallbackT&&, const rmw_qos_profile_t&, rclcpp::CallbackGroup::SharedPtr) [with ServiceT = lidar_cpp::srv::LidarService; CallbackT = void (*)(std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >); typename rclcpp::Service<ServiceT>::SharedPtr = std::shared_ptr<rclcpp::Service<lidar_cpp::srv::LidarService> >; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_t; rclcpp::CallbackGroup::SharedPtr = std::shared_ptr<rclcpp::CallbackGroup>]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[6.289146] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/node_impl.hpp:148:53:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Ktypename rclcpp::Service<ServiceT>::SharedPtr rclcpp::Node::create_service(const string&, CallbackT&&, const rmw_qos_profile_t&, rclcpp::CallbackGroup::SharedPtr) [with ServiceT = lidar_cpp::srv::LidarService; CallbackT = void (*)(std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >); typename rclcpp::Service<ServiceT>::SharedPtr = std::shared_ptr<rclcpp::Service<lidar_cpp::srv::LidarService> >; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_t; rclcpp::CallbackGroup::SharedPtr = std::shared_ptr<rclcpp::CallbackGroup>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[6.289217] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:79:90:\x1b[m\x1b[K   required from here\n'}
+[6.289282] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/create_service.hpp:43:3:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[Krclcpp::AnyServiceCallback<lidar_cpp::srv::LidarService>::set(void (*)(std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >))\x1b[m\x1b[K\xe2\x80\x99\n'}
+[6.289355] (lidar_cpp) StderrLine: {'line': b'   43 |   \x1b[01;31m\x1b[Kany_service_callback\x1b[m\x1b[K.set(std::forward<CallbackT>(callback));\n'}
+[6.289422] (lidar_cpp) StderrLine: {'line': b'      |   \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[6.289491] (lidar_cpp) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/service.hpp:28\x1b[m\x1b[K,\n'}
+[6.289555] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/callback_group.hpp:25\x1b[m\x1b[K,\n'}
+[6.289625] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/any_executable.hpp:20\x1b[m\x1b[K,\n'}
+[6.289707] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/memory_strategy.hpp:25\x1b[m\x1b[K,\n'}
+[6.289776] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/memory_strategies.hpp:18\x1b[m\x1b[K,\n'}
+[6.289839] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/executor_options.hpp:20\x1b[m\x1b[K,\n'}
+[6.289902] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/executor.hpp:36\x1b[m\x1b[K,\n'}
+[6.289972] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/executors/multi_threaded_executor.hpp:26\x1b[m\x1b[K,\n'}
+[6.290036] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[6.290099] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/rclcpp.hpp:156\x1b[m\x1b[K,\n'}
+[6.290162] (lidar_cpp) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:6\x1b[m\x1b[K:\n'}
+[6.290228] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:67:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class CallbackT, typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<lidar_cpp::srv::LidarService_Request_<std::allocator<void> > >, std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >)> >::value, void>::type* <anonymous> > void rclcpp::AnyServiceCallback<ServiceT>::set(CallbackT) [with CallbackT = CallbackT; typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<typename ServiceT::Request>, std::shared_ptr<typename ServiceT::Response>)> >::value>::type* <anonymous> = <enumerator>; ServiceT = lidar_cpp::srv::LidarService]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[6.290304] (lidar_cpp) StderrLine: {'line': b'   67 |   void \x1b[01;36m\x1b[Kset\x1b[m\x1b[K(CallbackT callback)\n'}
+[6.290369] (lidar_cpp) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~\x1b[m\x1b[K\n'}
+[6.290434] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:67:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[6.290498] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:65:17:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno type named \xe2\x80\x98\x1b[01m\x1b[Ktype\x1b[m\x1b[K\xe2\x80\x99 in \xe2\x80\x98\x1b[01m\x1b[Kstruct std::enable_if<false, void>\x1b[m\x1b[K\xe2\x80\x99\n'}
+[6.290565] (lidar_cpp) StderrLine: {'line': b'   65 |     >::type * = \x1b[01;31m\x1b[Knullptr\x1b[m\x1b[K\n'}
+[6.290628] (lidar_cpp) StderrLine: {'line': b'      |                 \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[6.290691] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:81:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class CallbackT, typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<rmw_request_id_t>, std::shared_ptr<lidar_cpp::srv::LidarService_Request_<std::allocator<void> > >, std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >)> >::value, void>::type* <anonymous> > void rclcpp::AnyServiceCallback<ServiceT>::set(CallbackT) [with CallbackT = CallbackT; typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<rmw_request_id_t>, std::shared_ptr<typename ServiceT::Request>, std::shared_ptr<typename ServiceT::Response>)> >::value>::type* <anonymous> = <enumerator>; ServiceT = lidar_cpp::srv::LidarService]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[6.290767] (lidar_cpp) StderrLine: {'line': b'   81 |   void \x1b[01;36m\x1b[Kset\x1b[m\x1b[K(CallbackT callback)\n'}
+[6.290831] (lidar_cpp) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~\x1b[m\x1b[K\n'}
+[6.290895] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:81:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[6.290959] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:79:17:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno type named \xe2\x80\x98\x1b[01m\x1b[Ktype\x1b[m\x1b[K\xe2\x80\x99 in \xe2\x80\x98\x1b[01m\x1b[Kstruct std::enable_if<false, void>\x1b[m\x1b[K\xe2\x80\x99\n'}
+[6.291027] (lidar_cpp) StderrLine: {'line': b'   79 |     >::type * = \x1b[01;31m\x1b[Knullptr\x1b[m\x1b[K\n'}
+[6.291091] (lidar_cpp) StderrLine: {'line': b'      |                 \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[6.319435] (-) TimerEvent: {}
+[6.419763] (-) TimerEvent: {}
+[6.520073] (-) TimerEvent: {}
+[6.620380] (-) TimerEvent: {}
+[6.720670] (-) TimerEvent: {}
+[6.820993] (-) TimerEvent: {}
+[6.921288] (-) TimerEvent: {}
+[7.021626] (-) TimerEvent: {}
+[7.040689] (lidar_cpp) StderrLine: {'line': b'make[2]: *** [CMakeFiles/lidar_server.dir/build.make:63: CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o] Error 1\n'}
+[7.040978] (lidar_cpp) StderrLine: {'line': b'make[1]: *** [CMakeFiles/Makefile2:125: CMakeFiles/lidar_server.dir/all] Error 2\n'}
+[7.041141] (lidar_cpp) StderrLine: {'line': b'make: *** [Makefile:141: all] Error 2\n'}
+[7.043362] (lidar_cpp) CommandEnded: {'returncode': 2}
+[7.122014] (-) TimerEvent: {}
+[7.142645] (lidar_cpp) JobEnded: {'identifier': 'lidar_cpp', 'rc': 2}
+[7.153319] (-) EventReactorShutdown: {}

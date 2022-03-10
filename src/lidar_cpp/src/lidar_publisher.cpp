@@ -31,7 +31,7 @@ private:
     pcl_ptr points_to_pcl(const rs2::points &points)
     {
         pcl_ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
-
+        
         auto sp = points.get_profile().as<rs2::video_stream_profile>();
         cloud->width = sp.width();
         cloud->height = sp.height();
@@ -62,7 +62,7 @@ private:
 
         sensor_msgs::msg::PointCloud2 message;
         pcl_conversions::fromPCL(pcl_points, message);
-        message.header.frame_id = "world";
+        message.header.frame_id = "L515";
 
         publisher_->publish(message);
         RCLCPP_INFO(this->get_logger(), "Publishing pcl");

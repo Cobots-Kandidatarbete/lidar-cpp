@@ -1,0 +1,126 @@
+[0.018s] Invoking command in '/home/student/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8
+[0.056s] -- Found ament_cmake: 1.1.4 (/opt/ros/galactic/share/ament_cmake/cmake)
+[0.087s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.087s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.169s] -- Found rclcpp: 9.2.0 (/opt/ros/galactic/share/rclcpp/cmake)
+[0.213s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.217s] -- Found rosidl_adapter: 2.2.1 (/opt/ros/galactic/share/rosidl_adapter/cmake)
+[0.352s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.399s] -- Found rmw_implementation_cmake: 3.3.1 (/opt/ros/galactic/share/rmw_implementation_cmake/cmake)
+[0.401s] -- Found rmw_cyclonedds_cpp: 0.22.3 (/opt/ros/galactic/share/rmw_cyclonedds_cpp/cmake)
+[0.426s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[0.565s] -- Found sensor_msgs: 2.2.3 (/opt/ros/galactic/share/sensor_msgs/cmake)
+[0.688s] -- Eigen found (include: /usr/include/eigen3, version: 3.3.7)
+[0.786s] -- The imported target "vtkParseOGLExt" references the file
+[0.786s]    "/usr/bin/vtkParseOGLExt-7.1"
+[0.786s] but this file does not exist.  Possible reasons include:
+[0.786s] * The file was deleted, renamed, or moved to another location.
+[0.786s] * An install or uninstall procedure did not complete successfully.
+[0.786s] * The installation package was faulty and contained
+[0.786s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.787s] but not all the files it references.
+[0.787s] 
+[0.787s] -- The imported target "vtkRenderingPythonTkWidgets" references the file
+[0.787s]    "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+[0.787s] but this file does not exist.  Possible reasons include:
+[0.787s] * The file was deleted, renamed, or moved to another location.
+[0.787s] * An install or uninstall procedure did not complete successfully.
+[0.787s] * The installation package was faulty and contained
+[0.787s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.788s] but not all the files it references.
+[0.788s] 
+[0.788s] -- The imported target "vtk" references the file
+[0.788s]    "/usr/bin/vtk"
+[0.788s] but this file does not exist.  Possible reasons include:
+[0.788s] * The file was deleted, renamed, or moved to another location.
+[0.788s] * An install or uninstall procedure did not complete successfully.
+[0.788s] * The installation package was faulty and contained
+[0.788s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.789s] but not all the files it references.
+[0.789s] 
+[0.789s] -- The imported target "pvtk" references the file
+[0.789s]    "/usr/bin/pvtk"
+[0.789s] but this file does not exist.  Possible reasons include:
+[0.789s] * The file was deleted, renamed, or moved to another location.
+[0.789s] * An install or uninstall procedure did not complete successfully.
+[0.789s] * The installation package was faulty and contained
+[0.789s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.789s] but not all the files it references.
+[0.789s] 
+[0.807s] -- Checking for module 'libusb-1.0'
+[0.812s] --   No package 'libusb-1.0' found
+[0.817s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.817s] -- OpenNI disabled because libusb-1.0 not found.
+[0.818s] ** WARNING ** io features related to openni will be disabled
+[0.823s] -- Checking for module 'libusb-1.0'
+[0.828s] --   No package 'libusb-1.0' found
+[0.833s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.833s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[0.833s] ** WARNING ** io features related to openni2 will be disabled
+[0.834s] ** WARNING ** io features related to pcap will be disabled
+[0.834s] ** WARNING ** io features related to png will be disabled
+[0.852s] -- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
+[0.853s] ** WARNING ** io features related to libusb-1.0 will be disabled
+[0.857s] -- Checking for module 'libusb-1.0'
+[0.860s] --   No package 'libusb-1.0' found
+[0.866s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.866s] -- OpenNI disabled because libusb-1.0 not found.
+[0.866s] ** WARNING ** visualization features related to openni will be disabled
+[0.871s] -- Checking for module 'libusb-1.0'
+[0.875s] --   No package 'libusb-1.0' found
+[0.879s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.879s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[0.879s] ** WARNING ** visualization features related to openni2 will be disabled
+[0.895s] -- QHULL found (include: /usr/include, lib: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so)
+[0.899s] -- Checking for module 'libusb-1.0'
+[0.903s] --   No package 'libusb-1.0' found
+[0.909s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.909s] -- OpenNI disabled because libusb-1.0 not found.
+[0.909s] ** WARNING ** apps features related to openni will be disabled
+[0.927s] -- looking for PCL_COMMON
+[0.928s] -- looking for PCL_KDTREE
+[0.929s] -- looking for PCL_OCTREE
+[0.929s] -- looking for PCL_SEARCH
+[0.930s] -- looking for PCL_SAMPLE_CONSENSUS
+[0.931s] -- looking for PCL_FILTERS
+[0.931s] -- looking for PCL_2D
+[0.932s] -- looking for PCL_GEOMETRY
+[0.933s] -- looking for PCL_IO
+[0.933s] -- looking for PCL_FEATURES
+[0.934s] -- looking for PCL_ML
+[0.935s] -- looking for PCL_SEGMENTATION
+[0.936s] -- looking for PCL_VISUALIZATION
+[0.937s] -- looking for PCL_SURFACE
+[0.937s] -- looking for PCL_REGISTRATION
+[0.938s] -- looking for PCL_KEYPOINTS
+[0.939s] -- looking for PCL_TRACKING
+[0.940s] -- looking for PCL_RECOGNITION
+[0.941s] -- looking for PCL_STEREO
+[0.942s] -- looking for PCL_APPS
+[0.943s] -- looking for PCL_IN_HAND_SCANNER
+[0.943s] -- looking for PCL_POINT_CLOUD_EDITOR
+[0.944s] -- looking for PCL_OUTOFCORE
+[0.944s] -- looking for PCL_PEOPLE
+[0.946s] -- Found rosidl_default_generators: 1.1.1 (/opt/ros/galactic/share/rosidl_default_generators/cmake)
+[1.003s] CMake Error at CMakeLists.txt:16 (find_package):
+[1.004s]   By not providing "Findrosidl.cmake" in CMAKE_MODULE_PATH this project has
+[1.004s]   asked CMake to find a package configuration file provided by "rosidl", but
+[1.004s]   CMake did not find one.
+[1.004s] 
+[1.004s]   Could not find a package configuration file provided by "rosidl" with any
+[1.004s]   of the following names:
+[1.004s] 
+[1.004s]     rosidlConfig.cmake
+[1.004s]     rosidl-config.cmake
+[1.005s] 
+[1.005s]   Add the installation prefix of "rosidl" to CMAKE_PREFIX_PATH or set
+[1.005s]   "rosidl_DIR" to a directory containing one of the above files.  If "rosidl"
+[1.005s]   provides a separate development package or SDK, be sure it has been
+[1.005s]   installed.
+[1.005s] 
+[1.005s] 
+[1.006s] -- Configuring incomplete, errors occurred!
+[1.006s] See also "/home/student/lidar-ws/build/lidar_cpp/CMakeFiles/CMakeOutput.log".
+[1.006s] See also "/home/student/lidar-ws/build/lidar_cpp/CMakeFiles/CMakeError.log".
+[1.018s] make: *** [Makefile:836: cmake_check_build_system] Error 1
+[1.020s] Invoked command in '/home/student/lidar-ws/build/lidar_cpp' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8

@@ -1,0 +1,24 @@
+[0.016s] Invoking command in '/home/student/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8
+[0.082s] [  2%] Built target lidar_cpp__cpp
+[0.082s] [ 11%] Built target lidar_cpp__rosidl_generator_c
+[0.096s] [ 14%] [32m[1mLinking CXX executable lidar_server[0m
+[0.100s] [ 20%] Built target lidar
+[0.107s] [ 37%] Built target lidar_cpp__rosidl_typesupport_cpp
+[0.107s] [ 37%] Built target lidar_cpp__rosidl_typesupport_introspection_cpp
+[0.118s] [ 45%] Built target lidar_cpp__rosidl_typesupport_fastrtps_cpp
+[0.127s] [ 54%] Built target lidar_cpp__rosidl_typesupport_c
+[0.131s] [ 62%] Built target lidar_cpp__rosidl_typesupport_introspection_c
+[0.147s] [ 71%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c
+[0.169s] [ 71%] Built target lidar_cpp
+[0.191s] [ 74%] Built target lidar_cpp__py
+[0.223s] [ 80%] Built target lidar_cpp__python
+[0.253s] [ 97%] Built target lidar_cpp__rosidl_typesupport_c__pyext
+[0.253s] [ 97%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c__pyext
+[0.254s] [ 97%] Built target lidar_cpp__rosidl_typesupport_introspection_c__pyext
+[0.774s] /usr/bin/ld: CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o: in function `rclcpp::Service<lidar_cpp::srv::LidarService>::Service(std::shared_ptr<rcl_node_t>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, rclcpp::AnyServiceCallback<lidar_cpp::srv::LidarService>, rcl_service_options_t&)':
+[0.774s] lidar_server.cpp:(.text._ZN6rclcpp7ServiceIN9lidar_cpp3srv12LidarServiceEEC2ESt10shared_ptrI10rcl_node_tERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_18AnyServiceCallbackIS3_EER21rcl_service_options_t[_ZN6rclcpp7ServiceIN9lidar_cpp3srv12LidarServiceEEC5ESt10shared_ptrI10rcl_node_tERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_18AnyServiceCallbackIS3_EER21rcl_service_options_t]+0xb4): undefined reference to `rosidl_service_type_support_t const* rosidl_typesupport_cpp::get_service_type_support_handle<lidar_cpp::srv::LidarService>()'
+[0.774s] collect2: error: ld returned 1 exit status
+[0.776s] make[2]: *** [CMakeFiles/lidar_server.dir/build.make:231: lidar_server] Error 1
+[0.776s] make[1]: *** [CMakeFiles/Makefile2:125: CMakeFiles/lidar_server.dir/all] Error 2
+[0.776s] make: *** [Makefile:141: all] Error 2
+[0.778s] Invoked command in '/home/student/lidar-ws/build/lidar_cpp' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8

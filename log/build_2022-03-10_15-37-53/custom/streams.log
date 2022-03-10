@@ -1,0 +1,20 @@
+[0.019s] Invoking command in '/home/student/lidar-ws/build/custom': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/custom -- -j8 -l8
+[0.056s] -- Found ament_cmake: 1.1.4 (/opt/ros/galactic/share/ament_cmake/cmake)
+[0.089s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.089s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.167s] -- Found rosidl_default_generators: 1.1.1 (/opt/ros/galactic/share/rosidl_default_generators/cmake)
+[0.175s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.178s] -- Found rosidl_adapter: 2.2.1 (/opt/ros/galactic/share/rosidl_adapter/cmake)
+[0.329s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.377s] -- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+[0.448s] CMake Error at /opt/ros/galactic/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:162 (message):
+[0.448s]   rosidl_generate_interfaces() the passed dependency 'sensor_msgs' has not
+[0.449s]   been found before using find_package()
+[0.449s] Call Stack (most recent call first):
+[0.449s]   CMakeLists.txt:16 (rosidl_generate_interfaces)
+[0.449s] 
+[0.449s] 
+[0.449s] -- Configuring incomplete, errors occurred!
+[0.449s] See also "/home/student/lidar-ws/build/custom/CMakeFiles/CMakeOutput.log".
+[0.455s] make: *** [Makefile:748: cmake_check_build_system] Error 1
+[0.456s] Invoked command in '/home/student/lidar-ws/build/custom' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/custom -- -j8 -l8

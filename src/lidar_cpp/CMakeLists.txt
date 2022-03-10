@@ -11,20 +11,18 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(realsense2 REQUIRED)
 find_package(PCL REQUIRED)
-
-find_package(rosidl_default_generators REQUIRED)
-
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "srv/LidarService.srv"
-)
-
+find_package(custom REQUIRED) 
 # target_link_libraries(${PROJECT_NAME} PRIVATE realsense2::realsense2)
 
 
 
 include_directories(
   include
+  ${PCL_INCLUDE_DIRS}
 )
+
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
 
 add_executable(lidar src/lidar_publisher.cpp)
 ament_target_dependencies(lidar
@@ -34,10 +32,22 @@ ament_target_dependencies(lidar
   PCL
 )
 
+add_executable(lidar_server src/lidar_server.cpp)
+ament_target_dependencies(lidar_server
+  realsense2
+  rclcpp
+  sensor_msgs
+  PCL
+  custom
+)
+
+
 target_link_libraries(lidar realsense2)
+target_link_libraries(lidar_server realsense2 ${PCL_LIBRARIES})
 
 install(TARGETS
   lidar
+  lidar_server
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

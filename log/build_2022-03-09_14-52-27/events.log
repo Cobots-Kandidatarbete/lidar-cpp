@@ -1,0 +1,319 @@
+[0.000000] (-) TimerEvent: {}
+[0.000620] (lidar_cpp) JobQueued: {'identifier': 'lidar_cpp', 'dependencies': OrderedDict()}
+[0.000915] (lidar_cpp) JobStarted: {'identifier': 'lidar_cpp'}
+[0.017390] (lidar_cpp) JobProgress: {'identifier': 'lidar_cpp', 'progress': 'cmake'}
+[0.018591] (lidar_cpp) JobProgress: {'identifier': 'lidar_cpp', 'progress': 'build'}
+[0.019706] (lidar_cpp) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/student/lidar-ws/build/lidar_cpp', '--', '-j8', '-l8'], 'cwd': '/home/student/lidar-ws/build/lidar_cpp', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'sv:en'), ('USER', 'student'), ('LC_TIME', 'sv_SE.UTF-8'), ('SSH_AGENT_PID', '1267'), ('XDG_SESSION_TYPE', 'x11'), ('GIT_ASKPASS', '/snap/code/90/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/student/lidar-ws/install/lidar_cpp/lib:/home/student/ia_ws/install/viz_tools_msgs/lib:/home/student/ia_ws/install/ur_tools_msgs/lib:/home/student/ia_ws/install/ur_script_msgs/lib:/home/student/ia_ws/install/tf_tools_msgs/lib:/home/student/ia_ws/install/mp_msgs/lib:/opt/ros/galactic/opt/yaml_cpp_vendor/lib:/opt/ros/galactic/opt/rviz_ogre_vendor/lib:/opt/ros/galactic/lib/x86_64-linux-gnu:/opt/ros/galactic/lib'), ('HOME', '/home/student'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('OLDPWD', '/home/student'), ('TERM_PROGRAM_VERSION', '1.65.1'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/var/lib/snapd/desktop/applications/code_code.desktop'), ('APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL', 'true'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/snap/code/90/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('LC_MONETARY', 'sv_SE.UTF-8'), ('VSCODE_GIT_ASKPASS_NODE', '/snap/code/90/usr/share/code/code'), ('MANAGERPID', '919'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '270424'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/student/lidar-ws/install:/home/student/ws/install:/home/student/ia_ws/install'), ('ROS_DISTRO', 'galactic'), ('LOGNAME', 'student'), ('JOURNAL_STREAM', '8:35502'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'student'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/home/student/.local/bin:/opt/ros/galactic/bin:/home/student/.cargo/bin:/home/student/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('SESSION_MANAGER', 'local/ia3:@/tmp/.ICE-unix/1781,unix/ia3:/tmp/.ICE-unix/1781'), ('INVOCATION_ID', 'c3c759cfa2264601bab7dc0fe144dacd'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'sv_SE.UTF-8'), ('BAMF_DESKTOP_FILE_HINT', '/var/lib/snapd/desktop/applications/code_code.desktop'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'sv_SE.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'sv_SE.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-2915d8ac73.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('GSETTINGS_SCHEMA_DIR', '/snap/code/90/usr/share/glib-2.0/schemas'), ('ROS_DOMAIN_ID', '3'), ('AMENT_PREFIX_PATH', '/home/student/lidar-ws/install/lidar_cpp:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ws/install/case_bringup:/home/student/ia_ws/install/viz_dynamic:/home/student/ia_ws/install/viz_tools_msgs:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/viz_bringup:/home/student/ia_ws/install/ur_script_generator:/home/student/ia_ws/install/ur_script_controller:/home/student/ia_ws/install/ur_tools_msgs:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/ur_script_driver:/home/student/ia_ws/install/ur_script_msgs:/home/student/ia_ws/install/ur_description:/home/student/ia_ws/install/ur_bringup:/home/student/ia_ws/install/tf_sms:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_bringup:/home/student/ia_ws/install/tf_tools_msgs:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/opcua_ros2_bridge:/home/student/ia_ws/install/mp_msgs:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'Unity'), ('SHELL', '/bin/bash'), ('LC_NAME', 'sv_SE.UTF-8'), ('DISABLE_WAYLAND', '1'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'sv_SE.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'sv_SE.UTF-8'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', '--ms-enable-electron-run-as-node'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/student/lidar-ws/build/lidar_cpp'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/student/lidar-ws/install/lidar_cpp/lib/python3.8/site-packages:/home/student/ws/install/py_ctrl/lib/python3.8/site-packages:/home/student/ws/install/case_scenes/lib/python3.8/site-packages:/home/student/ia_ws/install/viz_tools_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/viz_static/lib/python3.8/site-packages:/home/student/ia_ws/install/viz_interactive/lib/python3.8/site-packages:/home/student/ia_ws/install/ur_tools_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/ur_setup/lib/python3.8/site-packages:/home/student/ia_ws/install/ur_script_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/tf_lookup/lib/python3.8/site-packages:/home/student/ia_ws/install/tf_broadcast/lib/python3.8/site-packages:/home/student/ia_ws/install/tf_tools_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/tf_scene/lib/python3.8/site-packages:/home/student/ia_ws/install/mp_msgs/lib/python3.8/site-packages:/home/student/ia_ws/install/gui_tools/lib/python3.8/site-packages:/home/student/ia_ws/install/aruco_handler/lib/python3.8/site-packages:/opt/ros/galactic/lib/python3.8/site-packages'), ('LC_NUMERIC', 'sv_SE.UTF-8'), ('LC_PAPER', 'sv_SE.UTF-8'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/student/lidar-ws/install/lidar_cpp:/home/student/ws/install/case_bringup:/home/student/ia_ws/install/viz_dynamic:/home/student/ia_ws/install/viz_tools_msgs:/home/student/ia_ws/install/viz_bringup:/home/student/ia_ws/install/ur_script_generator:/home/student/ia_ws/install/ur_script_controller:/home/student/ia_ws/install/ur_tools_msgs:/home/student/ia_ws/install/ur_script_driver:/home/student/ia_ws/install/ur_script_msgs:/home/student/ia_ws/install/ur_description:/home/student/ia_ws/install/ur_bringup:/home/student/ia_ws/install/tf_sms:/home/student/ia_ws/install/tf_bringup:/home/student/ia_ws/install/tf_tools_msgs:/home/student/ia_ws/install/opcua_ros2_bridge:/home/student/ia_ws/install/mp_msgs:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic')]), 'shell': False}
+[0.059098] (lidar_cpp) StdoutLine: {'line': b'-- Found ament_cmake: 1.1.4 (/opt/ros/galactic/share/ament_cmake/cmake)\n'}
+[0.090359] (lidar_cpp) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") \n'}
+[0.090603] (lidar_cpp) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[0.099752] (-) TimerEvent: {}
+[0.169293] (lidar_cpp) StdoutLine: {'line': b'-- Found rclcpp: 9.2.0 (/opt/ros/galactic/share/rclcpp/cmake)\n'}
+[0.199846] (-) TimerEvent: {}
+[0.210814] (lidar_cpp) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.215440] (lidar_cpp) StdoutLine: {'line': b'-- Found rosidl_adapter: 2.2.1 (/opt/ros/galactic/share/rosidl_adapter/cmake)\n'}
+[0.299968] (-) TimerEvent: {}
+[0.353695] (lidar_cpp) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.400093] (-) TimerEvent: {}
+[0.405673] (lidar_cpp) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 3.3.1 (/opt/ros/galactic/share/rmw_implementation_cmake/cmake)\n'}
+[0.409081] (lidar_cpp) StdoutLine: {'line': b'-- Found rmw_cyclonedds_cpp: 0.22.3 (/opt/ros/galactic/share/rmw_cyclonedds_cpp/cmake)\n'}
+[0.433746] (lidar_cpp) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_cyclonedds_cpp' as default\n"}
+[0.500196] (-) TimerEvent: {}
+[0.569768] (lidar_cpp) StdoutLine: {'line': b'-- Found sensor_msgs: 2.2.3 (/opt/ros/galactic/share/sensor_msgs/cmake)\n'}
+[0.600307] (-) TimerEvent: {}
+[0.697009] (lidar_cpp) StdoutLine: {'line': b'-- Eigen found (include: /usr/include/eigen3, version: 3.3.7)\n'}
+[0.700386] (-) TimerEvent: {}
+[0.787299] (lidar_cpp) StdoutLine: {'line': b'-- The imported target "vtkParseOGLExt" references the file\n'}
+[0.787514] (lidar_cpp) StdoutLine: {'line': b'   "/usr/bin/vtkParseOGLExt-7.1"\n'}
+[0.787635] (lidar_cpp) StdoutLine: {'line': b'but this file does not exist.  Possible reasons include:\n'}
+[0.787744] (lidar_cpp) StdoutLine: {'line': b'* The file was deleted, renamed, or moved to another location.\n'}
+[0.787849] (lidar_cpp) StdoutLine: {'line': b'* An install or uninstall procedure did not complete successfully.\n'}
+[0.787951] (lidar_cpp) StdoutLine: {'line': b'* The installation package was faulty and contained\n'}
+[0.788052] (lidar_cpp) StdoutLine: {'line': b'   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"\n'}
+[0.788152] (lidar_cpp) StdoutLine: {'line': b'but not all the files it references.\n'}
+[0.788330] (lidar_cpp) StdoutLine: {'line': b'\n'}
+[0.788437] (lidar_cpp) StdoutLine: {'line': b'-- The imported target "vtkRenderingPythonTkWidgets" references the file\n'}
+[0.788539] (lidar_cpp) StdoutLine: {'line': b'   "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"\n'}
+[0.788638] (lidar_cpp) StdoutLine: {'line': b'but this file does not exist.  Possible reasons include:\n'}
+[0.788748] (lidar_cpp) StdoutLine: {'line': b'* The file was deleted, renamed, or moved to another location.\n'}
+[0.788849] (lidar_cpp) StdoutLine: {'line': b'* An install or uninstall procedure did not complete successfully.\n'}
+[0.788989] (lidar_cpp) StdoutLine: {'line': b'* The installation package was faulty and contained\n'}
+[0.789147] (lidar_cpp) StdoutLine: {'line': b'   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"\n'}
+[0.789311] (lidar_cpp) StdoutLine: {'line': b'but not all the files it references.\n'}
+[0.789455] (lidar_cpp) StdoutLine: {'line': b'\n'}
+[0.789557] (lidar_cpp) StdoutLine: {'line': b'-- The imported target "vtk" references the file\n'}
+[0.789657] (lidar_cpp) StdoutLine: {'line': b'   "/usr/bin/vtk"\n'}
+[0.789755] (lidar_cpp) StdoutLine: {'line': b'but this file does not exist.  Possible reasons include:\n'}
+[0.789855] (lidar_cpp) StdoutLine: {'line': b'* The file was deleted, renamed, or moved to another location.\n'}
+[0.789954] (lidar_cpp) StdoutLine: {'line': b'* An install or uninstall procedure did not complete successfully.\n'}
+[0.790053] (lidar_cpp) StdoutLine: {'line': b'* The installation package was faulty and contained\n'}
+[0.790151] (lidar_cpp) StdoutLine: {'line': b'   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"\n'}
+[0.790249] (lidar_cpp) StdoutLine: {'line': b'but not all the files it references.\n'}
+[0.790347] (lidar_cpp) StdoutLine: {'line': b'\n'}
+[0.790445] (lidar_cpp) StdoutLine: {'line': b'-- The imported target "pvtk" references the file\n'}
+[0.790542] (lidar_cpp) StdoutLine: {'line': b'   "/usr/bin/pvtk"\n'}
+[0.790640] (lidar_cpp) StdoutLine: {'line': b'but this file does not exist.  Possible reasons include:\n'}
+[0.790740] (lidar_cpp) StdoutLine: {'line': b'* The file was deleted, renamed, or moved to another location.\n'}
+[0.790837] (lidar_cpp) StdoutLine: {'line': b'* An install or uninstall procedure did not complete successfully.\n'}
+[0.790935] (lidar_cpp) StdoutLine: {'line': b'* The installation package was faulty and contained\n'}
+[0.791033] (lidar_cpp) StdoutLine: {'line': b'   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"\n'}
+[0.791131] (lidar_cpp) StdoutLine: {'line': b'but not all the files it references.\n'}
+[0.791229] (lidar_cpp) StdoutLine: {'line': b'\n'}
+[0.800468] (-) TimerEvent: {}
+[0.809505] (lidar_cpp) StdoutLine: {'line': b"-- Checking for module 'libusb-1.0'\n"}
+[0.813842] (lidar_cpp) StdoutLine: {'line': b"--   No package 'libusb-1.0' found\n"}
+[0.819712] (lidar_cpp) StdoutLine: {'line': b'-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) \n'}
+[0.819937] (lidar_cpp) StdoutLine: {'line': b'-- OpenNI disabled because libusb-1.0 not found.\n'}
+[0.820159] (lidar_cpp) StderrLine: {'line': b'** WARNING ** io features related to openni will be disabled\n'}
+[0.825486] (lidar_cpp) StdoutLine: {'line': b"-- Checking for module 'libusb-1.0'\n"}
+[0.828768] (lidar_cpp) StdoutLine: {'line': b"--   No package 'libusb-1.0' found\n"}
+[0.833470] (lidar_cpp) StdoutLine: {'line': b'-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) \n'}
+[0.833673] (lidar_cpp) StdoutLine: {'line': b'-- OpenNI 2 disabled because libusb-1.0 not found.\n'}
+[0.833956] (lidar_cpp) StderrLine: {'line': b'** WARNING ** io features related to openni2 will be disabled\n'}
+[0.834136] (lidar_cpp) StderrLine: {'line': b'** WARNING ** io features related to pcap will be disabled\n'}
+[0.834267] (lidar_cpp) StderrLine: {'line': b'** WARNING ** io features related to png will be disabled\n'}
+[0.849505] (lidar_cpp) StdoutLine: {'line': b'-- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) \n'}
+[0.849751] (lidar_cpp) StderrLine: {'line': b'** WARNING ** io features related to libusb-1.0 will be disabled\n'}
+[0.854133] (lidar_cpp) StdoutLine: {'line': b"-- Checking for module 'libusb-1.0'\n"}
+[0.857499] (lidar_cpp) StdoutLine: {'line': b"--   No package 'libusb-1.0' found\n"}
+[0.861502] (lidar_cpp) StdoutLine: {'line': b'-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) \n'}
+[0.861706] (lidar_cpp) StdoutLine: {'line': b'-- OpenNI disabled because libusb-1.0 not found.\n'}
+[0.861838] (lidar_cpp) StderrLine: {'line': b'** WARNING ** visualization features related to openni will be disabled\n'}
+[0.866723] (lidar_cpp) StdoutLine: {'line': b"-- Checking for module 'libusb-1.0'\n"}
+[0.870632] (lidar_cpp) StdoutLine: {'line': b"--   No package 'libusb-1.0' found\n"}
+[0.875100] (lidar_cpp) StdoutLine: {'line': b'-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) \n'}
+[0.875223] (lidar_cpp) StdoutLine: {'line': b'-- OpenNI 2 disabled because libusb-1.0 not found.\n'}
+[0.875368] (lidar_cpp) StderrLine: {'line': b'** WARNING ** visualization features related to openni2 will be disabled\n'}
+[0.888838] (lidar_cpp) StdoutLine: {'line': b'-- QHULL found (include: /usr/include, lib: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so)\n'}
+[0.892993] (lidar_cpp) StdoutLine: {'line': b"-- Checking for module 'libusb-1.0'\n"}
+[0.896167] (lidar_cpp) StdoutLine: {'line': b"--   No package 'libusb-1.0' found\n"}
+[0.900565] (-) TimerEvent: {}
+[0.900766] (lidar_cpp) StdoutLine: {'line': b'-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) \n'}
+[0.900967] (lidar_cpp) StdoutLine: {'line': b'-- OpenNI disabled because libusb-1.0 not found.\n'}
+[0.901077] (lidar_cpp) StderrLine: {'line': b'** WARNING ** apps features related to openni will be disabled\n'}
+[0.917960] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_COMMON\n'}
+[0.918661] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_KDTREE\n'}
+[0.919312] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_OCTREE\n'}
+[0.920026] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_SEARCH\n'}
+[0.920708] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_SAMPLE_CONSENSUS\n'}
+[0.921400] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_FILTERS\n'}
+[0.922171] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_2D\n'}
+[0.922765] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_GEOMETRY\n'}
+[0.923329] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_IO\n'}
+[0.924124] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_FEATURES\n'}
+[0.924960] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_ML\n'}
+[0.925675] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_SEGMENTATION\n'}
+[0.926437] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_VISUALIZATION\n'}
+[0.927035] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_SURFACE\n'}
+[0.927621] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_REGISTRATION\n'}
+[0.928265] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_KEYPOINTS\n'}
+[0.928857] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_TRACKING\n'}
+[0.929495] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_RECOGNITION\n'}
+[0.930233] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_STEREO\n'}
+[0.930820] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_APPS\n'}
+[0.931859] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_IN_HAND_SCANNER\n'}
+[0.932342] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_POINT_CLOUD_EDITOR\n'}
+[0.932754] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_OUTOFCORE\n'}
+[0.933455] (lidar_cpp) StdoutLine: {'line': b'-- looking for PCL_PEOPLE\n'}
+[0.935348] (lidar_cpp) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.1.1 (/opt/ros/galactic/share/rosidl_default_generators/cmake)\n'}
+[0.971732] (lidar_cpp) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") \n'}
+[1.000673] (-) TimerEvent: {}
+[1.101082] (lidar_cpp) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.9.2 (/opt/ros/galactic/share/ament_cmake_ros/cmake)\n'}
+[1.101389] (-) TimerEvent: {}
+[1.201685] (-) TimerEvent: {}
+[1.211050] (lidar_cpp) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.220313] (lidar_cpp) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.253275] (lidar_cpp) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") \n'}
+[1.253767] (lidar_cpp) StdoutLine: {'line': b'-- Found python_cmake_module: 0.8.1 (/opt/ros/galactic/share/python_cmake_module/cmake)\n'}
+[1.283044] (lidar_cpp) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[1.283286] (lidar_cpp) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8\n'}
+[1.283413] (lidar_cpp) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so\n'}
+[1.301765] (-) TimerEvent: {}
+[1.331908] (lidar_cpp) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.10.6 (/opt/ros/galactic/share/ament_lint_auto/cmake)\n'}
+[1.342305] (lidar_cpp) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[1.343247] (lidar_cpp) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[1.344831] (lidar_cpp) StdoutLine: {'line': b'-- Configured cppcheck include dirs: \n'}
+[1.344966] (lidar_cpp) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[1.345582] (lidar_cpp) StdoutLine: {'line': b"-- Added test 'cpplint' to check C / C++ code against the Google style\n"}
+[1.345725] (lidar_cpp) StdoutLine: {'line': b'-- Configured cpplint exclude dirs and/or files: \n'}
+[1.346253] (lidar_cpp) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[1.347033] (lidar_cpp) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[1.347304] (lidar_cpp) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[1.347577] (lidar_cpp) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[1.352127] (lidar_cpp) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.401930] (-) TimerEvent: {}
+[1.447588] (lidar_cpp) StdoutLine: {'line': b'-- Generating done\n'}
+[1.452953] (lidar_cpp) StdoutLine: {'line': b'-- Build files have been written to: /home/student/lidar-ws/build/lidar_cpp\n'}
+[1.483055] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_generator_c\x1b[0m\n'}
+[1.484538] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_server\x1b[0m\n'}
+[1.484773] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar\x1b[0m\n'}
+[1.493946] (lidar_cpp) StdoutLine: {'line': b'[  2%] Built target lidar_cpp__cpp\n'}
+[1.496703] (lidar_cpp) StdoutLine: {'line': b'[  5%] \x1b[32mBuilding C object CMakeFiles/lidar_cpp__rosidl_generator_c.dir/rosidl_generator_c/lidar_cpp/srv/detail/lidar_service__functions.c.o\x1b[0m\n'}
+[1.502031] (-) TimerEvent: {}
+[1.507138] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_cpp\x1b[0m\n'}
+[1.509847] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_cpp\x1b[0m\n'}
+[1.510368] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_cpp\x1b[0m\n'}
+[1.511188] (lidar_cpp) StdoutLine: {'line': b'[  8%] \x1b[32mBuilding CXX object CMakeFiles/lidar.dir/src/lidar_publisher.cpp.o\x1b[0m\n'}
+[1.515296] (lidar_cpp) StdoutLine: {'line': b'[ 11%] \x1b[32mBuilding CXX object CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o\x1b[0m\n'}
+[1.526181] (lidar_cpp) StdoutLine: {'line': b'[ 14%] \x1b[32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/lidar_cpp/srv/lidar_service__type_support.cpp.o\x1b[0m\n'}
+[1.528456] (lidar_cpp) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/lidar_cpp/srv/detail/lidar_service__type_support.cpp.o\x1b[0m\n'}
+[1.528668] (lidar_cpp) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/lidar_cpp/srv/detail/dds_fastrtps/lidar_service__type_support.cpp.o\x1b[0m\n'}
+[1.569279] (lidar_cpp) StdoutLine: {'line': b'[ 22%] \x1b[32m\x1b[1mLinking C shared library liblidar_cpp__rosidl_generator_c.so\x1b[0m\n'}
+[1.602143] (-) TimerEvent: {}
+[1.620668] (lidar_cpp) StdoutLine: {'line': b'[ 25%] Built target lidar_cpp__rosidl_generator_c\n'}
+[1.639757] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_c\x1b[0m\n'}
+[1.654213] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_c\x1b[0m\n'}
+[1.659837] (lidar_cpp) StdoutLine: {'line': b'[ 28%] \x1b[32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_c.dir/rosidl_typesupport_c/lidar_cpp/srv/lidar_service__type_support.cpp.o\x1b[0m\n'}
+[1.672936] (lidar_cpp) StdoutLine: {'line': b'[ 31%] \x1b[32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lidar_cpp/srv/detail/lidar_service__type_support.c.o\x1b[0m\n'}
+[1.702256] (-) TimerEvent: {}
+[1.716459] (lidar_cpp) StdoutLine: {'line': b'[ 34%] \x1b[32m\x1b[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_c.so\x1b[0m\n'}
+[1.749937] (lidar_cpp) StdoutLine: {'line': b'[ 37%] \x1b[32m\x1b[1mLinking C shared library liblidar_cpp__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[1.782856] (lidar_cpp) StdoutLine: {'line': b'[ 40%] Built target lidar_cpp__rosidl_typesupport_c\n'}
+[1.797232] (lidar_cpp) StdoutLine: {'line': b'[ 42%] Built target lidar_cpp__rosidl_typesupport_introspection_c\n'}
+[1.802375] (-) TimerEvent: {}
+[1.902769] (lidar_cpp) StdoutLine: {'line': b'[ 45%] \x1b[32m\x1b[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[1.903091] (-) TimerEvent: {}
+[1.954386] (lidar_cpp) StdoutLine: {'line': b'[ 48%] Built target lidar_cpp__rosidl_typesupport_cpp\n'}
+[2.003217] (-) TimerEvent: {}
+[2.029444] (lidar_cpp) StdoutLine: {'line': b'[ 51%] \x1b[32m\x1b[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[2.071984] (lidar_cpp) StdoutLine: {'line': b'[ 54%] \x1b[32m\x1b[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[2.098996] (lidar_cpp) StdoutLine: {'line': b'[ 57%] Built target lidar_cpp__rosidl_typesupport_introspection_cpp\n'}
+[2.103344] (-) TimerEvent: {}
+[2.172428] (lidar_cpp) StdoutLine: {'line': b'[ 60%] Built target lidar_cpp__rosidl_typesupport_fastrtps_cpp\n'}
+[2.183178] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_c\x1b[0m\n'}
+[2.195778] (lidar_cpp) StdoutLine: {'line': b'[ 62%] \x1b[32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/lidar_cpp/srv/detail/lidar_service__type_support_c.cpp.o\x1b[0m\n'}
+[2.203454] (-) TimerEvent: {}
+[2.303845] (-) TimerEvent: {}
+[2.404174] (-) TimerEvent: {}
+[2.504506] (-) TimerEvent: {}
+[2.555179] (lidar_cpp) StdoutLine: {'line': b'[ 65%] \x1b[32m\x1b[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[2.604632] (-) TimerEvent: {}
+[2.655622] (lidar_cpp) StdoutLine: {'line': b'[ 68%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c\n'}
+[2.679016] (lidar_cpp) StdoutLine: {'line': b'[ 68%] Built target lidar_cpp\n'}
+[2.701485] (lidar_cpp) StdoutLine: {'line': b'[ 71%] Built target lidar_cpp__py\n'}
+[2.704711] (-) TimerEvent: {}
+[2.713220] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__python\x1b[0m\n'}
+[2.730037] (lidar_cpp) StdoutLine: {'line': b'[ 74%] \x1b[32mBuilding C object CMakeFiles/lidar_cpp__python.dir/rosidl_generator_py/lidar_cpp/srv/_lidar_service_s.c.o\x1b[0m\n'}
+[2.804828] (-) TimerEvent: {}
+[2.821640] (lidar_cpp) StdoutLine: {'line': b'[ 77%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/lidar_cpp/liblidar_cpp__python.so\x1b[0m\n'}
+[2.872184] (lidar_cpp) StdoutLine: {'line': b'[ 77%] Built target lidar_cpp__python\n'}
+[2.884687] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_c__pyext\x1b[0m\n'}
+[2.885785] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_c__pyext\x1b[0m\n'}
+[2.886584] (lidar_cpp) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_c__pyext\x1b[0m\n'}
+[2.902405] (lidar_cpp) StdoutLine: {'line': b'[ 82%] \x1b[32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/lidar_cpp/_lidar_cpp_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[2.902753] (lidar_cpp) StdoutLine: {'line': b'[ 82%] \x1b[32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/lidar_cpp/_lidar_cpp_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[2.904955] (-) TimerEvent: {}
+[2.906181] (lidar_cpp) StdoutLine: {'line': b'[ 85%] \x1b[32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/lidar_cpp/_lidar_cpp_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[3.000853] (lidar_cpp) StdoutLine: {'line': b'[ 88%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/lidar_cpp/lidar_cpp_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[3.003222] (lidar_cpp) StdoutLine: {'line': b'[ 91%] \x1b[32m\x1b[1mLinking CXX shared library rosidl_generator_py/lidar_cpp/lidar_cpp_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[3.005024] (-) TimerEvent: {}
+[3.030832] (lidar_cpp) StdoutLine: {'line': b'[ 94%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/lidar_cpp/lidar_cpp_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[3.052234] (lidar_cpp) StdoutLine: {'line': b'[ 94%] Built target lidar_cpp__rosidl_typesupport_introspection_c__pyext\n'}
+[3.071325] (lidar_cpp) StdoutLine: {'line': b'[ 94%] Built target lidar_cpp__rosidl_typesupport_c__pyext\n'}
+[3.077953] (lidar_cpp) StdoutLine: {'line': b'[ 94%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c__pyext\n'}
+[3.105124] (-) TimerEvent: {}
+[3.205457] (-) TimerEvent: {}
+[3.305779] (-) TimerEvent: {}
+[3.406146] (-) TimerEvent: {}
+[3.506524] (-) TimerEvent: {}
+[3.606879] (-) TimerEvent: {}
+[3.707197] (-) TimerEvent: {}
+[3.807523] (-) TimerEvent: {}
+[3.907860] (-) TimerEvent: {}
+[4.008198] (-) TimerEvent: {}
+[4.108539] (-) TimerEvent: {}
+[4.208892] (-) TimerEvent: {}
+[4.309216] (-) TimerEvent: {}
+[4.409550] (-) TimerEvent: {}
+[4.509864] (-) TimerEvent: {}
+[4.610184] (-) TimerEvent: {}
+[4.710525] (-) TimerEvent: {}
+[4.810879] (-) TimerEvent: {}
+[4.911275] (-) TimerEvent: {}
+[5.011612] (-) TimerEvent: {}
+[5.111958] (-) TimerEvent: {}
+[5.212282] (-) TimerEvent: {}
+[5.312609] (-) TimerEvent: {}
+[5.412987] (-) TimerEvent: {}
+[5.513346] (-) TimerEvent: {}
+[5.613712] (-) TimerEvent: {}
+[5.714041] (-) TimerEvent: {}
+[5.814386] (-) TimerEvent: {}
+[5.914773] (-) TimerEvent: {}
+[6.015188] (-) TimerEvent: {}
+[6.115537] (-) TimerEvent: {}
+[6.215833] (-) TimerEvent: {}
+[6.316139] (-) TimerEvent: {}
+[6.416458] (-) TimerEvent: {}
+[6.516807] (-) TimerEvent: {}
+[6.617112] (-) TimerEvent: {}
+[6.717422] (-) TimerEvent: {}
+[6.817728] (-) TimerEvent: {}
+[6.918048] (-) TimerEvent: {}
+[7.018372] (-) TimerEvent: {}
+[7.118664] (-) TimerEvent: {}
+[7.218990] (-) TimerEvent: {}
+[7.319321] (-) TimerEvent: {}
+[7.419645] (-) TimerEvent: {}
+[7.519986] (-) TimerEvent: {}
+[7.620294] (-) TimerEvent: {}
+[7.718597] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[Kvoid take_picture(std::shared_ptr<lidar_cpp::srv::LidarService_Request_<std::allocator<void> > >, std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.732173] (-) TimerEvent: {}
+[7.732360] (lidar_cpp) StderrLine: {'line': b'\x1b[01m\x1b[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:37:80:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Krequest\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K-Wunused-parameter\x1b[m\x1b[K]\n'}
+[7.732544] (lidar_cpp) StderrLine: {'line': b'   37 | void take_picture(\x1b[01;35m\x1b[Kconst std::shared_ptr<lidar_cpp::srv::LidarService::Request> request\x1b[m\x1b[K, const std::shared_ptr<lidar_cpp::srv::LidarService::Response> response)\n'}
+[7.732645] (lidar_cpp) StderrLine: {'line': b'      |                   \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~\x1b[m\x1b[K\n'}
+[7.832283] (-) TimerEvent: {}
+[7.942551] (-) TimerEvent: {}
+[8.042869] (-) TimerEvent: {}
+[8.143190] (-) TimerEvent: {}
+[8.243505] (-) TimerEvent: {}
+[8.343847] (-) TimerEvent: {}
+[8.444177] (-) TimerEvent: {}
+[8.544501] (-) TimerEvent: {}
+[8.644835] (-) TimerEvent: {}
+[8.745177] (-) TimerEvent: {}
+[8.845533] (-) TimerEvent: {}
+[8.945886] (-) TimerEvent: {}
+[9.046232] (-) TimerEvent: {}
+[9.146560] (-) TimerEvent: {}
+[9.246907] (-) TimerEvent: {}
+[9.347251] (-) TimerEvent: {}
+[9.447596] (-) TimerEvent: {}
+[9.547945] (-) TimerEvent: {}
+[9.648274] (-) TimerEvent: {}
+[9.748605] (-) TimerEvent: {}
+[9.848938] (-) TimerEvent: {}
+[9.949343] (-) TimerEvent: {}
+[9.967095] (lidar_cpp) StdoutLine: {'line': b'[ 97%] \x1b[32m\x1b[1mLinking CXX executable lidar_server\x1b[0m\n'}
+[10.049467] (-) TimerEvent: {}
+[10.149833] (-) TimerEvent: {}
+[10.250205] (-) TimerEvent: {}
+[10.350490] (-) TimerEvent: {}
+[10.450812] (-) TimerEvent: {}
+[10.551160] (-) TimerEvent: {}
+[10.651514] (-) TimerEvent: {}
+[10.751871] (-) TimerEvent: {}
+[10.762899] (lidar_cpp) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o: in function `rclcpp::Service<lidar_cpp::srv::LidarService>::Service(std::shared_ptr<rcl_node_t>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, rclcpp::AnyServiceCallback<lidar_cpp::srv::LidarService>, rcl_service_options_t&)':\n"}
+[10.763174] (lidar_cpp) StderrLine: {'line': b"lidar_server.cpp:(.text._ZN6rclcpp7ServiceIN9lidar_cpp3srv12LidarServiceEEC2ESt10shared_ptrI10rcl_node_tERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_18AnyServiceCallbackIS3_EER21rcl_service_options_t[_ZN6rclcpp7ServiceIN9lidar_cpp3srv12LidarServiceEEC5ESt10shared_ptrI10rcl_node_tERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_18AnyServiceCallbackIS3_EER21rcl_service_options_t]+0xb4): undefined reference to `rosidl_service_type_support_t const* rosidl_typesupport_cpp::get_service_type_support_handle<lidar_cpp::srv::LidarService>()'\n"}
+[10.763258] (lidar_cpp) StderrLine: {'line': b'collect2: error: ld returned 1 exit status\n'}
+[10.764440] (lidar_cpp) StderrLine: {'line': b'make[2]: *** [CMakeFiles/lidar_server.dir/build.make:231: lidar_server] Error 1\n'}
+[10.764697] (lidar_cpp) StderrLine: {'line': b'make[1]: *** [CMakeFiles/Makefile2:125: CMakeFiles/lidar_server.dir/all] Error 2\n'}
+[10.764808] (lidar_cpp) StderrLine: {'line': b'make[1]: *** Waiting for unfinished jobs....\n'}
+[10.851993] (-) TimerEvent: {}
+[10.952280] (-) TimerEvent: {}
+[11.052732] (-) TimerEvent: {}
+[11.097764] (lidar_cpp) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable lidar\x1b[0m\n'}
+[11.152851] (-) TimerEvent: {}
+[11.253221] (-) TimerEvent: {}
+[11.353549] (-) TimerEvent: {}
+[11.453911] (-) TimerEvent: {}
+[11.554248] (-) TimerEvent: {}
+[11.654636] (-) TimerEvent: {}
+[11.755033] (-) TimerEvent: {}
+[11.855383] (-) TimerEvent: {}
+[11.929896] (lidar_cpp) StdoutLine: {'line': b'[100%] Built target lidar\n'}
+[11.930853] (lidar_cpp) StderrLine: {'line': b'make: *** [Makefile:141: all] Error 2\n'}
+[11.932705] (lidar_cpp) CommandEnded: {'returncode': 2}
+[11.955486] (-) TimerEvent: {}
+[12.021848] (lidar_cpp) JobEnded: {'identifier': 'lidar_cpp', 'rc': 2}
+[12.032552] (-) EventReactorShutdown: {}

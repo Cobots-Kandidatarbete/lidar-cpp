@@ -1,0 +1,219 @@
+[0.034s] Invoking command in '/home/student/lidar-ws/build/custom': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake /home/student/lidar-ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/student/lidar-ws/install/custom
+[0.088s] -- The C compiler identification is GNU 9.4.0
+[0.147s] -- The CXX compiler identification is GNU 9.4.0
+[0.153s] -- Check for working C compiler: /usr/bin/cc
+[0.233s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.234s] -- Detecting C compiler ABI info
+[0.316s] -- Detecting C compiler ABI info - done
+[0.329s] -- Detecting C compile features
+[0.329s] -- Detecting C compile features - done
+[0.332s] -- Check for working CXX compiler: /usr/bin/c++
+[0.421s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.422s] -- Detecting CXX compiler ABI info
+[0.512s] -- Detecting CXX compiler ABI info - done
+[0.528s] -- Detecting CXX compile features
+[0.528s] -- Detecting CXX compile features - done
+[0.533s] -- Found ament_cmake: 1.1.4 (/opt/ros/galactic/share/ament_cmake/cmake)
+[0.565s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.565s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.676s] -- Found rosidl_default_generators: 1.1.1 (/opt/ros/galactic/share/rosidl_default_generators/cmake)
+[0.685s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.695s] -- Found rosidl_adapter: 2.2.1 (/opt/ros/galactic/share/rosidl_adapter/cmake)
+[0.835s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.868s] -- Found FastRTPS: /opt/ros/galactic/include  
+[0.964s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.022s] -- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+[1.158s] -- Found ament_cmake_ros: 0.9.2 (/opt/ros/galactic/share/ament_cmake_ros/cmake)
+[1.281s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.291s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.323s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") 
+[1.326s] -- Found python_cmake_module: 0.8.1 (/opt/ros/galactic/share/python_cmake_module/cmake)
+[1.359s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") 
+[1.359s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.359s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8
+[1.359s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+[1.382s] -- Found PythonExtra: .so  
+[1.442s] -- Found ament_lint_auto: 0.10.6 (/opt/ros/galactic/share/ament_lint_auto/cmake)
+[1.476s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.478s] -- Added test 'lint_cmake' to check CMake code style
+[1.479s] -- Added test 'xmllint' to check XML markup files
+[1.485s] -- Configuring done
+[1.528s] -- Generating done
+[1.531s] -- Build files have been written to: /home/student/lidar-ws/build/custom
+[1.543s] Invoked command in '/home/student/lidar-ws/build/custom' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake /home/student/lidar-ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/student/lidar-ws/install/custom
+[1.545s] Invoking command in '/home/student/lidar-ws/build/custom': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/custom -- -j8 -l8
+[1.592s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[1.592s] [35m[1mScanning dependencies of target custom__cpp[0m
+[1.603s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[1.860s] [35m[1mScanning dependencies of target custom__rosidl_generator_c[0m
+[1.870s] [  6%] Built target custom__cpp
+[1.871s] [  9%] [32mBuilding C object CMakeFiles/custom__rosidl_generator_c.dir/rosidl_generator_c/custom/srv/detail/lidar_service__functions.c.o[0m
+[1.881s] [ 19%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[1.881s] [ 19%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[1.881s] [ 19%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[1.920s] [ 22%] [32m[1mLinking C shared library libcustom__rosidl_generator_c.so[0m
+[1.957s] [ 22%] Built target custom__rosidl_generator_c
+[1.967s] [ 25%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[1.971s] [ 29%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[2.110s] [35m[1mScanning dependencies of target custom__rosidl_typesupport_cpp[0m
+[2.127s] [35m[1mScanning dependencies of target custom__rosidl_typesupport_introspection_cpp[0m
+[2.127s] [ 32%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/custom/srv/lidar_service__type_support.cpp.o[0m
+[2.139s] [35m[1mScanning dependencies of target custom__rosidl_typesupport_fastrtps_cpp[0m
+[2.145s] [ 35%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/custom/srv/detail/lidar_service__type_support.cpp.o[0m
+[2.160s] [ 38%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/custom/srv/detail/dds_fastrtps/lidar_service__type_support.cpp.o[0m
+[2.322s] [35m[1mScanning dependencies of target custom__rosidl_typesupport_c[0m
+[2.343s] [ 41%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_c.dir/rosidl_typesupport_c/custom/srv/lidar_service__type_support.cpp.o[0m
+[2.362s] [35m[1mScanning dependencies of target custom__rosidl_typesupport_introspection_c[0m
+[2.377s] [ 45%] [32mBuilding C object CMakeFiles/custom__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/custom/srv/detail/lidar_service__type_support.c.o[0m
+[2.394s] [ 48%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_c.so[0m
+[2.417s] [ 51%] [32m[1mLinking C shared library libcustom__rosidl_typesupport_introspection_c.so[0m
+[2.452s] [ 54%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_cpp.so[0m
+[2.452s] [ 54%] Built target custom__rosidl_typesupport_c
+[2.459s] [ 54%] Built target custom__rosidl_typesupport_introspection_c
+[2.483s] [ 58%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_introspection_cpp.so[0m
+[2.491s] [ 58%] Built target custom__rosidl_typesupport_cpp
+[2.556s] [ 58%] Built target custom__rosidl_typesupport_introspection_cpp
+[2.634s] [ 61%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_fastrtps_cpp.so[0m
+[2.724s] [ 61%] Built target custom__rosidl_typesupport_fastrtps_cpp
+[2.735s] [ 64%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[2.972s] [35m[1mScanning dependencies of target custom__rosidl_typesupport_fastrtps_c[0m
+[2.992s] [ 67%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/custom/srv/detail/lidar_service__type_support_c.cpp.o[0m
+[3.342s] [ 70%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_fastrtps_c.so[0m
+[3.437s] [ 70%] Built target custom__rosidl_typesupport_fastrtps_c
+[3.449s] [35m[1mScanning dependencies of target custom[0m
+[3.463s] [ 70%] Built target custom
+[3.475s] [35m[1mScanning dependencies of target custom__py[0m
+[3.485s] [ 74%] [34m[1mGenerating Python code for ROS interfaces[0m
+[3.915s] [ 74%] Built target custom__py
+[3.928s] [35m[1mScanning dependencies of target custom__python[0m
+[3.947s] [ 77%] [32mBuilding C object CMakeFiles/custom__python.dir/rosidl_generator_py/custom/srv/_lidar_service_s.c.o[0m
+[4.036s] [ 80%] [32m[1mLinking C shared library rosidl_generator_py/custom/libcustom__python.so[0m
+[4.078s] [ 80%] Built target custom__python
+[4.090s] [35m[1mScanning dependencies of target custom__rosidl_typesupport_fastrtps_c__pyext[0m
+[4.090s] [35m[1mScanning dependencies of target custom__rosidl_typesupport_introspection_c__pyext[0m
+[4.090s] [35m[1mScanning dependencies of target custom__rosidl_typesupport_c__pyext[0m
+[4.111s] [ 83%] [32mBuilding C object CMakeFiles/custom__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/custom/_custom_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[4.112s] [ 87%] [32mBuilding C object CMakeFiles/custom__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/custom/_custom_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[4.113s] [ 90%] [32mBuilding C object CMakeFiles/custom__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/custom/_custom_s.ep.rosidl_typesupport_c.c.o[0m
+[4.194s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/custom/custom_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so[0m
+[4.194s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/custom/custom_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so[0m
+[4.196s] [100%] [32m[1mLinking CXX shared library rosidl_generator_py/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so[0m
+[4.233s] [100%] Built target custom__rosidl_typesupport_c__pyext
+[4.234s] [100%] Built target custom__rosidl_typesupport_introspection_c__pyext
+[4.265s] [100%] Built target custom__rosidl_typesupport_fastrtps_c__pyext
+[4.277s] Invoked command in '/home/student/lidar-ws/build/custom' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/custom -- -j8 -l8
+[4.357s] Invoking command in '/home/student/lidar-ws/build/custom': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --install /home/student/lidar-ws/build/custom
+[4.367s] -- Install configuration: ""
+[4.367s] -- Installing: /home/student/lidar-ws/install/custom/share/ament_index/resource_index/rosidl_interfaces/custom
+[4.367s] -- Installing: /home/student/lidar-ws/install/custom/include/custom
+[4.367s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv
+[4.367s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/lidar_service.h
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__functions.h
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__functions.c
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__struct.h
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__type_support.h
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/msg
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/msg/rosidl_generator_c__visibility_control.h
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/environment/library_path.sh
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/environment/library_path.dsv
+[4.368s] -- Installing: /home/student/lidar-ws/install/custom/lib/libcustom__rosidl_generator_c.so
+[4.369s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/libcustom__rosidl_generator_c.so" to ""
+[4.369s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom
+[4.369s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv
+[4.369s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv/detail
+[4.369s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__rosidl_typesupport_fastrtps_c.h
+[4.369s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/msg
+[4.369s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[4.370s] -- Installing: /home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_c.so
+[4.370s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_c.so" to ""
+[4.370s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom
+[4.370s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv
+[4.370s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv/detail
+[4.370s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__rosidl_typesupport_fastrtps_cpp.hpp
+[4.370s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/dds_fastrtps
+[4.370s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/msg
+[4.371s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[4.371s] -- Installing: /home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_cpp.so
+[4.371s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_cpp.so" to ""
+[4.371s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom
+[4.371s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv
+[4.371s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv/detail
+[4.371s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__rosidl_typesupport_introspection_c.h
+[4.371s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__type_support.c
+[4.371s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/msg
+[4.372s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[4.372s] -- Installing: /home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_introspection_c.so
+[4.372s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_introspection_c.so" to ""
+[4.372s] -- Installing: /home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_c.so
+[4.372s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_c.so" to ""
+[4.373s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom
+[4.373s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv
+[4.373s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv/detail
+[4.373s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__traits.hpp
+[4.373s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__struct.hpp
+[4.373s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__builder.hpp
+[4.373s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/lidar_service.hpp
+[4.373s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom
+[4.374s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv
+[4.374s] -- Up-to-date: /home/student/lidar-ws/install/custom/include/custom/srv/detail
+[4.374s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__rosidl_typesupport_introspection_cpp.hpp
+[4.374s] -- Installing: /home/student/lidar-ws/install/custom/include/custom/srv/detail/lidar_service__type_support.cpp
+[4.374s] -- Installing: /home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_introspection_cpp.so
+[4.374s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_introspection_cpp.so" to ""
+[4.375s] -- Installing: /home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_cpp.so
+[4.375s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/libcustom__rosidl_typesupport_cpp.so" to ""
+[4.375s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/environment/pythonpath.sh
+[4.375s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/environment/pythonpath.dsv
+[4.376s] -- Installing: /home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/__init__.py
+[4.409s] Compiling '/home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/__init__.py'...
+[4.414s] -- Installing: /home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/srv
+[4.414s] -- Installing: /home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/srv/_lidar_service.py
+[4.414s] -- Installing: /home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/srv/_lidar_service_s.c
+[4.414s] -- Installing: /home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/srv/__init__.py
+[4.414s] -- Installing: /home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so
+[4.415s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so" to ""
+[4.415s] -- Installing: /home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/custom_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so
+[4.416s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/custom_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so" to ""
+[4.416s] -- Installing: /home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/custom_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so
+[4.417s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/python3.8/site-packages/custom/custom_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so" to ""
+[4.417s] -- Installing: /home/student/lidar-ws/install/custom/lib/libcustom__python.so
+[4.418s] -- Set runtime path of "/home/student/lidar-ws/install/custom/lib/libcustom__python.so" to ""
+[4.418s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/srv/LidarService.idl
+[4.418s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/srv/LidarService.srv
+[4.418s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/srv/LidarService_Request.msg
+[4.418s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/srv/LidarService_Response.msg
+[4.419s] -- Installing: /home/student/lidar-ws/install/custom/share/ament_index/resource_index/package_run_dependencies/custom
+[4.419s] -- Installing: /home/student/lidar-ws/install/custom/share/ament_index/resource_index/parent_prefix_path/custom
+[4.419s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/environment/ament_prefix_path.sh
+[4.419s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/environment/ament_prefix_path.dsv
+[4.419s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/environment/path.sh
+[4.420s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/environment/path.dsv
+[4.420s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/local_setup.bash
+[4.420s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/local_setup.sh
+[4.420s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/local_setup.zsh
+[4.420s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/local_setup.dsv
+[4.421s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/package.dsv
+[4.421s] -- Installing: /home/student/lidar-ws/install/custom/share/ament_index/resource_index/packages/custom
+[4.421s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_generator_cExport.cmake
+[4.421s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_generator_cExport-noconfig.cmake
+[4.422s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cExport.cmake
+[4.422s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[4.422s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_typesupport_cExport.cmake
+[4.422s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_typesupport_cExport-noconfig.cmake
+[4.423s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_generator_cppExport.cmake
+[4.423s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cppExport.cmake
+[4.423s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[4.423s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_typesupport_cppExport.cmake
+[4.423s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/custom__rosidl_typesupport_cppExport-noconfig.cmake
+[4.424s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/rosidl_cmake-extras.cmake
+[4.424s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/ament_cmake_export_dependencies-extras.cmake
+[4.424s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/ament_cmake_export_libraries-extras.cmake
+[4.424s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/ament_cmake_export_targets-extras.cmake
+[4.424s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/ament_cmake_export_include_directories-extras.cmake
+[4.425s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[4.425s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[4.425s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/customConfig.cmake
+[4.425s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/cmake/customConfig-version.cmake
+[4.425s] -- Installing: /home/student/lidar-ws/install/custom/share/custom/package.xml
+[4.429s] Invoked command in '/home/student/lidar-ws/build/custom' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --install /home/student/lidar-ws/build/custom

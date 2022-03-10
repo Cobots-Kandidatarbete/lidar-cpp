@@ -1,0 +1,227 @@
+[0.017s] Invoking command in '/home/student/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8
+[0.057s] -- Found ament_cmake: 1.1.4 (/opt/ros/galactic/share/ament_cmake/cmake)
+[0.089s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.089s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.178s] -- Found rclcpp: 9.2.0 (/opt/ros/galactic/share/rclcpp/cmake)
+[0.220s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.224s] -- Found rosidl_adapter: 2.2.1 (/opt/ros/galactic/share/rosidl_adapter/cmake)
+[0.360s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.410s] -- Found rmw_implementation_cmake: 3.3.1 (/opt/ros/galactic/share/rmw_implementation_cmake/cmake)
+[0.413s] -- Found rmw_cyclonedds_cpp: 0.22.3 (/opt/ros/galactic/share/rmw_cyclonedds_cpp/cmake)
+[0.439s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[0.575s] -- Found sensor_msgs: 2.2.3 (/opt/ros/galactic/share/sensor_msgs/cmake)
+[0.705s] -- Eigen found (include: /usr/include/eigen3, version: 3.3.7)
+[0.815s] -- The imported target "vtkParseOGLExt" references the file
+[0.815s]    "/usr/bin/vtkParseOGLExt-7.1"
+[0.815s] but this file does not exist.  Possible reasons include:
+[0.815s] * The file was deleted, renamed, or moved to another location.
+[0.815s] * An install or uninstall procedure did not complete successfully.
+[0.816s] * The installation package was faulty and contained
+[0.816s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.816s] but not all the files it references.
+[0.816s] 
+[0.816s] -- The imported target "vtkRenderingPythonTkWidgets" references the file
+[0.816s]    "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+[0.816s] but this file does not exist.  Possible reasons include:
+[0.816s] * The file was deleted, renamed, or moved to another location.
+[0.816s] * An install or uninstall procedure did not complete successfully.
+[0.816s] * The installation package was faulty and contained
+[0.816s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.817s] but not all the files it references.
+[0.817s] 
+[0.817s] -- The imported target "vtk" references the file
+[0.817s]    "/usr/bin/vtk"
+[0.817s] but this file does not exist.  Possible reasons include:
+[0.817s] * The file was deleted, renamed, or moved to another location.
+[0.817s] * An install or uninstall procedure did not complete successfully.
+[0.817s] * The installation package was faulty and contained
+[0.817s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.817s] but not all the files it references.
+[0.817s] 
+[0.818s] -- The imported target "pvtk" references the file
+[0.818s]    "/usr/bin/pvtk"
+[0.818s] but this file does not exist.  Possible reasons include:
+[0.818s] * The file was deleted, renamed, or moved to another location.
+[0.818s] * An install or uninstall procedure did not complete successfully.
+[0.818s] * The installation package was faulty and contained
+[0.818s]    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+[0.818s] but not all the files it references.
+[0.818s] 
+[0.842s] -- Checking for module 'libusb-1.0'
+[0.847s] --   No package 'libusb-1.0' found
+[0.853s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.853s] -- OpenNI disabled because libusb-1.0 not found.
+[0.853s] ** WARNING ** io features related to openni will be disabled
+[0.858s] -- Checking for module 'libusb-1.0'
+[0.862s] --   No package 'libusb-1.0' found
+[0.867s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.867s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[0.868s] ** WARNING ** io features related to openni2 will be disabled
+[0.868s] ** WARNING ** io features related to pcap will be disabled
+[0.868s] ** WARNING ** io features related to png will be disabled
+[0.883s] -- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
+[0.883s] ** WARNING ** io features related to libusb-1.0 will be disabled
+[0.888s] -- Checking for module 'libusb-1.0'
+[0.891s] --   No package 'libusb-1.0' found
+[0.895s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.895s] -- OpenNI disabled because libusb-1.0 not found.
+[0.895s] ** WARNING ** visualization features related to openni will be disabled
+[0.901s] -- Checking for module 'libusb-1.0'
+[0.905s] --   No package 'libusb-1.0' found
+[0.909s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.909s] -- OpenNI 2 disabled because libusb-1.0 not found.
+[0.909s] ** WARNING ** visualization features related to openni2 will be disabled
+[0.926s] -- QHULL found (include: /usr/include, lib: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so)
+[0.931s] -- Checking for module 'libusb-1.0'
+[0.935s] --   No package 'libusb-1.0' found
+[0.941s] -- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+[0.941s] -- OpenNI disabled because libusb-1.0 not found.
+[0.942s] ** WARNING ** apps features related to openni will be disabled
+[0.958s] -- looking for PCL_COMMON
+[0.959s] -- looking for PCL_KDTREE
+[0.960s] -- looking for PCL_OCTREE
+[0.960s] -- looking for PCL_SEARCH
+[0.961s] -- looking for PCL_SAMPLE_CONSENSUS
+[0.961s] -- looking for PCL_FILTERS
+[0.962s] -- looking for PCL_2D
+[0.962s] -- looking for PCL_GEOMETRY
+[0.962s] -- looking for PCL_IO
+[0.963s] -- looking for PCL_FEATURES
+[0.964s] -- looking for PCL_ML
+[0.964s] -- looking for PCL_SEGMENTATION
+[0.965s] -- looking for PCL_VISUALIZATION
+[0.966s] -- looking for PCL_SURFACE
+[0.966s] -- looking for PCL_REGISTRATION
+[0.967s] -- looking for PCL_KEYPOINTS
+[0.968s] -- looking for PCL_TRACKING
+[0.968s] -- looking for PCL_RECOGNITION
+[0.969s] -- looking for PCL_STEREO
+[0.970s] -- looking for PCL_APPS
+[0.971s] -- looking for PCL_IN_HAND_SCANNER
+[0.971s] -- looking for PCL_POINT_CLOUD_EDITOR
+[0.972s] -- looking for PCL_OUTOFCORE
+[0.973s] -- looking for PCL_PEOPLE
+[0.974s] -- Found rosidl_default_generators: 1.1.1 (/opt/ros/galactic/share/rosidl_default_generators/cmake)
+[1.015s] -- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+[1.235s] -- Found ament_cmake_ros: 0.9.2 (/opt/ros/galactic/share/ament_cmake_ros/cmake)
+[1.583s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.763s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.798s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") 
+[1.798s] -- Found python_cmake_module: 0.8.1 (/opt/ros/galactic/share/python_cmake_module/cmake)
+[1.833s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.833s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8
+[1.833s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+[1.951s] -- Found ament_lint_auto: 0.10.6 (/opt/ros/galactic/share/ament_lint_auto/cmake)
+[1.961s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.962s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.964s] -- Configured cppcheck include dirs: 
+[1.964s] -- Configured cppcheck exclude dirs and/or files: 
+[1.965s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.965s] -- Configured cpplint exclude dirs and/or files: 
+[1.966s] -- Added test 'lint_cmake' to check CMake code style
+[1.967s] -- Added test 'uncrustify' to check C / C++ code style
+[1.967s] -- Configured uncrustify additional arguments: 
+[1.967s] -- Added test 'xmllint' to check XML markup files
+[1.971s] -- Configuring done
+[2.101s] -- Generating done
+[2.128s] -- Build files have been written to: /home/student/lidar-ws/build/lidar_cpp
+[2.168s] [  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[2.170s] [35m[1mScanning dependencies of target lidar_server[0m
+[2.180s] [  5%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[2.192s] [ 11%] Built target lidar
+[2.252s] [ 14%] [32mBuilding CXX object CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o[0m
+[2.435s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_generator_c[0m
+[2.453s] [ 17%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_generator_c.dir/rosidl_generator_c/lidar_cpp/srv/detail/lidar_service__functions.c.o[0m
+[2.453s] [ 17%] Built target lidar_cpp__cpp
+[2.465s] [ 22%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[2.465s] [ 22%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[2.466s] [ 25%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[2.497s] [ 28%] [32m[1mLinking C shared library liblidar_cpp__rosidl_generator_c.so[0m
+[2.552s] [ 28%] Built target lidar_cpp__rosidl_generator_c
+[2.570s] [ 34%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[2.570s] [ 34%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[2.737s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_cpp[0m
+[2.757s] [ 37%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/lidar_cpp/srv/lidar_service__type_support.cpp.o[0m
+[2.781s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_cpp[0m
+[2.801s] [ 40%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/lidar_cpp/srv/detail/dds_fastrtps/lidar_service__type_support.cpp.o[0m
+[2.850s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_cpp[0m
+[2.872s] [ 42%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/lidar_cpp/srv/detail/lidar_service__type_support.cpp.o[0m
+[2.900s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_c[0m
+[2.900s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_c[0m
+[2.917s] [ 45%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_c.dir/rosidl_typesupport_c/lidar_cpp/srv/lidar_service__type_support.cpp.o[0m
+[2.923s] [ 48%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/lidar_cpp/srv/detail/lidar_service__type_support.c.o[0m
+[2.964s] [ 51%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_c.so[0m
+[2.975s] [ 54%] [32m[1mLinking C shared library liblidar_cpp__rosidl_typesupport_introspection_c.so[0m
+[3.010s] [ 54%] Built target lidar_cpp__rosidl_typesupport_introspection_c
+[3.011s] [ 54%] Built target lidar_cpp__rosidl_typesupport_c
+[3.158s] [ 57%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_cpp.so[0m
+[3.201s] [ 57%] Built target lidar_cpp__rosidl_typesupport_cpp
+[3.377s] [ 60%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_introspection_cpp.so[0m
+[3.457s] [ 62%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_fastrtps_cpp.so[0m
+[3.457s] [ 62%] Built target lidar_cpp__rosidl_typesupport_introspection_cpp
+[3.561s] [ 62%] Built target lidar_cpp__rosidl_typesupport_fastrtps_cpp
+[3.572s] [ 65%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[3.816s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_c[0m
+[3.841s] [ 68%] [32mBuilding CXX object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/lidar_cpp/srv/detail/lidar_service__type_support_c.cpp.o[0m
+[4.207s] [ 71%] [32m[1mLinking CXX shared library liblidar_cpp__rosidl_typesupport_fastrtps_c.so[0m
+[4.309s] [ 71%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c
+[4.336s] [ 71%] Built target lidar_cpp
+[4.361s] [ 74%] [34m[1mGenerating Python code for ROS interfaces[0m
+[4.823s] [ 74%] Built target lidar_cpp__py
+[4.838s] [35m[1mScanning dependencies of target lidar_cpp__python[0m
+[4.857s] [ 77%] [32mBuilding C object CMakeFiles/lidar_cpp__python.dir/rosidl_generator_py/lidar_cpp/srv/_lidar_service_s.c.o[0m
+[4.953s] [ 80%] [32m[1mLinking C shared library rosidl_generator_py/lidar_cpp/liblidar_cpp__python.so[0m
+[4.999s] [ 80%] Built target lidar_cpp__python
+[5.011s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_c__pyext[0m
+[5.011s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_introspection_c__pyext[0m
+[5.011s] [35m[1mScanning dependencies of target lidar_cpp__rosidl_typesupport_fastrtps_c__pyext[0m
+[5.032s] [ 82%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/lidar_cpp/_lidar_cpp_s.ep.rosidl_typesupport_c.c.o[0m
+[5.032s] [ 85%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/lidar_cpp/_lidar_cpp_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[5.043s] [ 88%] [32mBuilding C object CMakeFiles/lidar_cpp__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/lidar_cpp/_lidar_cpp_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[5.125s] [ 91%] [32m[1mLinking C shared library rosidl_generator_py/lidar_cpp/lidar_cpp_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so[0m
+[5.143s] [ 94%] [32m[1mLinking CXX shared library rosidl_generator_py/lidar_cpp/lidar_cpp_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so[0m
+[5.165s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/lidar_cpp/lidar_cpp_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so[0m
+[5.175s] [ 97%] Built target lidar_cpp__rosidl_typesupport_c__pyext
+[5.207s] [ 97%] Built target lidar_cpp__rosidl_typesupport_introspection_c__pyext
+[5.221s] [ 97%] Built target lidar_cpp__rosidl_typesupport_fastrtps_c__pyext
+[9.112s] In file included from [01m[K/opt/ros/galactic/include/rclcpp/node_impl.hpp:42[m[K,
+[9.113s]                  from [01m[K/opt/ros/galactic/include/rclcpp/node.hpp:1329[m[K,
+[9.113s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[9.113s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executors.hpp:22[m[K,
+[9.113s]                  from [01m[K/opt/ros/galactic/include/rclcpp/rclcpp.hpp:156[m[K,
+[9.113s]                  from [01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:6[m[K:
+[9.113s] /opt/ros/galactic/include/rclcpp/create_service.hpp: In instantiation of ‘[01m[Ktypename rclcpp::Service<ServiceT>::SharedPtr rclcpp::create_service(std::shared_ptr<rclcpp::node_interfaces::NodeBaseInterface>, std::shared_ptr<rclcpp::node_interfaces::NodeServicesInterface>, const string&, CallbackT&&, const rmw_qos_profile_t&, rclcpp::CallbackGroup::SharedPtr) [with ServiceT = lidar_cpp::srv::LidarService; CallbackT = void (*)(std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >); typename rclcpp::Service<ServiceT>::SharedPtr = std::shared_ptr<rclcpp::Service<lidar_cpp::srv::LidarService> >; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_t; rclcpp::CallbackGroup::SharedPtr = std::shared_ptr<rclcpp::CallbackGroup>][m[K’:
+[9.113s] [01m[K/opt/ros/galactic/include/rclcpp/node_impl.hpp:148:53:[m[K   required from ‘[01m[Ktypename rclcpp::Service<ServiceT>::SharedPtr rclcpp::Node::create_service(const string&, CallbackT&&, const rmw_qos_profile_t&, rclcpp::CallbackGroup::SharedPtr) [with ServiceT = lidar_cpp::srv::LidarService; CallbackT = void (*)(std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >); typename rclcpp::Service<ServiceT>::SharedPtr = std::shared_ptr<rclcpp::Service<lidar_cpp::srv::LidarService> >; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_t; rclcpp::CallbackGroup::SharedPtr = std::shared_ptr<rclcpp::CallbackGroup>][m[K’
+[9.113s] [01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:79:90:[m[K   required from here
+[9.113s] [01m[K/opt/ros/galactic/include/rclcpp/create_service.hpp:43:3:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Krclcpp::AnyServiceCallback<lidar_cpp::srv::LidarService>::set(void (*)(std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >))[m[K’
+[9.114s]    43 |   [01;31m[Kany_service_callback[m[K.set(std::forward<CallbackT>(callback));
+[9.114s]       |   [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[9.114s] In file included from [01m[K/opt/ros/galactic/include/rclcpp/service.hpp:28[m[K,
+[9.114s]                  from [01m[K/opt/ros/galactic/include/rclcpp/callback_group.hpp:25[m[K,
+[9.114s]                  from [01m[K/opt/ros/galactic/include/rclcpp/any_executable.hpp:20[m[K,
+[9.114s]                  from [01m[K/opt/ros/galactic/include/rclcpp/memory_strategy.hpp:25[m[K,
+[9.114s]                  from [01m[K/opt/ros/galactic/include/rclcpp/memory_strategies.hpp:18[m[K,
+[9.114s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executor_options.hpp:20[m[K,
+[9.114s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executor.hpp:36[m[K,
+[9.114s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[9.115s]                  from [01m[K/opt/ros/galactic/include/rclcpp/executors.hpp:21[m[K,
+[9.115s]                  from [01m[K/opt/ros/galactic/include/rclcpp/rclcpp.hpp:156[m[K,
+[9.115s]                  from [01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:6[m[K:
+[9.115s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:67:8:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class CallbackT, typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<lidar_cpp::srv::LidarService_Request_<std::allocator<void> > >, std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >)> >::value, void>::type* <anonymous> > void rclcpp::AnyServiceCallback<ServiceT>::set(CallbackT) [with CallbackT = CallbackT; typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<typename ServiceT::Request>, std::shared_ptr<typename ServiceT::Response>)> >::value>::type* <anonymous> = <enumerator>; ServiceT = lidar_cpp::srv::LidarService][m[K’
+[9.115s]    67 |   void [01;36m[Kset[m[K(CallbackT callback)
+[9.115s]       |        [01;36m[K^~~[m[K
+[9.115s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:67:8:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[9.115s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:65:17:[m[K [01;31m[Kerror: [m[Kno type named ‘[01m[Ktype[m[K’ in ‘[01m[Kstruct std::enable_if<false, void>[m[K’
+[9.115s]    65 |     >::type * = [01;31m[Knullptr[m[K
+[9.115s]       |                 [01;31m[K^~~~~~~[m[K
+[9.116s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:81:8:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class CallbackT, typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<rmw_request_id_t>, std::shared_ptr<lidar_cpp::srv::LidarService_Request_<std::allocator<void> > >, std::shared_ptr<lidar_cpp::srv::LidarService_Response_<std::allocator<void> > >)> >::value, void>::type* <anonymous> > void rclcpp::AnyServiceCallback<ServiceT>::set(CallbackT) [with CallbackT = CallbackT; typename std::enable_if<rclcpp::function_traits::same_arguments<CallbackT, std::function<void(std::shared_ptr<rmw_request_id_t>, std::shared_ptr<typename ServiceT::Request>, std::shared_ptr<typename ServiceT::Response>)> >::value>::type* <anonymous> = <enumerator>; ServiceT = lidar_cpp::srv::LidarService][m[K’
+[9.116s]    81 |   void [01;36m[Kset[m[K(CallbackT callback)
+[9.116s]       |        [01;36m[K^~~[m[K
+[9.116s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:81:8:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[9.116s] [01m[K/opt/ros/galactic/include/rclcpp/any_service_callback.hpp:79:17:[m[K [01;31m[Kerror: [m[Kno type named ‘[01m[Ktype[m[K’ in ‘[01m[Kstruct std::enable_if<false, void>[m[K’
+[9.116s]    79 |     >::type * = [01;31m[Knullptr[m[K
+[9.116s]       |                 [01;31m[K^~~~~~~[m[K
+[9.902s] make[2]: *** [CMakeFiles/lidar_server.dir/build.make:63: CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o] Error 1
+[9.902s] make[1]: *** [CMakeFiles/Makefile2:125: CMakeFiles/lidar_server.dir/all] Error 2
+[9.903s] make: *** [Makefile:141: all] Error 2
+[9.905s] Invoked command in '/home/student/lidar-ws/build/lidar_cpp' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/student/ws/install/py_ctrl:/home/student/ws/install/case_scenes:/home/student/ia_ws/install/viz_static:/home/student/ia_ws/install/viz_interactive:/home/student/ia_ws/install/ur_setup:/home/student/ia_ws/install/tf_lookup:/home/student/ia_ws/install/tf_broadcast:/home/student/ia_ws/install/tf_scene:/home/student/ia_ws/install/gui_tools:/home/student/ia_ws/install/aruco_handler:/opt/ros/galactic /usr/bin/cmake --build /home/student/lidar-ws/build/lidar_cpp -- -j8 -l8

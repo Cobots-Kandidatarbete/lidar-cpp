@@ -1,4 +1,0 @@
-srv/LidarService.idl
-srv/LidarService.srv
-srv/LidarService_Request.msg
-srv/LidarService_Response.msg
