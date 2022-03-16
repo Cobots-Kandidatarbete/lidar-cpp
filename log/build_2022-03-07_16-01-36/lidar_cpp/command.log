@@ -1,2 +1,0 @@
-Invoking command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake /home/arvid/Documents/ros2/lidar-ws/src/lidar_cpp -DCMAKE_INSTALL_PREFIX=/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp
-Invoked command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp' returned '1': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake /home/arvid/Documents/ros2/lidar-ws/src/lidar_cpp -DCMAKE_INSTALL_PREFIX=/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp

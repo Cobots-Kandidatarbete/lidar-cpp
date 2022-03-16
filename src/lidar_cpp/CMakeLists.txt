@@ -41,13 +41,32 @@ ament_target_dependencies(lidar_server
   custom
 )
 
+add_executable(lidar_client src/lidar_client.cpp)
+ament_target_dependencies(lidar_client
+  rclcpp
+  sensor_msgs
+  custom
+)
+
+add_executable(tmp src/tmp.cpp)
+ament_target_dependencies(tmp
+  rclcpp
+  sensor_msgs
+  realsense2
+  PCL
+  custom
+)
+
 
 target_link_libraries(lidar realsense2)
 target_link_libraries(lidar_server realsense2 ${PCL_LIBRARIES})
+target_link_libraries(tmp realsense2 ${PCL_LIBRARIES})
 
 install(TARGETS
   lidar
   lidar_server
+  lidar_client
+  tmp
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

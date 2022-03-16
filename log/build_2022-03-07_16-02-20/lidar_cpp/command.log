@@ -1,6 +1,0 @@
-Invoking command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake /home/arvid/Documents/ros2/lidar-ws/src/lidar_cpp -DCMAKE_INSTALL_PREFIX=/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp
-Invoked command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp' returned '0': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake /home/arvid/Documents/ros2/lidar-ws/src/lidar_cpp -DCMAKE_INSTALL_PREFIX=/home/arvid/Documents/ros2/lidar-ws/install/lidar_cpp
-Invoking command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake --build /home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp -- -j12 -l12
-Invoked command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp' returned '0': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake --build /home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp -- -j12 -l12
-Invoking command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake --install /home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp
-Invoked command in '/home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp' returned '0': CMAKE_PREFIX_PATH=/opt/ros/galactic /usr/bin/cmake --install /home/arvid/Documents/ros2/lidar-ws/build/lidar_cpp

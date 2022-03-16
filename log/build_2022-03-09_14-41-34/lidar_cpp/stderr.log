@@ -1,7 +1,0 @@
-[01m[K/home/student/lidar-ws/src/lidar_cpp/src/lidar_server.cpp:12:10:[m[K [01;31m[Kfatal error: [m[Klidar_cpp/srv/lidar_service.hpp: No such file or directory
-   12 | #include [01;31m[K"lidar_cpp/srv/lidar_service.hpp"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
-compilation terminated.
-make[2]: *** [CMakeFiles/lidar_server.dir/build.make:63: CMakeFiles/lidar_server.dir/src/lidar_server.cpp.o] Error 1
-make[1]: *** [CMakeFiles/Makefile2:125: CMakeFiles/lidar_server.dir/all] Error 2
-make: *** [Makefile:141: all] Error 2

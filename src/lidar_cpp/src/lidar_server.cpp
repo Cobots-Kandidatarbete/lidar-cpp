@@ -13,27 +13,6 @@
 
 using pcl_ptr = pcl::PointCloud<pcl::PointXYZ>::Ptr;
 
-pcl_ptr points_to_pcl(const rs2::points &points)
-{
-    pcl_ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
-
-    auto sp = points.get_profile().as<rs2::video_stream_profile>();
-    cloud->width = sp.width();
-    cloud->height = sp.height();
-    cloud->is_dense = false;
-    cloud->points.resize(points.size());
-    auto ptr = points.get_vertices();
-    for (auto &p : cloud->points)
-    {
-        p.x = ptr->x;
-        p.y = ptr->y;
-        p.z = ptr->z;
-        ptr++;
-    }
-
-    return cloud;
-}
-
 void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> request, const std::shared_ptr<custom::srv::LidarService::Response> response)
 {
     rs2::pipeline pipe;
@@ -66,7 +45,7 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
     sensor_msgs::msg::PointCloud2 message;
     pcl_conversions::fromPCL(pcl_points, message);
-    message.header.frame_id = "world";
+    message.header.frame_id = "L515";
     response->pcl_response = message;
     pipe.stop();
 }
