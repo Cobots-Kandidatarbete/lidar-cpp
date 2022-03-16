@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/install/custom/include/**",
+                "${workspaceFolder}/install/custom/include/*",
                 "/opt/ros/galactic/include/**",
                 "/usr/include/**"
             ],

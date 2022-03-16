@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 #include <thread>
+#include <iostream>
 
 #include "rclcpp/rclcpp.hpp"
 #include "librealsense2/rs.hpp" // Include RealSense Cross Platform API
@@ -86,7 +87,7 @@ void take_picture()
     auto frames = pipe.wait_for_frames();
     auto depth = frames.get_depth_frame();
     points = pc.calculate(depth);
-    auto pcl_points = points_to_pcl(points);
+    pcl_ptr pcl_points = points_to_pcl(points);
     pipe.stop();
 
 
@@ -111,12 +112,10 @@ void take_picture()
     extract.setNegative(true);
     extract.filter(*pcl_points);
 
-    pcl_ptr transformed_cloud;
-
     Eigen::Matrix<float, 1, 3> floor_plane_normal_vector, xy_plane_normal_vector, rotation_vector;
-
-    floor_plane_normal_vector[1] = coefficients->values[1];
+    
     floor_plane_normal_vector[0] = coefficients->values[0];
+    floor_plane_normal_vector[1] = coefficients->values[1];
     floor_plane_normal_vector[2] = coefficients->values[2];
     
     xy_plane_normal_vector[0] = 0.0;
@@ -125,16 +124,22 @@ void take_picture()
     
     rotation_vector = xy_plane_normal_vector.cross (floor_plane_normal_vector);
     
-    float theta = -atan2(rotation_vector.norm(), xy_plane_normal_vector.dot(floor_plane_normal_vector));
-
+    //float theta = -atan2(rotation_vector.norm(), xy_plane_normal_vector.dot(floor_plane_normal_vector));
+    float theta = -acos(floor_plane_normal_vector.dot(xy_plane_normal_vector)/sqrt( pow(coefficients->values[0],2)+ pow(coefficients->values[1],2) + pow(coefficients->values[2],2)));
     Eigen::Affine3f transform_2 = Eigen::Affine3f::Identity();
 
     transform_2.rotate (Eigen::AngleAxisf (theta, rotation_vector));
+    std::cout << transform_2.matrix() << std::endl;
     
+    // Executing the transformation
+    pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
+    // You can either apply transform_1 or transform_2; they are the same
     pcl::transformPointCloud (*pcl_points, *transformed_cloud, transform_2);
 
     pcl::visualization::PCLVisualizer::Ptr viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
-    viewer->addPointCloud(pcl_points, "main");
+    pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color (transformed_cloud, 0, 255, 0);
+    viewer->addPointCloud(transformed_cloud, single_color,  "main");
+    viewer->addPointCloud(pcl_points, "second");
     viewer->addCoordinateSystem (1.0);
     viewer->registerKeyboardCallback (keyboardEventOccurred, (void*)&viewer);
     viewer->registerMouseCallback (mouseEventOccurred, (void*)&viewer);
