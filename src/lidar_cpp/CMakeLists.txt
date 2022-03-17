@@ -12,13 +12,12 @@ find_package(sensor_msgs REQUIRED)
 find_package(realsense2 REQUIRED)
 find_package(PCL REQUIRED)
 find_package(custom REQUIRED) 
-# target_link_libraries(${PROJECT_NAME} PRIVATE realsense2::realsense2)
-
-
+find_package( OpenCV REQUIRED )
 
 include_directories(
   include
   ${PCL_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 link_directories(${PCL_LIBRARY_DIRS})
@@ -60,7 +59,7 @@ ament_target_dependencies(tmp
 
 target_link_libraries(lidar realsense2)
 target_link_libraries(lidar_server realsense2 ${PCL_LIBRARIES})
-target_link_libraries(tmp realsense2 ${PCL_LIBRARIES})
+target_link_libraries(tmp realsense2 ${PCL_LIBRARIES} ${OpenCV_LIBS})
 
 install(TARGETS
   lidar

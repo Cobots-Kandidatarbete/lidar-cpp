@@ -36,7 +36,7 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     for (auto &p : cloud->points)
     {
         p.x = ptr->x;
-        p.y = ptr->y;
+        p.y = ptr->y; 
         p.z = ptr->z;
         ptr++;
     }

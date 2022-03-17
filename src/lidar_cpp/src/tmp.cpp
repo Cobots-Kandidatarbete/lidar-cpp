@@ -16,143 +16,125 @@
 #include <pcl/segmentation/sac_segmentation.h>
 #include <pcl/filters/extract_indices.h>
 #include <pcl/common/transforms.h>
+#include <opencv4/opencv2/opencv.hpp>
 
 using namespace std::chrono_literals;
 using pcl_ptr = pcl::PointCloud<pcl::PointXYZ>::Ptr;
 
-unsigned int text_id = 0;
-
-void mouseEventOccurred (const pcl::visualization::MouseEvent &event,
-                     void* viewer_void)
+struct Picture
 {
-  pcl::visualization::PCLVisualizer::Ptr viewer = *static_cast<pcl::visualization::PCLVisualizer::Ptr *> (viewer_void);
-  if (event.getButton () == pcl::visualization::MouseEvent::LeftButton && event.getType () == pcl::visualization::MouseEvent::MouseButtonRelease)
+  pcl_ptr cloud;
+  rs2::video_frame video;
+  rs2::depth_frame depth;
+};
+
+pcl_ptr points_to_pcl(const rs2::points &points)
+{
+  pcl_ptr cloud{new pcl::PointCloud<pcl::PointXYZ>};
+
+  const rs2::video_stream_profile sp = points.get_profile().as<rs2::video_stream_profile>();
+  cloud->width = sp.width();
+  cloud->height = sp.height();
+  cloud->is_dense = false;
+  cloud->points.resize(points.size());
+  auto ptr = points.get_vertices();
+  for (auto &p : cloud->points)
   {
-    std::cout << "Left mouse button released at position (" << event.getX () << ", " << event.getY () << ")" << std::endl;
-    char str[512];
-
-    sprintf (str, "text#%03d", text_id ++);
-    viewer->addText ("clicked here", event.getX (), event.getY (), str);
+    p.x = ptr->x;
+    p.y = ptr->y;
+    p.z = ptr->z;
+    ptr++;
   }
+  return cloud;
 }
 
-void keyboardEventOccurred (const pcl::visualization::KeyboardEvent &event,
-                        void* viewer_void)
+Picture take_picture()
 {
-  pcl::visualization::PCLVisualizer::Ptr viewer = *static_cast<pcl::visualization::PCLVisualizer::Ptr *> (viewer_void);
-  if (event.getKeySym () == "r" && event.keyDown ())
+  rs2::pipeline pipe;
+
+  const rs2::pointcloud pc;
+  rs2::config config;
+  config.enable_stream(RS2_STREAM_COLOR, RS2_FORMAT_BGR8);
+  config.enable_stream(RS2_STREAM_DEPTH, RS2_FORMAT_Z16);
+  pipe.start(config);
+
+  rs2::frameset frames{pipe.wait_for_frames()};
+
+  rs2::align align_to{RS2_STREAM_COLOR};
+  frames = align_to.process(frames);
+
+  const rs2::video_frame color{frames.get_color_frame()};
+  const rs2::depth_frame depth{frames.get_depth_frame()};
+
+  const rs2::points points{pc.calculate(depth)};
+  const pcl_ptr pcl_points{points_to_pcl(points)};
+  pipe.stop();
+
+  return Picture{pcl_points, color, depth};
+}
+pcl_ptr remove_plane(pcl_ptr pcl_points)
+{
+  pcl::ModelCoefficients::Ptr coefficients{new pcl::ModelCoefficients};
+  pcl::PointIndices::Ptr inliers{new pcl::PointIndices};
+  // Create the segmentation object
+  pcl::SACSegmentation<pcl::PointXYZ> seg{};
+  // Optional
+  seg.setOptimizeCoefficients(true);
+  // Mandatory!
+  seg.setModelType(pcl::SACMODEL_PLANE);
+  seg.setMethodType(pcl::SAC_RANSAC);
+  seg.setMaxIterations(1000);
+  seg.setDistanceThreshold(0.02);
+
+  seg.setInputCloud(pcl_points);
+  seg.segment(*inliers, *coefficients);
+
+  pcl::ExtractIndices<pcl::PointXYZ> extract;
+  extract.setInputCloud(pcl_points);
+  extract.setIndices(inliers);
+  extract.setNegative(true);
+  extract.filter(*pcl_points);
+
+  return pcl_points;
+}
+void visualize_pcl(Picture &picture)
+{
+  cv::namedWindow("Window", cv::WINDOW_AUTOSIZE);
+  cv::namedWindow("Window2", cv::WINDOW_AUTOSIZE);
+
+  // Query frame size (width and height)
+  const int w = picture.video.get_width();
+  const int h = picture.video.get_height();
+  cv::Mat image{cv::Size{w, h}, CV_8UC3, (void *)picture.video.get_data(), cv::Mat::AUTO_STEP};
+  cv::Mat depth_image{cv::Size{w, h}, CV_16SC1, (void *)picture.depth.get_data()};
+  cv::Mat hsv, mask, non_zero;
+  cv::cvtColor(image, hsv, cv::COLOR_BGR2HSV);
+  cv::inRange(hsv, cv::Scalar{100, 150, 0}, cv::Scalar{140, 255, 255}, mask);
+  cv::findNonZero(mask, non_zero);
+  cv::Scalar mean = cv::mean(non_zero);
+  cv::circle(image, cv::Point{static_cast<int>(mean[0]), static_cast<int>(mean[1])}, 4, cv::Scalar(0, 255, 0));
+  cv::imshow("Window", image);
+  cv::imshow("Window2", depth_image);
+
+  cv::waitKey(0);
+
+  pcl::visualization::PCLVisualizer::Ptr viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));
+  pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color(picture.cloud, 0, 255, 0);
+  viewer->addPointCloud(picture.cloud, single_color, "main");
+  viewer->initCameraParameters();
+
+  while (!viewer->wasStopped())
   {
-    std::cout << "r was pressed => removing all text" << std::endl;
-
-    char str[512];
-    for (unsigned int i = 0; i < text_id; ++i)
-    {
-      sprintf (str, "text#%03d", i);
-      viewer->removeShape (str);
-    }
-    text_id = 0;
+    viewer->spinOnce(100);
+    std::this_thread::sleep_for(100ms);
   }
-}
-
-
-
-
-pcl_ptr points_to_pcl(const rs2::points& points)
-{
-    pcl_ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
-
-    auto sp = points.get_profile().as<rs2::video_stream_profile>();
-    cloud->width = sp.width();
-    cloud->height = sp.height();
-    cloud->is_dense = false;
-    cloud->points.resize(points.size());
-    auto ptr = points.get_vertices();
-    for (auto& p : cloud->points)
-    {
-        p.x = ptr->x;
-        p.y = ptr->y;
-        p.z = ptr->z;
-        ptr++;
-    }
-
-    return cloud;
-}
-
-void take_picture()
-{
-    rs2::pipeline pipe;
-    rs2::pointcloud pc;
-    rs2::points points;
-    pipe.start();
-    auto frames = pipe.wait_for_frames();
-    auto depth = frames.get_depth_frame();
-    points = pc.calculate(depth);
-    pcl_ptr pcl_points = points_to_pcl(points);
-    pipe.stop();
-
-
-    pcl::ModelCoefficients::Ptr coefficients (new pcl::ModelCoefficients);
-    pcl::PointIndices::Ptr inliers (new pcl::PointIndices);
-    // Create the segmentation object
-    pcl::SACSegmentation<pcl::PointXYZ> seg;
-    // Optional
-    seg.setOptimizeCoefficients (true);
-    // Mandatory!
-    seg.setModelType (pcl::SACMODEL_PLANE);
-    seg.setMethodType (pcl::SAC_RANSAC);
-    seg.setMaxIterations(1000);
-    seg.setDistanceThreshold (0.02);
-
-    seg.setInputCloud (pcl_points);
-    seg.segment (*inliers, *coefficients);
-
-    pcl::ExtractIndices<pcl::PointXYZ> extract;
-    extract.setInputCloud(pcl_points);
-    extract.setIndices(inliers);
-    extract.setNegative(true);
-    extract.filter(*pcl_points);
-
-    Eigen::Matrix<float, 1, 3> floor_plane_normal_vector, xy_plane_normal_vector, rotation_vector;
-    
-    floor_plane_normal_vector[0] = coefficients->values[0];
-    floor_plane_normal_vector[1] = coefficients->values[1];
-    floor_plane_normal_vector[2] = coefficients->values[2];
-    
-    xy_plane_normal_vector[0] = 0.0;
-    xy_plane_normal_vector[1] = 0.0;
-    xy_plane_normal_vector[2] = 1.0;
-    
-    rotation_vector = xy_plane_normal_vector.cross (floor_plane_normal_vector);
-    
-    //float theta = -atan2(rotation_vector.norm(), xy_plane_normal_vector.dot(floor_plane_normal_vector));
-    float theta = -acos(floor_plane_normal_vector.dot(xy_plane_normal_vector)/sqrt( pow(coefficients->values[0],2)+ pow(coefficients->values[1],2) + pow(coefficients->values[2],2)));
-    Eigen::Affine3f transform_2 = Eigen::Affine3f::Identity();
-
-    transform_2.rotate (Eigen::AngleAxisf (theta, rotation_vector));
-    std::cout << transform_2.matrix() << std::endl;
-    
-    // Executing the transformation
-    pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
-    // You can either apply transform_1 or transform_2; they are the same
-    pcl::transformPointCloud (*pcl_points, *transformed_cloud, transform_2);
-
-    pcl::visualization::PCLVisualizer::Ptr viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
-    pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color (transformed_cloud, 0, 255, 0);
-    viewer->addPointCloud(transformed_cloud, single_color,  "main");
-    viewer->addPointCloud(pcl_points, "second");
-    viewer->addCoordinateSystem (1.0);
-    viewer->registerKeyboardCallback (keyboardEventOccurred, (void*)&viewer);
-    viewer->registerMouseCallback (mouseEventOccurred, (void*)&viewer);
-    while (!viewer->wasStopped ()){
-        viewer->spinOnce (100);
-        std::this_thread::sleep_for(100ms);
-    }
-
 }
 
 int main(int argc, char **argv)
 {
-    rclcpp::init(argc, argv);
-    take_picture();
-    rclcpp::shutdown();
+  rclcpp::init(argc, argv);
+  Picture picture{take_picture()};
+  remove_plane(picture.cloud);
+  visualize_pcl(picture);
+  rclcpp::shutdown();
 }
