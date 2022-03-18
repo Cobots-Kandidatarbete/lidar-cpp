@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/install/custom/include/*",
+                "/usr/local/lib/cpd/include/**",
                 "/opt/ros/galactic/include/**",
                 "/usr/include/**"
             ],

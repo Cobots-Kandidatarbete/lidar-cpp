@@ -4,21 +4,29 @@
 #include <string>
 #include <thread>
 #include <iostream>
-#include <cmath>
 
 #include "rclcpp/rclcpp.hpp"
+
 #include "librealsense2/rs.hpp" // Include RealSense Cross Platform API
 #include "librealsense2/rsutil.h"
+
 #include "pcl/point_cloud.h"
 #include "pcl/point_types.h"
-#include "pcl_conversions/pcl_conversions.h"
-#include <pcl/visualization/cloud_viewer.h>
+
 #include <pcl/sample_consensus/method_types.h>
 #include <pcl/sample_consensus/model_types.h>
-#include <pcl/segmentation/sac_segmentation.h>
+
 #include <pcl/filters/extract_indices.h>
+#include <pcl/filters/random_sample.h>
+
+#include <pcl/registration/icp.h>
 #include <pcl/common/transforms.h>
+#include <pcl/io/ply_io.h>
+#include <pcl/segmentation/sac_segmentation.h>
+#include "pcl_conversions/pcl_conversions.h"
+#include <pcl/visualization/cloud_viewer.h>
 #include <opencv4/opencv2/opencv.hpp>
+#include <cpd/rigid.hpp>
 
 using namespace std::chrono_literals;
 using pcl_ptr = pcl::PointCloud<pcl::PointXYZ>::Ptr;
@@ -134,6 +142,27 @@ void visualize_pcl(Picture &picture)
     }
   }
 
+  pcl_ptr box{new pcl::PointCloud<pcl::PointXYZ>};
+  pcl::io::loadPLYFile("/home/student/lidar-ws/src/lidar_cpp/src/box.ply", *box);
+  pcl::RandomSample<pcl::PointXYZ> rand{};
+  rand.setInputCloud(box);
+  rand.setSample(1000);
+  rand.filter(*box);
+
+  rand.setInputCloud(filtered);
+  rand.filter(*filtered);
+
+  pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> icp;
+  icp.setInputSource(box);
+  icp.setInputTarget(filtered);
+
+  pcl_ptr filtered_icp{new pcl::PointCloud<pcl::PointXYZ>};
+  icp.align(*filtered_icp);
+
+  cpd::Matrix m;
+
+  viewer->addPointCloud(box, single_color, "m");
+  viewer->addPointCloud(filtered_icp, "box");
   viewer->addPointCloud(filtered, single_color, "main");
 
   viewer->initCameraParameters();
