@@ -4,9 +4,11 @@
 #include <string>
 #include <thread>
 #include <iostream>
+#include <cmath>
 
 #include "rclcpp/rclcpp.hpp"
 #include "librealsense2/rs.hpp" // Include RealSense Cross Platform API
+#include "librealsense2/rsutil.h"
 #include "pcl/point_cloud.h"
 #include "pcl/point_types.h"
 #include "pcl_conversions/pcl_conversions.h"
@@ -48,6 +50,24 @@ pcl_ptr points_to_pcl(const rs2::points &points)
   return cloud;
 }
 
+void blue_point(float box_position[3], const rs2::video_frame video, const rs2::depth_frame depth)
+{
+  const int w = video.get_width();
+  const int h = video.get_height();
+  cv::Mat image{cv::Size{w, h}, CV_8UC3, (void *)video.get_data(), cv::Mat::AUTO_STEP};
+  cv::Mat depth_image{cv::Size{w, h}, CV_16SC1, (void *)depth.get_data()};
+  cv::Mat hsv, mask, non_zero;
+  cv::cvtColor(image, hsv, cv::COLOR_BGR2HSV);
+  cv::inRange(hsv, cv::Scalar{100, 150, 0}, cv::Scalar{140, 255, 255}, mask);
+  cv::findNonZero(mask, non_zero);
+  cv::Scalar mean = cv::mean(non_zero);
+
+  auto intrinsics{depth.get_profile().as<rs2::video_stream_profile>().get_intrinsics()};
+  float m[2] = {static_cast<float>(mean[0]), static_cast<float>(mean[1])};
+
+  rs2_deproject_pixel_to_point(box_position, &intrinsics, m, depth.get_distance(static_cast<int>(mean[0]), static_cast<int>(mean[1])));
+}
+
 Picture take_picture()
 {
   rs2::pipeline pipe;
@@ -59,7 +79,6 @@ Picture take_picture()
   pipe.start(config);
 
   rs2::frameset frames{pipe.wait_for_frames()};
-
   rs2::align align_to{RS2_STREAM_COLOR};
   frames = align_to.process(frames);
 
@@ -99,28 +118,24 @@ pcl_ptr remove_plane(pcl_ptr pcl_points)
 }
 void visualize_pcl(Picture &picture)
 {
-  cv::namedWindow("Window", cv::WINDOW_AUTOSIZE);
-  cv::namedWindow("Window2", cv::WINDOW_AUTOSIZE);
-
-  // Query frame size (width and height)
-  const int w = picture.video.get_width();
-  const int h = picture.video.get_height();
-  cv::Mat image{cv::Size{w, h}, CV_8UC3, (void *)picture.video.get_data(), cv::Mat::AUTO_STEP};
-  cv::Mat depth_image{cv::Size{w, h}, CV_16SC1, (void *)picture.depth.get_data()};
-  cv::Mat hsv, mask, non_zero;
-  cv::cvtColor(image, hsv, cv::COLOR_BGR2HSV);
-  cv::inRange(hsv, cv::Scalar{100, 150, 0}, cv::Scalar{140, 255, 255}, mask);
-  cv::findNonZero(mask, non_zero);
-  cv::Scalar mean = cv::mean(non_zero);
-  cv::circle(image, cv::Point{static_cast<int>(mean[0]), static_cast<int>(mean[1])}, 4, cv::Scalar(0, 255, 0));
-  cv::imshow("Window", image);
-  cv::imshow("Window2", depth_image);
-
-  cv::waitKey(0);
-
+  float box_position[3];
+  blue_point(box_position, picture.video, picture.depth);
+  pcl_ptr blue_box{new pcl::PointCloud<pcl::PointXYZ>};
+  blue_box->push_back(pcl::PointXYZ{box_position[0], box_position[1], box_position[2]});
   pcl::visualization::PCLVisualizer::Ptr viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));
   pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color(picture.cloud, 0, 255, 0);
-  viewer->addPointCloud(picture.cloud, single_color, "main");
+  pcl_ptr filtered{new pcl::PointCloud<pcl::PointXYZ>};
+  for (auto p : picture.cloud->points)
+  {
+    float dist{(p.x - box_position[0]) * (p.x - box_position[0]) + (p.y - box_position[1]) * (p.y - box_position[1]) + (p.z - box_position[2]) * (p.z - box_position[2])};
+    if (dist <= 0.16)
+    {
+      filtered->push_back(p);
+    }
+  }
+
+  viewer->addPointCloud(filtered, single_color, "main");
+
   viewer->initCameraParameters();
 
   while (!viewer->wasStopped())
