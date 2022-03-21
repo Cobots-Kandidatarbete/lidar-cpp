@@ -19,7 +19,7 @@ include_directories(
   include
   ${PCL_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
-  /usr/local/include
+  /usr/local/include/cpd
 )
 
 link_directories(${PCL_LIBRARY_DIRS})
@@ -62,7 +62,7 @@ ament_target_dependencies(tmp
 
 target_link_libraries(lidar realsense2)
 target_link_libraries(lidar_server realsense2 ${PCL_LIBRARIES})
-target_link_libraries(tmp realsense2 ${PCL_LIBRARIES} ${OpenCV_LIBS} cpd})
+target_link_libraries(tmp realsense2 ${PCL_LIBRARIES} ${OpenCV_LIBS} cpd)
 
 install(TARGETS
   lidar

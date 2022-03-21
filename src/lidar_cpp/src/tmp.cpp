@@ -146,23 +146,22 @@ void visualize_pcl(Picture &picture)
   pcl::io::loadPLYFile("/home/student/lidar-ws/src/lidar_cpp/src/box.ply", *box);
   pcl::RandomSample<pcl::PointXYZ> rand{};
   rand.setInputCloud(box);
-  rand.setSample(1000);
+  int num_points = 1000;
+  rand.setSample(num_points);
   rand.filter(*box);
 
   rand.setInputCloud(filtered);
   rand.filter(*filtered);
 
-  pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> icp;
-  icp.setInputSource(box);
-  icp.setInputTarget(filtered);
+  cpd::Matrix fixed{filtered->getMatrixXfMap()};
+  cpd::Matrix moving{box->getMatrixXfMap()};
+  cpd::Rigid rigid;
+  rigid.scale(true);
+  cpd::RigidResult result = rigid.run(fixed, moving);
 
-  pcl_ptr filtered_icp{new pcl::PointCloud<pcl::PointXYZ>};
-  icp.align(*filtered_icp);
-
-  cpd::Matrix m;
+  cpd::Matrix moved_box = result.points;
 
   viewer->addPointCloud(box, single_color, "m");
-  viewer->addPointCloud(filtered_icp, "box");
   viewer->addPointCloud(filtered, single_color, "main");
 
   viewer->initCameraParameters();
