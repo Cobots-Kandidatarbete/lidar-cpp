@@ -18,6 +18,7 @@
 
 #include <pcl/filters/extract_indices.h>
 #include <pcl/filters/random_sample.h>
+#include <pcl/filters/voxel_grid.h>
 
 #include <pcl/registration/icp.h>
 #include <pcl/common/transforms.h>
@@ -128,8 +129,8 @@ void visualize_pcl(Picture &picture)
 {
   float box_position[3];
   blue_point(box_position, picture.video, picture.depth);
-  pcl_ptr blue_box{new pcl::PointCloud<pcl::PointXYZ>};
-  blue_box->push_back(pcl::PointXYZ{box_position[0], box_position[1], box_position[2]});
+  // pcl_ptr blue_box{new pcl::PointCloud<pcl::PointXYZ>};
+  // blue_box->push_back(pcl::PointXYZ{box_position[0], box_position[1], box_position[2]});
   pcl::visualization::PCLVisualizer::Ptr viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));
   pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color(picture.cloud, 0, 255, 0);
   pcl_ptr filtered{new pcl::PointCloud<pcl::PointXYZ>};
@@ -144,24 +145,61 @@ void visualize_pcl(Picture &picture)
 
   pcl_ptr box{new pcl::PointCloud<pcl::PointXYZ>};
   pcl::io::loadPLYFile("/home/student/lidar-ws/src/lidar_cpp/src/box.ply", *box);
+  Eigen::Matrix4f transform_1 = Eigen::Matrix4f::Identity();
+  double scale{0.001};
+  transform_1(0, 0) = scale;
+  transform_1(1, 1) = scale;
+  transform_1(2, 2) = scale;
+  // pcl_ptr scaled_box{new pcl::PointCloud<pcl::PointXYZ>};
+  // pcl::transformPointCloud(*box, *scaled_box, transform_1);
+
   pcl::RandomSample<pcl::PointXYZ> rand{};
   rand.setInputCloud(box);
-  int num_points = 1000;
+  size_t num_points = 500;
   rand.setSample(num_points);
   rand.filter(*box);
 
   rand.setInputCloud(filtered);
   rand.filter(*filtered);
 
-  cpd::Matrix fixed{filtered->getMatrixXfMap()};
-  cpd::Matrix moving{box->getMatrixXfMap()};
+  cpd::Matrix fixed{num_points, 3};
+  size_t i{0};
+  for (auto &p : filtered->points)
+  {
+    fixed(i, 0) = p.x;
+    fixed(i, 1) = p.y;
+    fixed(i, 2) = p.z;
+    ++i;
+  }
+  cpd::Matrix moving{num_points, 3};
+  i = 0;
+
+  for (auto &p : box->points)
+  {
+    moving(i, 0) = p.x;
+    moving(i, 1) = p.y;
+    moving(i, 2) = p.z;
+    ++i;
+  }
+
   cpd::Rigid rigid;
   rigid.scale(true);
+  std::cout << "#1" << std::endl;
   cpd::RigidResult result = rigid.run(fixed, moving);
-
+  std::cout << "#2" << std::endl;
   cpd::Matrix moved_box = result.points;
 
-  viewer->addPointCloud(box, single_color, "m");
+  pcl_ptr cpd_result{new pcl::PointCloud<pcl::PointXYZ>};
+  for (size_t i{0}; i < num_points; i++)
+  {
+    pcl::PointXYZ point;
+    point.x = moved_box(i, 0);
+    point.y = moved_box(i, 1);
+    point.z = moved_box(i, 2);
+    cpd_result->points.push_back(point);
+  }
+
+  viewer->addPointCloud(cpd_result, "m");
   viewer->addPointCloud(filtered, single_color, "main");
 
   viewer->initCameraParameters();
