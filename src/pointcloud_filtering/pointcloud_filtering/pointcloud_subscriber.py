@@ -41,10 +41,13 @@ class PCDListener(Node):
         # https://github.com/ros/common_msgs/blob/noetic-devel/sensor_msgs/src/sensor_msgs/point_cloud2.py
 
         pcd_as_numpy_array = np.array(list(read_points(msg)))
+        dist = 1
+        filtered = np.array(
+            [row for row in pcd_as_numpy_array if row[0]**2 + row[1]**2 + row[2]**2 < dist**2])
 
         # The rest here is for visualization.
         self.o3d_pcd = o3d.geometry.PointCloud(
-            o3d.utility.Vector3dVector(pcd_as_numpy_array))
+            o3d.utility.Vector3dVector(filtered))
 
         plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02,
                                                           ransac_n=3,
@@ -59,12 +62,17 @@ class PCDListener(Node):
 
         max_label = labels.max()
         clusters = []
+        boxes = []
 
         if max_label > -1:
-            for i in range(0, max_label+1):
+            for i in range(0, max_label + 1):
                 cluster_index = np.where(labels == i)[0]
                 clusters.append(self.o3d_pcd.select_by_index(
                     cluster_index))
+                try:
+                    boxes.append(clusters[i].get_oriented_bounding_box())
+                except:
+                    print("Oj")
 
         print(f"point cloud has {max_label + 1} clusters")
         colors = plt.get_cmap("tab20")(
@@ -77,8 +85,24 @@ class PCDListener(Node):
         box = box.random_down_sample(
             sampling_ratio=2000/len(np.asarray(box.points)))
 
+        mesh_frame = o3d.geometry.TriangleMesh.create_coordinate_frame(
+            size=0.1, origin=[0, 0, 0])
+        blue_boxes = []
+        dx = 0.46235329
+        dy = 0.38135528
+        dz = 0.24068656
+        volume = 0.018781736409474
+        verror = 0.04
+        error = 0.15
+
+        for box in boxes:
+            print('----------Box----------')
+            print(np.array(box.volume()))
+            print(np.array(box.extent))
+            if dx-error < box.extent[0] < dx + error and dy-error < box.extent[1] < dy + error and dz-error < box.extent[2] < dz + error and volume - verror < box.volume() < volume + verror:
+                blue_boxes.append(box)
         o3d.visualization.draw_geometries(
-            [self.o3d_pcd, clusters[2].get_oriented_bounding_box()])
+            [self.o3d_pcd, mesh_frame] + blue_boxes)
 
 
 # The code below is "ported" from
