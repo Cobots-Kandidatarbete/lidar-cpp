@@ -6,21 +6,60 @@
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
 #include "librealsense2/rs.hpp" // Include RealSense Cross Platform API
+#include "librealsense2/rsutil.h"
 #include "pcl/point_cloud.h"
 #include "pcl/point_types.h"
 #include "pcl_conversions/pcl_conversions.h"
 #include "custom/srv/lidar_service.hpp"
+#include "custom/msg/lidar_message.hpp"
+#include <opencv4/opencv2/opencv.hpp>
 
 using pcl_ptr = pcl::PointCloud<pcl::PointXYZ>::Ptr;
+
+void blue_point(float box_position[3], const rs2::video_frame video, const rs2::depth_frame depth)
+{
+    const int w = video.get_width();
+    const int h = video.get_height();
+    cv::Mat image{cv::Size{w, h}, CV_8UC3, (void *)video.get_data(), cv::Mat::AUTO_STEP};
+    cv::Mat depth_image{cv::Size{w, h}, CV_16SC1, (void *)depth.get_data()};
+    cv::Mat hsv, mask, non_zero;
+    cv::cvtColor(image, hsv, cv::COLOR_BGR2HSV);
+    cv::inRange(hsv, cv::Scalar{100, 150, 0}, cv::Scalar{140, 255, 255}, mask);
+    cv::findNonZero(mask, non_zero);
+    cv::Scalar mean = cv::mean(non_zero);
+
+    auto intrinsics{depth.get_profile().as<rs2::video_stream_profile>().get_intrinsics()};
+    float m[2] = {static_cast<float>(mean[0]), static_cast<float>(mean[1])};
+
+    rs2_deproject_pixel_to_point(box_position, &intrinsics, m, depth.get_distance(static_cast<int>(mean[0]), static_cast<int>(mean[1])));
+}
 
 void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> request, const std::shared_ptr<custom::srv::LidarService::Response> response)
 {
     rs2::pipeline pipe;
     rs2::pointcloud pc;
     rs2::points points;
-    pipe.start();
-    auto frames = pipe.wait_for_frames();
+    rs2::config cfg;
+
+    // Enable lidar
+    cfg.enable_device("f1120455");
+    cfg.enable_stream(RS2_STREAM_COLOR, RS2_FORMAT_BGR8);
+    cfg.enable_stream(RS2_STREAM_DEPTH, RS2_FORMAT_Z16);
+
+    pipe.start(cfg);
+    rs2::frameset frames{pipe.wait_for_frames()};
+    rs2::align align_to{RS2_STREAM_COLOR};
+    frames = align_to.process(frames);
     auto depth = frames.get_depth_frame();
+    auto video = frames.get_color_frame();
+
+    float box_position[3];
+    // Get center of blue pixels in xyz
+    blue_point(box_position, video, depth);
+    std::cout << box_position[0] << std::endl;
+    std::cout << box_position[1] << std::endl;
+    std::cout << box_position[2] << std::endl;
+
     points = pc.calculate(depth);
     pcl::PCLPointCloud2 pcl_points;
 
@@ -36,17 +75,22 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     for (auto &p : cloud->points)
     {
         p.x = ptr->x;
-        p.y = ptr->y; 
+        p.y = ptr->y;
         p.z = ptr->z;
         ptr++;
     }
 
     pcl::toPCLPointCloud2(*cloud, pcl_points);
 
-    sensor_msgs::msg::PointCloud2 message;
-    pcl_conversions::fromPCL(pcl_points, message);
-    message.header.frame_id = "L515";
-    response->pcl_response = message;
+    custom::msg::LidarMessage message;
+    sensor_msgs::msg::PointCloud2 pointcloud;
+    pcl_conversions::fromPCL(pcl_points, pointcloud);
+    pointcloud.header.frame_id = "L515";
+    message.pcl_response = pointcloud;
+    message.x = box_position[0];
+    message.y = box_position[1];
+    message.z = box_position[2];
+    response->data = message;
     pipe.stop();
 }
 

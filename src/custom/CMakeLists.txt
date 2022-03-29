@@ -16,6 +16,7 @@ find_package(sensor_msgs REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/LidarService.srv"
+  "msg/LidarMessage.msg"
   DEPENDENCIES sensor_msgs
 )
 

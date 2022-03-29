@@ -5,6 +5,7 @@ import ctypes
 from collections import namedtuple
 import sys
 import os
+from custom.msg import LidarMessage
 
 import rclpy
 from rclpy.node import Node
@@ -28,7 +29,7 @@ class PCDListener(Node):
         # Set up a subscription to the 'pcd' topic with a callback to the
         # function `listener_callback`
         self.pcd_subscriber = self.create_subscription(
-            sensor_msgs.PointCloud2,    # Msg type
+            LidarMessage,    # Msg type
             'pcl',                      # topic
             self.listener_callback,      # Function to call
             10                          # QoS
@@ -40,7 +41,7 @@ class PCDListener(Node):
         # the ROS1 package.
         # https://github.com/ros/common_msgs/blob/noetic-devel/sensor_msgs/src/sensor_msgs/point_cloud2.py
 
-        pcd_as_numpy_array = np.array(list(read_points(msg)))
+        pcd_as_numpy_array = np.array(list(read_points(msg.pcl_response)))
         dist = 1
         filtered = np.array(
             [row for row in pcd_as_numpy_array if row[0]**2 + row[1]**2 + row[2]**2 < dist**2])
@@ -58,7 +59,7 @@ class PCDListener(Node):
         with o3d.utility.VerbosityContextManager(
                 o3d.utility.VerbosityLevel.Debug) as cm:
             labels = np.array(
-                self.o3d_pcd.cluster_dbscan(eps=0.05, min_points=10, print_progress=True))
+                self.o3d_pcd.cluster_dbscan(eps=0.05, min_points=20, print_progress=True))
 
         max_label = labels.max()
         clusters = []
@@ -89,17 +90,22 @@ class PCDListener(Node):
             size=0.1, origin=[0, 0, 0])
         blue_boxes = []
         dx = 0.46235329
-        dy = 0.38135528
-        dz = 0.24068656
+        dy = 0.36464842
+        dz = 0.18794718
+        errorxd = 0.05
+        erroryd = 0.05
+        errorzd = 0.05
+        errorxu = 0.15
+        erroryu = 0.15
+        errorzu = 0.15
         volume = 0.018781736409474
         verror = 0.04
-        error = 0.15
 
         for box in boxes:
             print('----------Box----------')
             print(np.array(box.volume()))
             print(np.array(box.extent))
-            if dx-error < box.extent[0] < dx + error and dy-error < box.extent[1] < dy + error and dz-error < box.extent[2] < dz + error and volume - verror < box.volume() < volume + verror:
+            if dx-errorxd < box.extent[0] < dx + errorxu and dy-erroryd < box.extent[1] < dy + erroryu and dz-errorzd < box.extent[2] < dz + errorzu and volume - verror < box.volume() < volume + verror:
                 blue_boxes.append(box)
         o3d.visualization.draw_geometries(
             [self.o3d_pcd, mesh_frame] + blue_boxes)

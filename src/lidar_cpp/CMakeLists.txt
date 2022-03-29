@@ -12,13 +12,13 @@ find_package(sensor_msgs REQUIRED)
 find_package(realsense2 REQUIRED)
 find_package(PCL REQUIRED)
 find_package(custom REQUIRED) 
-#find_package(OpenCV REQUIRED)
+find_package(OpenCV REQUIRED)
 #find_package(Cpd REQUIRED)
 
 include_directories(
   include
   ${PCL_INCLUDE_DIRS}
-  #${OpenCV_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
   #/usr/local/include/cpd
 )
 
@@ -40,6 +40,7 @@ ament_target_dependencies(lidar_server
   sensor_msgs
   PCL
   custom
+  OpenCV
 )
 
 add_executable(lidar_client src/lidar_client.cpp)
@@ -52,7 +53,7 @@ ament_target_dependencies(lidar_client
 
 
 target_link_libraries(lidar realsense2)
-target_link_libraries(lidar_server realsense2 ${PCL_LIBRARIES})
+target_link_libraries(lidar_server realsense2 ${PCL_LIBRARIES} ${OpenCV_LIBS})
 
 install(TARGETS
   lidar

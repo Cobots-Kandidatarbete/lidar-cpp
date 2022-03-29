@@ -1,5 +1,6 @@
 #include "rclcpp/rclcpp.hpp"
 #include "custom/srv/lidar_service.hpp"
+#include "custom/msg/lidar_message.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
 
 #include <chrono>
@@ -13,7 +14,7 @@ int main(int argc, char **argv)
     rclcpp::init(argc, argv);
 
     std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("lidar_client");
-    auto publisher = node->create_publisher<sensor_msgs::msg::PointCloud2>("pcl", 10);
+    auto publisher = node->create_publisher<custom::msg::LidarMessage>("pcl", 10);
     rclcpp::Client<custom::srv::LidarService>::SharedPtr client = node->create_client<custom::srv::LidarService>("lidar_service");
     auto request = std::make_shared<custom::srv::LidarService::Request>();
     while (!client->wait_for_service(1s))
@@ -30,7 +31,7 @@ int main(int argc, char **argv)
 
     if (rclcpp::spin_until_future_complete(node, result) == rclcpp::FutureReturnCode::SUCCESS)
     {
-        publisher->publish(result.get()->pcl_response);
+        publisher->publish(result.get()->data);
         RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Published");
     }
     else

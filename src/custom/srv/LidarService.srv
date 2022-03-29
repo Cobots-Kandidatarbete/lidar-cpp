@@ -1,2 +1,2 @@
 ---
-sensor_msgs/PointCloud2 pcl_response
+custom/LidarMessage data
