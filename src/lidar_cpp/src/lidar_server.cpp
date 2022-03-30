@@ -5,6 +5,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
+#include "geometry_msgs/msg/vector3.hpp"
 #include "librealsense2/rs.hpp" // Include RealSense Cross Platform API
 #include "librealsense2/rsutil.h"
 #include "pcl/point_cloud.h"
@@ -83,13 +84,18 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     pcl::toPCLPointCloud2(*cloud, pcl_points);
 
     custom::msg::LidarMessage message;
+
     sensor_msgs::msg::PointCloud2 pointcloud;
     pcl_conversions::fromPCL(pcl_points, pointcloud);
     pointcloud.header.frame_id = "L515";
+
+    geometry_msgs::msg::Vector3 blue_center;
+    blue_center.x = box_position[0];
+    blue_center.y = box_position[1];
+    blue_center.z = box_position[2];
+
     message.pcl_response = pointcloud;
-    message.x = box_position[0];
-    message.y = box_position[1];
-    message.z = box_position[2];
+    message.blue_center = blue_center;
     response->data = message;
     pipe.stop();
 }

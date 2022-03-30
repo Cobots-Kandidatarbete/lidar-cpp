@@ -38,6 +38,7 @@ ament_target_dependencies(lidar_server
   realsense2
   rclcpp
   sensor_msgs
+  geometry_msgs
   PCL
   custom
   OpenCV
