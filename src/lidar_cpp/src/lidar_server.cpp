@@ -37,6 +37,20 @@ void blue_point(float box_position[3], const rs2::video_frame video, const rs2::
 
 void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> request, const std::shared_ptr<custom::srv::LidarService::Response> response)
 {
+    /* Description: Get the exakt pose of a box
+     *
+     * The algorithm works as follows:
+     * - Get rgb and depth maps from Lidar
+     * - Generate point cloud from given data
+     * - Generate XYZHSV point cloud from all points
+     * - Filter the points that are not blue
+     * - Cluster blue points
+     * - Select cluster of box (optional)
+     * - Perform coherent point drift on cluster
+     */
+
+    // OBS: Current code does not implement the algorithm above, it will be replaced.
+
     rs2::pipeline pipe;
     rs2::pointcloud pc;
     rs2::points points;
