@@ -56,11 +56,12 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     rs2::points points;
     rs2::config cfg;
 
-    // Enable lidar
+    // Enable Lidar
     cfg.enable_device("f1120455");
     cfg.enable_stream(RS2_STREAM_COLOR, RS2_FORMAT_BGR8);
     cfg.enable_stream(RS2_STREAM_DEPTH, RS2_FORMAT_Z16);
 
+    // Get RGB and depth data from the Lidar camera
     pipe.start(cfg);
     rs2::frameset frames{pipe.wait_for_frames()};
     rs2::align align_to{RS2_STREAM_COLOR};
@@ -68,35 +69,39 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     auto depth = frames.get_depth_frame();
     auto video = frames.get_color_frame();
 
-    float box_position[3];
     // Get center of blue pixels in xyz
+    float box_position[3];
     blue_point(box_position, video, depth);
     std::cout << box_position[0] << std::endl;
     std::cout << box_position[1] << std::endl;
     std::cout << box_position[2] << std::endl;
 
+    // Calculate 3D points from the depth map
     points = pc.calculate(depth);
-    pcl::PCLPointCloud2 pcl_points;
 
-    // Points to pcl
+    // Create pointcloud from the 3D points
+    pcl::PCLPointCloud2 pcl_points;
     pcl_ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 
+    // TODO Explain this
     auto sp = points.get_profile().as<rs2::video_stream_profile>();
     cloud->width = sp.width();
     cloud->height = sp.height();
     cloud->is_dense = false;
     cloud->points.resize(points.size());
-    auto ptr = points.get_vertices();
-    for (auto &p : cloud->points)
-    {
-        p.x = ptr->x;
-        p.y = ptr->y;
-        p.z = ptr->z;
-        ptr++;
-    }
 
+    // TODO Explain this
+    auto vertex = points.get_vertices();
+    for (auto &point : cloud->points)
+    {
+        point.x = vertex->x;
+        point.y = vertex->y;
+        point.z = vertex->z;
+        vertex++;
+    }
     pcl::toPCLPointCloud2(*cloud, pcl_points);
 
+    // Create message
     custom::msg::LidarMessage message;
 
     sensor_msgs::msg::PointCloud2 pointcloud;
