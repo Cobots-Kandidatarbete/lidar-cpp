@@ -15,7 +15,8 @@
 #include "custom/msg/lidar_message.hpp"
 #include <opencv4/opencv2/opencv.hpp>
 
-using pcl_ptr = pcl::PointCloud<pcl::PointXYZ>::Ptr;
+// using pcl_ptr = pcl::PointCloud<pcl::PointXYZ>::Ptr;
+// using pcl_xyzrgb_ptr = pcl::PointCloud<pcl::PointXYZRGB>::Ptr;
 
 void blue_point(float box_position[3], const rs2::video_frame video, const rs2::depth_frame depth)
 {
@@ -51,72 +52,76 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
     // OBS: Current code does not implement the algorithm above, it will be replaced.
 
-    rs2::pipeline pipe;
-    rs2::pointcloud pc;
-    rs2::points points;
-    rs2::config cfg;
-
-    // Enable Lidar
-    cfg.enable_device("f1120455");
-    cfg.enable_stream(RS2_STREAM_COLOR, RS2_FORMAT_BGR8);
-    cfg.enable_stream(RS2_STREAM_DEPTH, RS2_FORMAT_Z16);
+    // Enable Lidar camera
+    rs2::config config;
+    config.enable_device("f1120455");
+    config.enable_stream(RS2_STREAM_COLOR, RS2_FORMAT_BGR8);
+    config.enable_stream(RS2_STREAM_DEPTH, RS2_FORMAT_Z16);
 
     // Get RGB and depth data from the Lidar camera
-    pipe.start(cfg);
-    rs2::frameset frames{pipe.wait_for_frames()};
+    rs2::pipeline pipeline;
+    pipeline.start(config);
+    rs2::frameset frames{pipeline.wait_for_frames()};
     rs2::align align_to{RS2_STREAM_COLOR};
     frames = align_to.process(frames);
-    auto depth = frames.get_depth_frame();
-    auto video = frames.get_color_frame();
+    auto depth_frame{frames.get_depth_frame()};
+    auto color_frame{frames.get_color_frame()};
+
+    // Create realsense point cloud and map it to color frames
+    rs2::pointcloud rs_pointcloud;
+    rs_pointcloud.map_to(color_frame);
+
+    // Generate generate colored pointcloud from the old pointcloud and the depth map
+    rs2::points points{rs_pointcloud.calculate(depth_frame)};
+    auto pcl_pointcloud{new pcl::PointCloud<pcl::PointXYZRGB>};
 
     // Get center of blue pixels in xyz
     float box_position[3];
-    blue_point(box_position, video, depth);
+    blue_point(box_position, color_frame, depth_frame);
     std::cout << box_position[0] << std::endl;
     std::cout << box_position[1] << std::endl;
     std::cout << box_position[2] << std::endl;
 
-    // Calculate 3D points from the depth map
-    points = pc.calculate(depth);
-
-    // Create pointcloud from the 3D points
-    pcl::PCLPointCloud2 pcl_points;
-    pcl_ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+    // TODO Explain this
+    auto stream_profile{points.get_profile().as<rs2::video_stream_profile>()};
+    pcl_pointcloud->width = stream_profile.width();
+    pcl_pointcloud->height = stream_profile.height();
+    pcl_pointcloud->is_dense = false;
+    pcl_pointcloud->points.resize(points.size());
 
     // TODO Explain this
-    auto sp = points.get_profile().as<rs2::video_stream_profile>();
-    cloud->width = sp.width();
-    cloud->height = sp.height();
-    cloud->is_dense = false;
-    cloud->points.resize(points.size());
-
-    // TODO Explain this
-    auto vertex = points.get_vertices();
-    for (auto &point : cloud->points)
+    auto vertex{points.get_vertices()};
+    auto texture_coords{points.get_texture_coordinates()};
+    for (auto &point : pcl_pointcloud->points)
     {
         point.x = vertex->x;
         point.y = vertex->y;
         point.z = vertex->z;
-        vertex++;
+
+        ++vertex;
     }
-    pcl::toPCLPointCloud2(*cloud, pcl_points);
 
     // Create message
-    custom::msg::LidarMessage message;
+    custom::msg::LidarMessage lidar_message;
 
-    sensor_msgs::msg::PointCloud2 pointcloud;
-    pcl_conversions::fromPCL(pcl_points, pointcloud);
-    pointcloud.header.frame_id = "L515";
+    // Convert to ROS-compatible type
+    pcl::PCLPointCloud2 pcl_points;
+    sensor_msgs::msg::PointCloud2 pointcloud_msg;
+
+    pcl::toPCLPointCloud2(*pcl_pointcloud, pcl_points);
+    pcl_conversions::fromPCL(pcl_points, pointcloud_msg);
+    pointcloud_msg.header.frame_id = "L515";
 
     geometry_msgs::msg::Vector3 blue_center;
     blue_center.x = box_position[0];
     blue_center.y = box_position[1];
     blue_center.z = box_position[2];
 
-    message.pcl_response = pointcloud;
-    message.blue_center = blue_center;
-    response->data = message;
-    pipe.stop();
+    lidar_message.pcl_response = pointcloud_msg;
+    lidar_message.blue_center = blue_center;
+    response->data = lidar_message;
+
+    pipeline.stop();
 }
 
 int main(int argc, char **argv)
