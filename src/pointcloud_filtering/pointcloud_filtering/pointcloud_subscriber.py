@@ -39,7 +39,7 @@ class PCDListener(Node):
         pcd_as_numpy_array = np.array(
             list(dangerzone.read_points(msg.pcl_response)))
 
-        print(pcd_as_numpy_array.shape)
+        print(pcd_as_numpy_array[:, 3])
 
         dist = 1
         filtered = np.array(

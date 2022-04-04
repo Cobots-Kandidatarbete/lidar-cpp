@@ -67,6 +67,9 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     auto depth_frame{frames.get_depth_frame()};
     auto color_frame{frames.get_color_frame()};
 
+    auto frame_width = color_frame.get_width();
+    auto frame_height = color_frame.get_height();
+
     // Create realsense point cloud and map it to color frames
     rs2::pointcloud rs_pointcloud;
     rs_pointcloud.map_to(color_frame);
@@ -74,13 +77,6 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     // Generate generate colored pointcloud from the old pointcloud and the depth map
     rs2::points points{rs_pointcloud.calculate(depth_frame)};
     pcl_t::Ptr pcl_pointcloud{new pcl_t};
-
-    // Get center of blue pixels in xyz
-    float box_position[3];
-    blue_point(box_position, color_frame, depth_frame);
-    std::cout << box_position[0] << std::endl;
-    std::cout << box_position[1] << std::endl;
-    std::cout << box_position[2] << std::endl;
 
     // TODO Explain this
     auto stream_profile{points.get_profile().as<rs2::video_stream_profile>()};
@@ -91,15 +87,53 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
     // TODO Explain this
     auto vertex{points.get_vertices()};
-    auto texture_coords{points.get_texture_coordinates()};
-    for (auto &point : pcl_pointcloud->points)
+    auto texture_coordinates{points.get_texture_coordinates()};
+
+    // TODO: Fix this abomination
+    // Big haram
+    // https://stackoverflow.com/questions/61921324/pointer-exception-while-getting-rgb-values-from-video-frame-intel-realsense
+    auto color_data{(uint8_t *)color_frame.get_data()};
+    auto stride{color_frame.as<rs2::video_frame>().get_stride_in_bytes()};
+
+    for (auto i{0}; i < points.size(); ++i)
+    {
+        auto pt{pcl_pointcloud->points[i]};
+        auto vex{vertex[i]};
+        auto tex{texture_coordinates[i]};
+
+        pt.x = vex.x;
+        pt.y = vex.y;
+        pt.z = vex.z;
+
+        auto color_x{static_cast<int>(texture_coordinates[i].u * frame_width)};
+        auto color_y{static_cast<int>(texture_coordinates[i].v * frame_height)};
+
+        if (color_x < 0 || color_x >= frame_width || color_y < 0 || color_y >= frame_height)
+            continue;
+
+        auto color_location{(color_y * frame_width + color_x) * 3};
+        pt.r = color_data[color_location];
+        pt.g = color_data[color_location + 1];
+        pt.b = color_data[color_location + 2];
+
+        std::cout << pt.r << ' ' << pt.g << ' ' << pt.b << std::endl;
+    }
+
+    /*for (auto &point : pcl_pointcloud->points)
     {
         point.x = vertex->x;
         point.y = vertex->y;
         point.z = vertex->z;
 
         ++vertex;
-    }
+    }*/
+
+    // Get center of blue pixels in xyz
+    float box_position[3];
+    blue_point(box_position, color_frame, depth_frame);
+    std::cout << box_position[0] << std::endl;
+    std::cout << box_position[1] << std::endl;
+    std::cout << box_position[2] << std::endl;
 
     // Create message
     custom::msg::LidarMessage lidar_message;
