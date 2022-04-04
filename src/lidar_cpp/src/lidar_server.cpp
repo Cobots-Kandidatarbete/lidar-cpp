@@ -15,8 +15,8 @@
 #include "custom/msg/lidar_message.hpp"
 #include <opencv4/opencv2/opencv.hpp>
 
-// using pcl_ptr = pcl::PointCloud<pcl::PointXYZ>::Ptr;
-// using pcl_xyzrgb_ptr = pcl::PointCloud<pcl::PointXYZRGB>::Ptr;
+using pt_t = pcl::PointXYZRGB;
+using pcl_t = pcl::PointCloud<pt_t>;
 
 void blue_point(float box_position[3], const rs2::video_frame video, const rs2::depth_frame depth)
 {
@@ -73,7 +73,7 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
     // Generate generate colored pointcloud from the old pointcloud and the depth map
     rs2::points points{rs_pointcloud.calculate(depth_frame)};
-    auto pcl_pointcloud{new pcl::PointCloud<pcl::PointXYZRGB>};
+    pcl_t::Ptr pcl_pointcloud{new pcl_t};
 
     // Get center of blue pixels in xyz
     float box_position[3];
