@@ -43,7 +43,7 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
      * The algorithm works as follows:
      * - Get rgb and depth maps from Lidar
      * - Generate point cloud from given data
-     * - Generate XYZHSV point cloud from all points
+     * - Generate XYZRGB point cloud from all points
      * - Filter the points that are not blue
      * - Cluster blue points
      * - Select cluster of box (optional)
@@ -95,6 +95,8 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     auto color_data{(uint8_t *)color_frame.get_data()};
     auto stride{color_frame.as<rs2::video_frame>().get_stride_in_bytes()};
 
+    std::vector<int> points_to_remove;
+
     for (auto i{0}; i < points.size(); ++i)
     {
         auto pt{pcl_pointcloud->points[i]};
@@ -111,12 +113,29 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
         if (color_x < 0 || color_x >= frame_width || color_y < 0 || color_y >= frame_height)
             continue;
 
-        auto color_location{(color_y * frame_width + color_x) * 3};
-        pt.r = color_data[color_location];
-        pt.g = color_data[color_location + 1];
-        pt.b = color_data[color_location + 2];
+        // auto color_location{(color_y * frame_width + color_x) * 3};
 
-        std::cout << pt.r << ' ' << pt.g << ' ' << pt.b << std::endl;
+        auto color_location{color_x * stride + (3 * color_y)};
+
+        auto r{int(color_data[color_location])};
+        auto g{int(color_data[color_location + 1])};
+        auto b{int(color_data[color_location + 2])};
+        // std::cout << "pt: (" << r << "," << g << "," << b << ")" << std::endl;
+
+        // PLACE HOLDER FILTER
+        if (b > 200 && g < 100 && r < 100)
+        {
+            std::cout << "removing: (" << r << "," << g << "," << b << ")" << std::endl;
+        }
+
+        /*
+std::cout << "  R= " << int(color_data[a * stride + (3 * b)]);
+std::cout << ", G= " << int(color_data[a * stride + (3 * b) + 1]);
+std::cout << ", B= " << int(color_data[a * stride + (3 * b) + 2]);
+std::cout << std::endl;
+*/
+
+        // std::cout << pt.r << ' ' << pt.g << ' ' << pt.b << std::endl;
     }
 
     /*for (auto &point : pcl_pointcloud->points)
