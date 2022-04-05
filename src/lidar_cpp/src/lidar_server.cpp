@@ -95,17 +95,17 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     auto color_data{(uint8_t *)color_frame.get_data()};
     auto stride{color_frame.as<rs2::video_frame>().get_stride_in_bytes()};
 
-    std::vector<int> points_to_remove;
+    // std::vector<pt_t> points_to_remove;
 
     for (auto i{0}; i < points.size(); ++i)
     {
-        auto pt{pcl_pointcloud->points[i]};
+        auto pt_ptr{&pcl_pointcloud->points[i]};
         auto vex{vertex[i]};
         auto tex{texture_coordinates[i]};
 
-        pt.x = vex.x;
-        pt.y = vex.y;
-        pt.z = vex.z;
+        pt_ptr->x = vex.x;
+        pt_ptr->y = vex.y;
+        pt_ptr->z = vex.z;
 
         auto color_x{static_cast<int>(texture_coordinates[i].u * frame_width)};
         auto color_y{static_cast<int>(texture_coordinates[i].v * frame_height)};
@@ -125,27 +125,15 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
         // PLACE HOLDER FILTER
         if (b > 200 && g < 100 && r < 100)
         {
+            // points_to_remove.push_back(pt);
             std::cout << "removing: (" << r << "," << g << "," << b << ")" << std::endl;
         }
-
-        /*
-std::cout << "  R= " << int(color_data[a * stride + (3 * b)]);
-std::cout << ", G= " << int(color_data[a * stride + (3 * b) + 1]);
-std::cout << ", B= " << int(color_data[a * stride + (3 * b) + 2]);
-std::cout << std::endl;
-*/
-
-        // std::cout << pt.r << ' ' << pt.g << ' ' << pt.b << std::endl;
     }
 
-    /*for (auto &point : pcl_pointcloud->points)
-    {
-        point.x = vertex->x;
-        point.y = vertex->y;
-        point.z = vertex->z;
-
-        ++vertex;
-    }*/
+    // for (auto pt : points_to_remove)
+    //{
+    //    pcl_pointcloud->erase(pt);
+    //}
 
     // Get center of blue pixels in xyz
     float box_position[3];
