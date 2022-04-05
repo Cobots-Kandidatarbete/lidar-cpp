@@ -12,6 +12,7 @@ import open3d as o3d
 
 from . import dangerzone
 
+import os
 
 class PCDListener(Node):
 
@@ -79,8 +80,16 @@ class PCDListener(Node):
         colors[labels < 0] = 0
         self.o3d_pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
 
-        box = o3d.io.read_point_cloud(
-            '/home/student/kandidat/lidar-ws/src/pointcloud_filtering/pointcloud_filtering/box.ply')
+        ws_path = '/home/student/kandidat/lidar-ws'
+        if not os.path.isdir(ws_path):
+            ws_path = os.getcwd()
+
+        box_path_rel = '/src/pointcloud_filtering/pointcloud_filtering/box.ply'
+        box_path_full = ws_path + box_path_rel
+        if not os.path.isfile(box_path_full):
+            raise FileNotFoundError("Could not file box file. Make sure the program is run from workspace")               
+
+        box = o3d.io.read_point_cloud(box_path_full)
         box = box.random_down_sample(
             sampling_ratio=2000/len(np.asarray(box.points)))
 
