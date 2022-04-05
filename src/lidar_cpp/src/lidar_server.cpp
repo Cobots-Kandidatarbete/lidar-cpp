@@ -14,6 +14,7 @@
 #include "custom/srv/lidar_service.hpp"
 #include "custom/msg/lidar_message.hpp"
 #include <opencv4/opencv2/opencv.hpp>
+#include <pcl/filters/extract_indices.h>
 
 using pt_t = pcl::PointXYZRGB;
 using pcl_t = pcl::PointCloud<pt_t>;
@@ -97,6 +98,9 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
     // std::vector<pt_t> points_to_remove;
 
+    pcl::PointIndices::Ptr inliers(new pcl::PointIndices());
+    pcl::ExtractIndices<pt_t> extract;
+
     for (auto i{0}; i < points.size(); ++i)
     {
         auto pt_ptr{&pcl_pointcloud->points[i]};
@@ -107,8 +111,8 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
         pt_ptr->y = vex.y;
         pt_ptr->z = vex.z;
 
-        auto color_x{static_cast<int>(texture_coordinates[i].u * frame_width)};
-        auto color_y{static_cast<int>(texture_coordinates[i].v * frame_height)};
+        auto color_x{static_cast<int>(tex.u * frame_width)};
+        auto color_y{static_cast<int>(tex.v * frame_height)};
 
         if (color_x < 0 || color_x >= frame_width || color_y < 0 || color_y >= frame_height)
             continue;
@@ -123,13 +127,21 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
         // std::cout << "pt: (" << r << "," << g << "," << b << ")" << std::endl;
 
         // PLACE HOLDER FILTER
-        if (b > 200 && g < 100 && r < 100)
+        if (b < 200 && g > 100 && r > 100)
         {
+            inliers->indices.push_back(i);
             // points_to_remove.push_back(pt);
-            std::cout << "removing: (" << r << "," << g << "," << b << ")" << std::endl;
+            // std::cout << "removing: (" << r << "," << g << "," << b << ")" << std::endl;
         }
     }
+    std::cout << pcl_pointcloud->size() << std::endl;
 
+    extract.setInputCloud(pcl_pointcloud);
+    extract.setIndices(inliers);
+    extract.setNegative(true);
+    extract.filter(*pcl_pointcloud);
+
+    std::cout << pcl_pointcloud->size() << std::endl;
     // for (auto pt : points_to_remove)
     //{
     //    pcl_pointcloud->erase(pt);
