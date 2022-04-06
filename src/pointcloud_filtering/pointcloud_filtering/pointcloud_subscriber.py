@@ -42,18 +42,18 @@ class PCDListener(Node):
 
         print(pcd_as_numpy_array[:, 3])
 
-        dist = 1
+        dist = 1.5
         filtered = np.array(
             [row for row in pcd_as_numpy_array if row[0]**2 + row[1]**2 + row[2]**2 < dist**2])
 
         self.o3d_pcd = o3d.geometry.PointCloud(
             o3d.utility.Vector3dVector(filtered[:, :3]))
 
-        plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02,
-                                                          ransac_n=3,
-                                                          num_iterations=1000)
+        #plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02,
+        #                                                  ransac_n=3,
+        #                                                  num_iterations=1000)
 
-        self.o3d_pcd = self.o3d_pcd.select_by_index(inliers, invert=True)
+        #self.o3d_pcd = self.o3d_pcd.select_by_index(inliers, invert=True)
 
         with o3d.utility.VerbosityContextManager(
                 o3d.utility.VerbosityLevel.Debug) as cm:

@@ -19,6 +19,92 @@
 using pt_t = pcl::PointXYZRGB;
 using pcl_t = pcl::PointCloud<pt_t>;
 
+struct RGB {
+    int r;
+    int b;
+    int g;
+
+    void print() {
+        std::cout << r << "," << g << "," << b << std::endl;
+    }
+};
+
+struct HSV {
+    float h;
+    float s;
+    float v;
+
+    void print() {
+        std::cout << h << "," << s << "," << v << std::endl;
+    }
+};
+
+bool feq(float a, float b) {
+    return fabs(a - b) < FLT_EPSILON;
+}
+
+void rgb_to_hsv(const RGB rgb, HSV &hsv) {
+    // H IS IN DEGREES
+
+    float r = rgb.r / 255.0;
+    float g = rgb.g / 255.0;
+    float b = rgb.b / 255.0;
+    float c_max = MAX(MAX(r, g), b); 
+    float c_min = MIN(MIN(r, g), b);
+
+    hsv.v = c_max;
+
+    float delta = c_max - c_min;
+
+    if (feq(delta, 0)) 
+    {
+        hsv.h = 0;
+        hsv.s = 0;
+        return;
+    }
+
+    if (c_max > 0.0)
+    {
+        hsv.s = delta / c_max;
+    }
+    else {
+        hsv.s = 0;
+        hsv.h = NAN;
+        return;
+    }
+
+    if (feq(r, c_max)) 
+    {
+        hsv.h = (g - b) / delta;
+    }
+    else if (feq(g, c_max)) 
+    {
+        hsv.h = 2.0 + (b - r) / delta;
+    }
+    else {
+        hsv.h = 4.0 + (r - g) / delta;
+    }
+
+    hsv.h *= 60;
+
+    if (hsv.h < 0.0)
+    {
+        hsv.h += 360;
+    }
+}
+
+bool is_blue(const HSV hsv) {
+    //return hsv.h > 200 && hsv.h < 240 && hsv.v > 0.40 && hsv.s > 0.75;  
+    return hsv.h > 100 && hsv.h < 300 && hsv.v > 0.3 && hsv.s > 0.5;  
+    //return true;
+}
+
+bool is_blue(const RGB rgb) {
+    float sum = rgb.b + rgb.g + rgb.r;
+    return rgb.b >= sum * 0.34; 
+}
+
+
 void blue_point(float box_position[3], const rs2::video_frame video, const rs2::depth_frame depth)
 {
     const int w = video.get_width();
@@ -36,6 +122,7 @@ void blue_point(float box_position[3], const rs2::video_frame video, const rs2::
 
     rs2_deproject_pixel_to_point(box_position, &intrinsics, m, depth.get_distance(static_cast<int>(mean[0]), static_cast<int>(mean[1])));
 }
+
 
 void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> request, const std::shared_ptr<custom::srv::LidarService::Response> response)
 {
@@ -90,11 +177,16 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     auto vertex{points.get_vertices()};
     auto texture_coordinates{points.get_texture_coordinates()};
 
-    // TODO: Fix this abomination
-    // Big haram
     // https://stackoverflow.com/questions/61921324/pointer-exception-while-getting-rgb-values-from-video-frame-intel-realsense
     auto color_data{(uint8_t *)color_frame.get_data()};
     auto stride{color_frame.as<rs2::video_frame>().get_stride_in_bytes()};
+
+    // Show image
+    const int w = color_frame.as<rs2::video_frame>().get_width();
+    const int h = color_frame.as<rs2::video_frame>().get_height();
+
+    cv::Mat image(cv::Size(w, h), CV_8UC3, (void*)color_frame.get_data(), cv::Mat::AUTO_STEP);
+    cv::imshow("win", image);
 
     // std::vector<pt_t> points_to_remove;
 
@@ -111,8 +203,12 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
         pt_ptr->y = vex.y;
         pt_ptr->z = vex.z;
 
+        /*
         auto color_x{static_cast<int>(tex.u * frame_width)};
         auto color_y{static_cast<int>(tex.v * frame_height)};
+        */
+        auto color_x = i % frame_width;
+        auto color_y = i / frame_width;
 
         if (color_x < 0 || color_x >= frame_width || color_y < 0 || color_y >= frame_height)
             continue;
@@ -121,17 +217,23 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
         auto color_location{color_x * stride + (3 * color_y)};
 
-        auto r{int(color_data[color_location])};
-        auto g{int(color_data[color_location + 1])};
-        auto b{int(color_data[color_location + 2])};
-        // std::cout << "pt: (" << r << "," << g << "," << b << ")" << std::endl;
 
-        // PLACE HOLDER FILTER
-        if (b < 200 && g > 100 && r > 100)
+        RGB rgb {
+            int(color_data[color_location]),
+            int(color_data[color_location + 1]),
+            int(color_data[color_location + 2])
+        };
+        
+        HSV hsv;
+        //rgb_to_hsv(rgb, hsv);
+
+        //std::cout << hsv.h << "," << hsv.s << "," << hsv.v << std::endl;
+
+        if (!is_blue(rgb))
         {
+            rgb.print();
+            //std::cout << hsv.h << "," << hsv.s << "," << hsv.v << std::endl;
             inliers->indices.push_back(i);
-            // points_to_remove.push_back(pt);
-            // std::cout << "removing: (" << r << "," << g << "," << b << ")" << std::endl;
         }
     }
     std::cout << pcl_pointcloud->size() << std::endl;
