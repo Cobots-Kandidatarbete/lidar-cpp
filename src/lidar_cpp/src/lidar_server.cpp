@@ -100,6 +100,8 @@ bool is_blue(const HSV hsv) {
 }
 
 bool is_blue(const RGB rgb) {
+    return rgb.r < 100 && rgb.g > rgb.b; 
+
     float sum = rgb.b + rgb.g + rgb.r;
     return rgb.b >= sum * 0.34; 
 }
@@ -123,6 +125,17 @@ void blue_point(float box_position[3], const rs2::video_frame video, const rs2::
     rs2_deproject_pixel_to_point(box_position, &intrinsics, m, depth.get_distance(static_cast<int>(mean[0]), static_cast<int>(mean[1])));
 }
 
+std::tuple<uint8_t, uint8_t, uint8_t> get_texcolor(rs2::video_frame texture, rs2::texture_coordinate texcoords)
+{
+    const int w = texture.get_width(), h = texture.get_height();
+    
+    int x = std::min(std::max(int(texcoords.u*w + .5f), 0), w - 1);
+    int y = std::min(std::max(int(texcoords.v*h + .5f), 0), h - 1);
+
+    int idx = x * texture.get_bytes_per_pixel() + y * texture.get_stride_in_bytes();
+    const auto texture_data = reinterpret_cast<const uint8_t*>(texture.get_data());
+    return std::tuple<uint8_t, uint8_t, uint8_t>(texture_data[idx], texture_data[idx+1], texture_data[idx+2]);
+}
 
 void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> request, const std::shared_ptr<custom::srv::LidarService::Response> response)
 {
@@ -149,14 +162,20 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     // Get RGB and depth data from the Lidar camera
     rs2::pipeline pipeline;
     pipeline.start(config);
+
+    // Warm up camera
+    for (auto i {0}; i < 100; ++i)
+        pipeline.wait_for_frames();
+
+
     rs2::frameset frames{pipeline.wait_for_frames()};
     rs2::align align_to{RS2_STREAM_COLOR};
     frames = align_to.process(frames);
     auto depth_frame{frames.get_depth_frame()};
     auto color_frame{frames.get_color_frame()};
 
-    auto frame_width = color_frame.get_width();
-    auto frame_height = color_frame.get_height();
+    //auto frame_width = color_frame.get_width();
+    //auto frame_height = color_frame.get_height();
 
     // Create realsense point cloud and map it to color frames
     rs2::pointcloud rs_pointcloud;
@@ -168,27 +187,27 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
     // TODO Explain this
     auto stream_profile{points.get_profile().as<rs2::video_stream_profile>()};
-    pcl_pointcloud->width = stream_profile.width();
-    pcl_pointcloud->height = stream_profile.height();
+    pcl_pointcloud->width = static_cast<uint32_t>(stream_profile.width());
+    pcl_pointcloud->height = static_cast<uint32_t>(stream_profile.height());
     pcl_pointcloud->is_dense = false;
     pcl_pointcloud->points.resize(points.size());
 
+    /*
+     * https://github.com/eMrazSVK/JetsonSLAM/blob/master/pcl_testing.cpp
+     */
+
+    // OpenCV Mat for showing the rgb color image, just as part of processing
+    cv::Mat colorr(cv::Size(640, 480), CV_8UC3, (void*)color_frame.get_data(), cv::Mat::AUTO_STEP);
+    cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
+    cv::imshow("Display Image", colorr);
+        
     // TODO Explain this
-    auto vertex{points.get_vertices()};
+    auto vertices{points.get_vertices()};
     auto texture_coordinates{points.get_texture_coordinates()};
 
     // https://stackoverflow.com/questions/61921324/pointer-exception-while-getting-rgb-values-from-video-frame-intel-realsense
     auto color_data{(uint8_t *)color_frame.get_data()};
     auto stride{color_frame.as<rs2::video_frame>().get_stride_in_bytes()};
-
-    // Show image
-    const int w = color_frame.as<rs2::video_frame>().get_width();
-    const int h = color_frame.as<rs2::video_frame>().get_height();
-
-    cv::Mat image(cv::Size(w, h), CV_8UC3, (void*)color_frame.get_data(), cv::Mat::AUTO_STEP);
-    cv::imshow("win", image);
-
-    // std::vector<pt_t> points_to_remove;
 
     pcl::PointIndices::Ptr inliers(new pcl::PointIndices());
     pcl::ExtractIndices<pt_t> extract;
@@ -196,7 +215,7 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     for (auto i{0}; i < points.size(); ++i)
     {
         auto pt_ptr{&pcl_pointcloud->points[i]};
-        auto vex{vertex[i]};
+        auto vex{vertices[i]};
         auto tex{texture_coordinates[i]};
 
         pt_ptr->x = vex.x;
@@ -206,7 +225,8 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
         /*
         auto color_x{static_cast<int>(tex.u * frame_width)};
         auto color_y{static_cast<int>(tex.v * frame_height)};
-        */
+        
+        
         auto color_x = i % frame_width;
         auto color_y = i / frame_width;
 
@@ -216,18 +236,17 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
         // auto color_location{(color_y * frame_width + color_x) * 3};
 
         auto color_location{color_x * stride + (3 * color_y)};
+        */
 
+        std::tuple<uint8_t, uint8_t, uint8_t> current_color;
+        current_color = get_texcolor(color_frame, tex);
 
-        RGB rgb {
-            int(color_data[color_location]),
-            int(color_data[color_location + 1]),
-            int(color_data[color_location + 2])
-        };
+        pt_ptr->r = std::get<2>(current_color);
+        pt_ptr->g = std::get<1>(current_color);
+        pt_ptr->b = std::get<0>(current_color);
+
+        RGB rgb {pt_ptr->r, pt_ptr->g, pt_ptr->b};
         
-        HSV hsv;
-        //rgb_to_hsv(rgb, hsv);
-
-        //std::cout << hsv.h << "," << hsv.s << "," << hsv.v << std::endl;
 
         if (!is_blue(rgb))
         {
@@ -235,19 +254,15 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
             //std::cout << hsv.h << "," << hsv.s << "," << hsv.v << std::endl;
             inliers->indices.push_back(i);
         }
+
+
     }
     std::cout << pcl_pointcloud->size() << std::endl;
-
     extract.setInputCloud(pcl_pointcloud);
     extract.setIndices(inliers);
     extract.setNegative(true);
     extract.filter(*pcl_pointcloud);
-
     std::cout << pcl_pointcloud->size() << std::endl;
-    // for (auto pt : points_to_remove)
-    //{
-    //    pcl_pointcloud->erase(pt);
-    //}
 
     // Get center of blue pixels in xyz
     float box_position[3];
