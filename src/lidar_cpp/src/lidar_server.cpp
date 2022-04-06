@@ -19,36 +19,96 @@
 using pt_t = pcl::PointXYZRGB;
 using pcl_t = pcl::PointCloud<pt_t>;
 
-struct RGB {
-    int r;
-    int b;
-    int g;
 
-    void print() {
-        std::cout << r << "," << g << "," << b << std::endl;
-    }
-};
+bool feq(float a, float b) {
+    return fabs(a - b) < FLT_EPSILON;
+}
 
 struct HSV {
     float h;
     float s;
     float v;
 
-    void print() {
+    void print() const {
         std::cout << h << "," << s << "," << v << std::endl;
     }
 };
 
-bool feq(float a, float b) {
-    return fabs(a - b) < FLT_EPSILON;
-}
+struct RGB {
+    float r;
+    float g;
+    float b;
+
+    RGB(float r, float g, float b) {
+        this->r = r / 255.0;
+        this->g = g / 255.0;
+        this->b = b / 255.0;
+
+        std::cout << "CREATED RGB" << std::endl;
+    }
+
+    void print() const {
+        std::cout << r << "," << g << "," << b << std::endl;
+    }
+
+    HSV to_hsv() const {
+        HSV hsv;
+    
+        auto c_max = MAX(MAX(r, g), b); 
+        auto c_min = MIN(MIN(r, g), b);
+
+        hsv.v = c_max;
+
+        float delta = c_max - c_min;
+
+        if (feq(delta, 0)) 
+        {
+            hsv.h = 0;
+            hsv.s = 0;
+            return hsv;
+        }
+
+        if (c_max > 0.0)
+        {
+            hsv.s = delta / c_max;
+        }
+        else {
+            hsv.s = 0;
+            hsv.h = NAN;
+            return hsv;
+        }
+
+        if (feq(r, c_max)) 
+        {
+            hsv.h = (g - b) / delta;
+        }
+        else if (feq(g, c_max)) 
+        {
+            hsv.h = 2.0 + (b - r) / delta;
+        }
+        else {
+            hsv.h = 4.0 + (r - g) / delta;
+        }
+
+        hsv.h *= 60;
+
+        if (hsv.h < 0.0)
+        {
+            hsv.h += 360;
+        }
+
+        return hsv;
+    }
+};
+
+
+
+
+/*
 
 void rgb_to_hsv(const RGB rgb, HSV &hsv) {
     // H IS IN DEGREES
 
-    float r = rgb.r / 255.0;
-    float g = rgb.g / 255.0;
-    float b = rgb.b / 255.0;
     float c_max = MAX(MAX(r, g), b); 
     float c_min = MIN(MIN(r, g), b);
 
@@ -91,11 +151,17 @@ void rgb_to_hsv(const RGB rgb, HSV &hsv) {
     {
         hsv.h += 360;
     }
-}
 
-bool is_blue(const HSV hsv) {
+}
+*/
+
+bool is_blue(const RGB rgb) {
     // Blue is in the range 120-180
-    return hsv.h > 120 && hsv.h < 180 && hsv.s > 0.3 && hsv.v > 0.5;  
+    auto hsv {rgb.to_hsv()};
+    std::cout << "COMPING:";
+    hsv.print();
+    //return hsv.h > 120 && hsv.h < 180 && hsv.s > 0.3 && hsv.v > 0.5;  
+    return hsv.h > 200 && hsv.h < 280 && hsv.s > 0.3 && hsv.v > 0.5;  
 }
 
 void blue_point(float box_position[3], const rs2::video_frame video, const rs2::depth_frame depth)
@@ -201,27 +267,33 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
     for (auto i{0}; i < points.size(); ++i)
     {
-        auto pt_ptr{&pcl_pointcloud->points[i]};
+        auto point_ptr{&pcl_pointcloud->points[i]};
         auto vex{vertices[i]};
         auto tex{texture_coordinates[i]};
 
-        pt_ptr->x = vex.x;
-        pt_ptr->y = vex.y;
-        pt_ptr->z = vex.z;
+        point_ptr->x = vex.x;
+        point_ptr->y = vex.y;
+        point_ptr->z = vex.z;
 
         std::tuple<uint8_t, uint8_t, uint8_t> current_color;
         current_color = get_texcolor(color_frame, tex);
 
+        RGB color_rgb {std::get<2>(current_color), std::get<1>(current_color), std::get<0>(current_color)};
+
+        /*
         pt_ptr->r = std::get<2>(current_color);
         pt_ptr->g = std::get<1>(current_color);
         pt_ptr->b = std::get<0>(current_color);
+        */
+        point_ptr->r = color_rgb.r;
+        point_ptr->g = color_rgb.g;
+        point_ptr->b = color_rgb.b;
 
-        RGB rgb {pt_ptr->r, pt_ptr->g, pt_ptr->b};
         
-        HSV hsv;
-        rgb_to_hsv(rgb, hsv);
+        //HSV hsv;
+        //rgb_to_hsv(rgb, hsv);
 
-        if (!is_blue(hsv))
+        if (!is_blue(color_rgb))
         {
             inliers->indices.push_back(i);
         }
