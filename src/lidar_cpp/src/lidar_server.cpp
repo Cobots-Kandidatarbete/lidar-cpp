@@ -32,6 +32,10 @@ struct HSV {
     void print() const {
         std::cout << h << "," << s << "," << v << std::endl;
     }
+
+    bool is_blue() {
+        return h > 200 && h < 280 && s > 0.3 && v > 0.5;  
+    }
 };
 
 struct RGB {
@@ -43,8 +47,6 @@ struct RGB {
         this->r = r / 255.0;
         this->g = g / 255.0;
         this->b = b / 255.0;
-
-        std::cout << "CREATED RGB" << std::endl;
     }
 
     void print() const {
@@ -68,121 +70,43 @@ struct RGB {
             return hsv;
         }
 
-        if (c_max > 0.0)
+        if (feq(c_max, 0))
         {
-            hsv.s = delta / c_max;
-        }
-        else {
             hsv.s = 0;
             hsv.h = NAN;
             return hsv;
         }
 
-        if (feq(r, c_max)) 
-        {
-            hsv.h = (g - b) / delta;
-        }
-        else if (feq(g, c_max)) 
-        {
-            hsv.h = 2.0 + (b - r) / delta;
-        }
-        else {
-            hsv.h = 4.0 + (r - g) / delta;
-        }
+        hsv.s = delta / c_max;
 
-        hsv.h *= 60;
+        if (feq(r, c_max)) 
+            hsv.h = 60 * (g - b) / delta;
+
+        else if (feq(g, c_max)) 
+            hsv.h = 60 * (2.0 + (b - r) / delta);
+
+        else 
+            hsv.h = 60 * (4.0 + (r - g) / delta);
 
         if (hsv.h < 0.0)
-        {
             hsv.h += 360;
-        }
 
         return hsv;
     }
+
+    bool is_blue() {
+        return to_hsv().is_blue();
+    }
+};
+
+struct XYZ {
+    float x;
+    float y;
+    float z;
 };
 
 
-
-
-/*
-
-void rgb_to_hsv(const RGB rgb, HSV &hsv) {
-    // H IS IN DEGREES
-
-    float c_max = MAX(MAX(r, g), b); 
-    float c_min = MIN(MIN(r, g), b);
-
-    hsv.v = c_max;
-
-    float delta = c_max - c_min;
-
-    if (feq(delta, 0)) 
-    {
-        hsv.h = 0;
-        hsv.s = 0;
-        return;
-    }
-
-    if (c_max > 0.0)
-    {
-        hsv.s = delta / c_max;
-    }
-    else {
-        hsv.s = 0;
-        hsv.h = NAN;
-        return;
-    }
-
-    if (feq(r, c_max)) 
-    {
-        hsv.h = (g - b) / delta;
-    }
-    else if (feq(g, c_max)) 
-    {
-        hsv.h = 2.0 + (b - r) / delta;
-    }
-    else {
-        hsv.h = 4.0 + (r - g) / delta;
-    }
-
-    hsv.h *= 60;
-
-    if (hsv.h < 0.0)
-    {
-        hsv.h += 360;
-    }
-
-}
-*/
-
-bool is_blue(const RGB rgb) {
-    // Blue is in the range 120-180
-    auto hsv {rgb.to_hsv()};
-    std::cout << "COMPING:";
-    hsv.print();
-    //return hsv.h > 120 && hsv.h < 180 && hsv.s > 0.3 && hsv.v > 0.5;  
-    return hsv.h > 200 && hsv.h < 280 && hsv.s > 0.3 && hsv.v > 0.5;  
-}
-
-void blue_point(float box_position[3], const rs2::video_frame video, const rs2::depth_frame depth)
-{
-    const int w = video.get_width();
-    const int h = video.get_height();
-    cv::Mat image{cv::Size{w, h}, CV_8UC3, (void *)video.get_data(), cv::Mat::AUTO_STEP};
-    cv::Mat depth_image{cv::Size{w, h}, CV_16SC1, (void *)depth.get_data()};
-    cv::Mat hsv, mask, non_zero;
-    cv::cvtColor(image, hsv, cv::COLOR_BGR2HSV);
-    cv::inRange(hsv, cv::Scalar{100, 150, 0}, cv::Scalar{140, 255, 255}, mask);
-    cv::findNonZero(mask, non_zero);
-    cv::Scalar mean = cv::mean(non_zero);
-
-    auto intrinsics{depth.get_profile().as<rs2::video_stream_profile>().get_intrinsics()};
-    float m[2] = {static_cast<float>(mean[0]), static_cast<float>(mean[1])};
-
-    rs2_deproject_pixel_to_point(box_position, &intrinsics, m, depth.get_distance(static_cast<int>(mean[0]), static_cast<int>(mean[1])));
-}
-
-std::tuple<uint8_t, uint8_t, uint8_t> get_texcolor(rs2::video_frame texture, rs2::texture_coordinate texcoords)
+RGB get_texture_color(rs2::video_frame texture, rs2::texture_coordinate texcoords)
 {
     const int w = texture.get_width(), h = texture.get_height();
     
@@ -191,25 +115,21 @@ std::tuple<uint8_t, uint8_t, uint8_t> get_texcolor(rs2::video_frame texture, rs2
 
     int idx = x * texture.get_bytes_per_pixel() + y * texture.get_stride_in_bytes();
     const auto texture_data = reinterpret_cast<const uint8_t*>(texture.get_data());
-    return std::tuple<uint8_t, uint8_t, uint8_t>(texture_data[idx], texture_data[idx+1], texture_data[idx+2]);
+    
+    return RGB {texture_data[idx+2], texture_data[idx+1], texture_data[idx]};   // Reverse order to go from BGR to RGB
 }
 
-void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> request, const std::shared_ptr<custom::srv::LidarService::Response> response)
+void write_point(pt_t *point, const XYZ coord, const RGB color) 
 {
-    /* Description: Get the exakt pose of a box
-     *
-     * The algorithm works as follows:
-     * - Get rgb and depth maps from Lidar
-     * - Generate point cloud from given data
-     * - Generate XYZRGB point cloud from all points
-     * - Filter the points that are not blue
-     * - Cluster blue points
-     * - Select cluster of box (optional)
-     * - Perform coherent point drift on cluster
-     */
+    point->x = coord.x;
+    point->y = coord.y;
+    point->z = coord.z;
+    point->r = color.r;
+    point->g = color.g;
+    point->b = color.b;
+}
 
-    // OBS: Current code does not implement the algorithm above, it will be replaced.
-
+std::tuple<pcl_t::Ptr, rs2::points, rs2::video_frame>  setup_pointcloud() {
     // Enable Lidar camera
     rs2::config config;
     config.enable_device("f1120455");
@@ -239,23 +159,18 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     rs2::points points{rs_pointcloud.calculate(depth_frame)};
     pcl_t::Ptr pcl_pointcloud{new pcl_t};
 
-    // TODO Explain this
     auto stream_profile{points.get_profile().as<rs2::video_stream_profile>()};
     pcl_pointcloud->width = static_cast<uint32_t>(stream_profile.width());
     pcl_pointcloud->height = static_cast<uint32_t>(stream_profile.height());
     pcl_pointcloud->is_dense = false;
     pcl_pointcloud->points.resize(points.size());
 
-    /*
-     * https://github.com/eMrazSVK/JetsonSLAM/blob/master/pcl_testing.cpp
-     */
+    pipeline.stop();
 
-    // OpenCV Mat for showing the rgb color image, just as part of processing
-    cv::Mat colorr(cv::Size(640, 480), CV_8UC3, (void*)color_frame.get_data(), cv::Mat::AUTO_STEP);
-    cv::namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
-    cv::imshow("Display Image", colorr);
-        
-    // TODO Explain this
+    return { pcl_pointcloud, points, color_frame};
+}
+
+pcl::PointIndices::Ptr process_pointcloud(pcl_t::Ptr pcl_pointcloud, rs2::points points, rs2::video_frame color_frame) {
     auto vertices{points.get_vertices()};
     auto texture_coordinates{points.get_texture_coordinates()};
 
@@ -263,7 +178,6 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     auto stride{color_frame.as<rs2::video_frame>().get_stride_in_bytes()};
 
     pcl::PointIndices::Ptr inliers(new pcl::PointIndices());
-    pcl::ExtractIndices<pt_t> extract;
 
     for (auto i{0}; i < points.size(); ++i)
     {
@@ -271,48 +185,32 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
         auto vex{vertices[i]};
         auto tex{texture_coordinates[i]};
 
-        point_ptr->x = vex.x;
-        point_ptr->y = vex.y;
-        point_ptr->z = vex.z;
+        RGB color_rgb {get_texture_color(color_frame, tex)};
+        XYZ pos_xyz {vex.x, vex.y, vex.z};
 
-        std::tuple<uint8_t, uint8_t, uint8_t> current_color;
-        current_color = get_texcolor(color_frame, tex);
+        write_point(point_ptr, pos_xyz, color_rgb);
 
-        RGB color_rgb {std::get<2>(current_color), std::get<1>(current_color), std::get<0>(current_color)};
-
-        /*
-        pt_ptr->r = std::get<2>(current_color);
-        pt_ptr->g = std::get<1>(current_color);
-        pt_ptr->b = std::get<0>(current_color);
-        */
-        point_ptr->r = color_rgb.r;
-        point_ptr->g = color_rgb.g;
-        point_ptr->b = color_rgb.b;
-
-        
-        //HSV hsv;
-        //rgb_to_hsv(rgb, hsv);
-
-        if (!is_blue(color_rgb))
-        {
+        if (!color_rgb.is_blue())
             inliers->indices.push_back(i);
-        }
     }
 
-    std::cout << pcl_pointcloud->size() << std::endl;
+    return inliers;
+}
+
+void filter_pointcloud(pcl_t::Ptr pcl_pointcloud, pcl::PointIndices::Ptr inliers) {
+    pcl::ExtractIndices<pt_t> extract;
+    int n_points_prefilter {pcl_pointcloud->size()};
+
     extract.setInputCloud(pcl_pointcloud);
     extract.setIndices(inliers);
     extract.setNegative(true);
     extract.filter(*pcl_pointcloud);
-    std::cout << pcl_pointcloud->size() << std::endl;
+    int n_points_postfilter {pcl_pointcloud->size()};
 
-    // Get center of blue pixels in xyz
-    float box_position[3];
-    blue_point(box_position, color_frame, depth_frame);
-    std::cout << box_position[0] << std::endl;
-    std::cout << box_position[1] << std::endl;
-    std::cout << box_position[2] << std::endl;
+    std::cout << "Filtered " << n_points_prefilter - n_points_postfilter << " points." << std::endl; 
+}
 
+custom::msg::LidarMessage create_message(pcl_t::Ptr pcl_pointcloud) {
     // Create message
     custom::msg::LidarMessage lidar_message;
 
@@ -324,16 +222,33 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     pcl_conversions::fromPCL(pcl_points, pointcloud_msg);
     pointcloud_msg.header.frame_id = "L515";
 
-    geometry_msgs::msg::Vector3 blue_center;
-    blue_center.x = box_position[0];
-    blue_center.y = box_position[1];
-    blue_center.z = box_position[2];
-
     lidar_message.pcl_response = pointcloud_msg;
-    lidar_message.blue_center = blue_center;
-    response->data = lidar_message;
 
-    pipeline.stop();
+    return lidar_message;
+}
+
+
+
+void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> request, const std::shared_ptr<custom::srv::LidarService::Response> response)
+{
+    /* Description: Get the point cloud of a blue box (or any blue object, honestly)
+     *
+     * The algorithm works as follows:
+     * - Get rgb and depth maps from Lidar
+     * - Generate point cloud from given data
+     * - Generate XYZRGB point cloud from all points
+     * - Filter the points that are not blue
+     * - Send the remaining point cloud in the response
+     */
+
+    // Some parts of the was inspired from https://github.com/eMrazSVK/JetsonSLAM/blob/master/pcl_testing.cpp
+
+    const auto [pcl_pointcloud, points, color_frame] { setup_pointcloud()};
+    auto inliers {process_pointcloud(pcl_pointcloud, points, color_frame)};
+    filter_pointcloud(pcl_pointcloud, inliers);
+    auto message {create_message(pcl_pointcloud)};
+
+    response->data = message;
 }
 
 int main(int argc, char **argv)

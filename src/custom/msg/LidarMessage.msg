@@ -1,2 +1,1 @@
 sensor_msgs/PointCloud2 pcl_response
-geometry_msgs/Vector3 blue_center
