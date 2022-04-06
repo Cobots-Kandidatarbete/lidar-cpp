@@ -94,18 +94,9 @@ void rgb_to_hsv(const RGB rgb, HSV &hsv) {
 }
 
 bool is_blue(const HSV hsv) {
-    //return hsv.h > 200 && hsv.h < 240 && hsv.v > 0.40 && hsv.s > 0.75;  
-    return hsv.h > 100 && hsv.h < 300 && hsv.v > 0.3 && hsv.s > 0.5;  
-    //return true;
+    // Blue is in the range 120-180
+    return hsv.h > 120 && hsv.h < 180 && hsv.s > 0.3 && hsv.v > 0.5;  
 }
-
-bool is_blue(const RGB rgb) {
-    return rgb.r < 100 && rgb.g > rgb.b; 
-
-    float sum = rgb.b + rgb.g + rgb.r;
-    return rgb.b >= sum * 0.34; 
-}
-
 
 void blue_point(float box_position[3], const rs2::video_frame video, const rs2::depth_frame depth)
 {
@@ -174,9 +165,6 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     auto depth_frame{frames.get_depth_frame()};
     auto color_frame{frames.get_color_frame()};
 
-    //auto frame_width = color_frame.get_width();
-    //auto frame_height = color_frame.get_height();
-
     // Create realsense point cloud and map it to color frames
     rs2::pointcloud rs_pointcloud;
     rs_pointcloud.map_to(color_frame);
@@ -205,7 +193,6 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
     auto vertices{points.get_vertices()};
     auto texture_coordinates{points.get_texture_coordinates()};
 
-    // https://stackoverflow.com/questions/61921324/pointer-exception-while-getting-rgb-values-from-video-frame-intel-realsense
     auto color_data{(uint8_t *)color_frame.get_data()};
     auto stride{color_frame.as<rs2::video_frame>().get_stride_in_bytes()};
 
@@ -222,22 +209,6 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
         pt_ptr->y = vex.y;
         pt_ptr->z = vex.z;
 
-        /*
-        auto color_x{static_cast<int>(tex.u * frame_width)};
-        auto color_y{static_cast<int>(tex.v * frame_height)};
-        
-        
-        auto color_x = i % frame_width;
-        auto color_y = i / frame_width;
-
-        if (color_x < 0 || color_x >= frame_width || color_y < 0 || color_y >= frame_height)
-            continue;
-
-        // auto color_location{(color_y * frame_width + color_x) * 3};
-
-        auto color_location{color_x * stride + (3 * color_y)};
-        */
-
         std::tuple<uint8_t, uint8_t, uint8_t> current_color;
         current_color = get_texcolor(color_frame, tex);
 
@@ -252,13 +223,10 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
         if (!is_blue(hsv))
         {
-            hsv.print();
-            //std::cout << hsv.h << "," << hsv.s << "," << hsv.v << std::endl;
             inliers->indices.push_back(i);
         }
-
-
     }
+
     std::cout << pcl_pointcloud->size() << std::endl;
     extract.setInputCloud(pcl_pointcloud);
     extract.setIndices(inliers);
