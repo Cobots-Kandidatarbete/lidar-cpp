@@ -183,6 +183,9 @@ int main(int argc, char **argv)
     std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("lidar_service_server");
     rclcpp::Service<custom::srv::LidarService>::SharedPtr service =
         node->create_service<custom::srv::LidarService>("lidar_service", &take_picture);
+    RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Lidar service ready to get request.");
+
+
     rclcpp::spin(node);
     rclcpp::shutdown();
 }
