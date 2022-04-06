@@ -247,10 +247,12 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
         RGB rgb {pt_ptr->r, pt_ptr->g, pt_ptr->b};
         
+        HSV hsv;
+        rgb_to_hsv(rgb, hsv);
 
-        if (!is_blue(rgb))
+        if (!is_blue(hsv))
         {
-            rgb.print();
+            hsv.print();
             //std::cout << hsv.h << "," << hsv.s << "," << hsv.v << std::endl;
             inliers->indices.push_back(i);
         }
