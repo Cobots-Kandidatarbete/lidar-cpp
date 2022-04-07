@@ -14,6 +14,15 @@ from . import dangerzone
 
 import os
 
+
+def get_square_dist(pcd: np.ndarray) -> np.ndarray:
+    return np.sum(np.square(pcd[:, :3]), axis=1)
+
+
+def filter_points_outside_distance(pcd: np.ndarray, distance: float) -> np.ndarray:
+    return pcd[get_square_dist(pcd) < (distance * distance)]
+
+
 class PCDListener(Node):
 
     def __init__(self):
@@ -37,17 +46,17 @@ class PCDListener(Node):
         # the ROS1 package.
         # https://github.com/ros/common_msgs/blob/noetic-devel/sensor_msgs/src/sensor_msgs/point_cloud2.py
 
-        pcd_as_numpy_array = np.array(
-            list(dangerzone.read_points(msg.pcl_response)))
+        pcd_as_numpy_array = np.array(list(dangerzone.read_points(msg.pcl_response)))
 
-        print(pcd_as_numpy_array[:, 3])
 
-        dist = 1.5
-        filtered = np.array(
-            [row for row in pcd_as_numpy_array if row[0]**2 + row[1]**2 + row[2]**2 < dist**2])
+        n_points_prefilter = pcd_as_numpy_array.shape[0]
+        max_distance = 1.5
+        pcd_filtered = filter_points_outside_distance(pcd_as_numpy_array, max_distance)
+        n_points_postfilter = pcd_filtered.shape[0]
+        print(f"Filtered all points beyond {max_distance}. Removed {n_points_prefilter - n_points_postfilter} points.")
+        
 
-        self.o3d_pcd = o3d.geometry.PointCloud(
-            o3d.utility.Vector3dVector(filtered[:, :3]))
+        self.o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(pcd_filtered[:, :3]))
 
         #plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02,
         #                                                  ransac_n=3,
@@ -55,28 +64,25 @@ class PCDListener(Node):
 
         #self.o3d_pcd = self.o3d_pcd.select_by_index(inliers, invert=True)
 
-        with o3d.utility.VerbosityContextManager(
-                o3d.utility.VerbosityLevel.Debug) as cm:
-            labels = np.array(
-                self.o3d_pcd.cluster_dbscan(eps=0.05, min_points=20, print_progress=True))
+        with o3d.utility.VerbosityContextManager(o3d.utility.VerbosityLevel.Debug) as cm:
+            labels = np.array(self.o3d_pcd.cluster_dbscan(eps=0.02, min_points=15, print_progress=True))
 
         max_label = labels.max()
         clusters = []
-        boxes = []
+        bounding_boxes = []
 
         if max_label > -1:
             for i in range(0, max_label + 1):
                 cluster_index = np.where(labels == i)[0]
-                clusters.append(self.o3d_pcd.select_by_index(
-                    cluster_index))
+                clusters.append(self.o3d_pcd.select_by_index(cluster_index))
                 try:
-                    boxes.append(clusters[i].get_oriented_bounding_box())
+                    bounding_boxes.append(clusters[i].get_oriented_bounding_box())
                 except:
-                    print("Oj")
+                    print(f"Attempted to add bounding box of cluster {i} but failed.")
 
-        print(f"point cloud has {max_label + 1} clusters")
-        colors = plt.get_cmap("tab20")(
-            labels / (max_label if max_label > 0 else 1))
+        print(f"Found {max_label + 1} clusters in the Pointcloud")
+
+        colors = plt.get_cmap("tab20")(labels / (max_label if max_label > 0 else 1))
         colors[labels < 0] = 0
         self.o3d_pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
 
@@ -108,7 +114,7 @@ class PCDListener(Node):
         volume = 0.018781736409474
         verror = 0.04
 
-        for box in boxes:
+        for box in bounding_boxes:
             print('----------Box----------')
             print(np.array(box.volume()))
             print(np.array(box.extent))
