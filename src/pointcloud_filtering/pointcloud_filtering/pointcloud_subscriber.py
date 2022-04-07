@@ -23,7 +23,7 @@ def filter_points_outside_distance(pcd: np.ndarray, distance: float) -> np.ndarr
     return pcd[get_square_dist(pcd) < (distance * distance)]
 
 
-def filter_pointcloud(pcd: np.ndarray, max_distance):
+def filter_pointcloud(pcd: np.ndarray, max_distance: float) -> np.ndarray:
     n_points_prefilter = pcd.shape[0]
 
     pcd_filtered = filter_points_outside_distance(pcd, max_distance)
@@ -58,6 +58,7 @@ def process_clusters(pcd):
         labels = np.array(pcd.cluster_dbscan(eps=0.02, min_points=15, print_progress=True))
 
     max_label = labels.max()
+
     if max_label > -1:
         for i in range(0, max_label + 1):
             cluster_index = np.where(labels == i)[0]
@@ -66,12 +67,14 @@ def process_clusters(pcd):
                 bounding_boxes.append(clusters[i].get_oriented_bounding_box())
             except:
                 print(f"Attempted to add bounding box of cluster {i} but failed.")
+                bounding_boxes.pop()
+            
 
     print(f"Found {max_label + 1} clusters in the Pointcloud")
-    return max_label, labels, bounding_boxes
+    return max_label, labels, clusters, bounding_boxes
 
 
-def get_blue_box(bounding_boxes):
+def find_blue_box(bounding_boxes):
     bounds = np.array([0.46235329, 0.36464842, 0.18794718])
     lower_margin = np.array([0.05, 0.05, 0.05])
     upper_margin = np.array([0.15, 0.15, 0.15])
@@ -85,26 +88,28 @@ def get_blue_box(bounding_boxes):
     upper_volume = volume + volume_margin
 
     blue_boxes = []
-    for box in bounding_boxes:
+    blue_box_indexes = []
+    for index, box in enumerate(bounding_boxes):
         volume = box.volume()
         extent = box.extent
 
         if np.all(lower_bound < extent) and np.all(extent < upper_bound) and lower_volume < volume < upper_volume:
             blue_boxes.append(box)
+            blue_box_indexes.append(index)
     
     n_found = len(blue_boxes)
 
     if n_found > 1:
         print(f"Found {len(blue_boxes)} blue boxes, selecting first one")
-        return blue_boxes[0]
+        return blue_box_indexes[0], blue_boxes[0]
 
     elif n_found == 1:
         print("Found one blue box")
-        return blue_boxes[0]
+        return blue_box_indexes[0], blue_boxes[0]
 
     else:
         print("No blue boxes found")
-        return None
+        return None, None
 
 
 def visualize_scene(pcd, max_label, labels, blue_box=None):
@@ -153,13 +158,23 @@ class PCDListener(Node):
         #self.o3d_pcd = self.o3d_pcd.select_by_index(inliers, invert=True)
 
         
-        max_label, labels, bounding_boxes = process_clusters(self.o3d_pcd)
-        blue_box = get_blue_box(bounding_boxes)
-
-        visualize_scene(self.o3d_pcd, max_label, labels, blue_box)
+        max_label, labels, clusters, bounding_boxes= process_clusters(self.o3d_pcd)
+        blue_box_index, bound_blue_box = find_blue_box(bounding_boxes)
 
 
+        visualize_scene(self.o3d_pcd, max_label, labels, bound_blue_box)
 
+        if bound_blue_box is None:
+            return
+
+        blue_box_cluster = clusters[blue_box_index]
+
+        # https://pypi.org/project/probreg/
+        print("Starting coherent point drift...")
+        # TODO Fix Coherent point drift and remove max_iter
+        cpd_reg = cpd.registration_cpd(source=self.o3d_pcd, target=blue_box_cluster, maxiter=5)
+        print(cpd_reg)
+        print("Coherent point drift finished")
         # TODO Perform Coherent point drift on blue box and bo model
 
 
