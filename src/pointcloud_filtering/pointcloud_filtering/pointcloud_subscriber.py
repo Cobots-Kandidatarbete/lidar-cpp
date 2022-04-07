@@ -23,6 +23,104 @@ def filter_points_outside_distance(pcd: np.ndarray, distance: float) -> np.ndarr
     return pcd[get_square_dist(pcd) < (distance * distance)]
 
 
+def filter_pointcloud(pcd: np.ndarray, max_distance):
+    n_points_prefilter = pcd.shape[0]
+
+    pcd_filtered = filter_points_outside_distance(pcd, max_distance)
+
+    n_points_postfilter = pcd_filtered.shape[0]
+    print(f"Filtered all points beyond {max_distance}. Removed {n_points_prefilter - n_points_postfilter} points.")
+
+    return pcd_filtered
+
+
+def get_box_model():
+    ws_path = '/home/student/kandidat/lidar-ws'
+    if not os.path.isdir(ws_path):
+        ws_path = os.getcwd()
+
+    box_path_rel = '/src/pointcloud_filtering/pointcloud_filtering/box.ply'
+    box_path_full = ws_path + box_path_rel
+    if not os.path.isfile(box_path_full):
+        raise FileNotFoundError("Could not file box file. Make sure the program is run from workspace")               
+
+    box = o3d.io.read_point_cloud(box_path_full)
+    box = box.random_down_sample(sampling_ratio=2000/len(np.asarray(box.points)))
+
+    return box
+
+
+def process_clusters(pcd):
+    clusters = []
+    bounding_boxes = []
+
+    with o3d.utility.VerbosityContextManager(o3d.utility.VerbosityLevel.Debug) as cm:
+        labels = np.array(pcd.cluster_dbscan(eps=0.02, min_points=15, print_progress=True))
+
+    max_label = labels.max()
+    if max_label > -1:
+        for i in range(0, max_label + 1):
+            cluster_index = np.where(labels == i)[0]
+            clusters.append(pcd.select_by_index(cluster_index))
+            try:
+                bounding_boxes.append(clusters[i].get_oriented_bounding_box())
+            except:
+                print(f"Attempted to add bounding box of cluster {i} but failed.")
+
+    print(f"Found {max_label + 1} clusters in the Pointcloud")
+    return max_label, labels, bounding_boxes
+
+
+def get_blue_box(bounding_boxes):
+    bounds = np.array([0.46235329, 0.36464842, 0.18794718])
+    lower_margin = np.array([0.05, 0.05, 0.05])
+    upper_margin = np.array([0.15, 0.15, 0.15])
+
+    volume = 0.018781736409474
+    volume_margin = 0.04
+
+    lower_bound = bounds - lower_margin
+    upper_bound = bounds + upper_margin
+    lower_volume = volume - volume_margin
+    upper_volume = volume + volume_margin
+
+    blue_boxes = []
+    for box in bounding_boxes:
+        volume = box.volume()
+        extent = box.extent
+
+        if np.all(lower_bound < extent) and np.all(extent < upper_bound) and lower_volume < volume < upper_volume:
+            blue_boxes.append(box)
+    
+    n_found = len(blue_boxes)
+
+    if n_found > 1:
+        print(f"Found {len(blue_boxes)} blue boxes, selecting first one")
+        return blue_boxes[0]
+
+    elif n_found == 1:
+        print("Found one blue box")
+        return blue_boxes[0]
+
+    else:
+        print("No blue boxes found")
+        return None
+
+
+def visualize_scene(pcd, max_label, labels, blue_box=None):
+        mesh_frame = o3d.geometry.TriangleMesh.create_coordinate_frame(size=0.1, origin=[0, 0, 0])
+        colors = plt.get_cmap("tab20")(labels / (max_label if max_label > 0 else 1))
+        colors[labels < 0] = 0
+        pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
+
+        geometries = [pcd, mesh_frame]
+
+        if blue_box is not None:
+            geometries.append(blue_box)
+
+        o3d.visualization.draw_geometries(geometries)
+
+
 class PCDListener(Node):
 
     def __init__(self):
@@ -46,94 +144,31 @@ class PCDListener(Node):
         # the ROS1 package.
         # https://github.com/ros/common_msgs/blob/noetic-devel/sensor_msgs/src/sensor_msgs/point_cloud2.py
 
-        pcd_as_numpy_array = np.array(list(dangerzone.read_points(msg.pcl_response)))
+        pcd = np.array(list(dangerzone.read_points(msg.pcl_response)))
+        pcd = filter_pointcloud(pcd, max_distance=1.5)
 
+        self.o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(pcd[:, :3]))
 
-        n_points_prefilter = pcd_as_numpy_array.shape[0]
-        max_distance = 1.5
-        pcd_filtered = filter_points_outside_distance(pcd_as_numpy_array, max_distance)
-        n_points_postfilter = pcd_filtered.shape[0]
-        print(f"Filtered all points beyond {max_distance}. Removed {n_points_prefilter - n_points_postfilter} points.")
-        
-
-        self.o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(pcd_filtered[:, :3]))
-
-        #plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02,
-        #                                                  ransac_n=3,
-        #                                                  num_iterations=1000)
-
+        #plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02, ransac_n=3, num_iterations=1000)
         #self.o3d_pcd = self.o3d_pcd.select_by_index(inliers, invert=True)
 
-        with o3d.utility.VerbosityContextManager(o3d.utility.VerbosityLevel.Debug) as cm:
-            labels = np.array(self.o3d_pcd.cluster_dbscan(eps=0.02, min_points=15, print_progress=True))
+        
+        max_label, labels, bounding_boxes = process_clusters(self.o3d_pcd)
+        blue_box = get_blue_box(bounding_boxes)
 
-        max_label = labels.max()
-        clusters = []
-        bounding_boxes = []
+        visualize_scene(self.o3d_pcd, max_label, labels, blue_box)
 
-        if max_label > -1:
-            for i in range(0, max_label + 1):
-                cluster_index = np.where(labels == i)[0]
-                clusters.append(self.o3d_pcd.select_by_index(cluster_index))
-                try:
-                    bounding_boxes.append(clusters[i].get_oriented_bounding_box())
-                except:
-                    print(f"Attempted to add bounding box of cluster {i} but failed.")
 
-        print(f"Found {max_label + 1} clusters in the Pointcloud")
 
-        colors = plt.get_cmap("tab20")(labels / (max_label if max_label > 0 else 1))
-        colors[labels < 0] = 0
-        self.o3d_pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
-
-        ws_path = '/home/student/kandidat/lidar-ws'
-        if not os.path.isdir(ws_path):
-            ws_path = os.getcwd()
-
-        box_path_rel = '/src/pointcloud_filtering/pointcloud_filtering/box.ply'
-        box_path_full = ws_path + box_path_rel
-        if not os.path.isfile(box_path_full):
-            raise FileNotFoundError("Could not file box file. Make sure the program is run from workspace")               
-
-        box = o3d.io.read_point_cloud(box_path_full)
-        box = box.random_down_sample(
-            sampling_ratio=2000/len(np.asarray(box.points)))
-
-        mesh_frame = o3d.geometry.TriangleMesh.create_coordinate_frame(
-            size=0.1, origin=[0, 0, 0])
-        blue_boxes = []
-        dx = 0.46235329
-        dy = 0.36464842
-        dz = 0.18794718
-        errorxd = 0.05
-        erroryd = 0.05
-        errorzd = 0.05
-        errorxu = 0.15
-        erroryu = 0.15
-        errorzu = 0.15
-        volume = 0.018781736409474
-        verror = 0.04
-
-        for box in bounding_boxes:
-            print('----------Box----------')
-            print(np.array(box.volume()))
-            print(np.array(box.extent))
-            if dx-errorxd < box.extent[0] < dx + errorxu and dy-erroryd < box.extent[1] < dy + erroryu and dz-errorzd < box.extent[2] < dz + errorzu and volume - verror < box.volume() < volume + verror:
-                blue_boxes.append(box)
-
-        o3d.visualization.draw_geometries(
-            [self.o3d_pcd, mesh_frame] + blue_boxes)
+        # TODO Perform Coherent point drift on blue box and bo model
 
 
 def main(args=None):
-    # Boilerplate code.
     rclpy.init(args=args)
     pcd_listener = PCDListener()
+
     rclpy.spin(pcd_listener)
 
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
     pcd_listener.destroy_node()
     rclpy.shutdown()
 
