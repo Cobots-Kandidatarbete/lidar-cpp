@@ -143,6 +143,7 @@ def visualize_scene(pcd, max_label, labels, blue_box=None):
 
 
 def get_cloud(msg, use_example=False, store_example=False):
+    print("Getting cloud")
     o3d_pcd = None    
     path = "./src/pointcloud_filtering/pointcloud_filtering/example_box_cloud.pcd"
 
@@ -178,7 +179,7 @@ class PCDListener(Node):
         #pcd = filter_pointcloud(pcd, max_distance=1.5)
         #o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(pcd[:, :3]))
 
-        o3d_pcd = get_cloud(msg, store_example=True)
+        o3d_pcd = get_cloud(msg, use_example=True)
 
         o3d.visualization.draw_geometries([o3d_pcd]) 
 

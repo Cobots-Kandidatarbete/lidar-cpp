@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'pointcloud_sub = pointcloud_filtering.pointcloud_subscriber:main'
-        ],
+            'pointcloud_sub = pointcloud_filtering.pointcloud_subscriber:main',
+            'example_service = pointcloud_filtering.example_server:main'
+        ]
     },
 )
