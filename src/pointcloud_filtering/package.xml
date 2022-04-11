@@ -7,8 +7,6 @@
   <maintainer email="arvid.sorfeldt@gmail.com">student</maintainer>
   <license>TODO: License declaration</license>
 
-  <depend>custom</depend>
-  
   <exec_depend>rclpy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>custom</exec_depend>
