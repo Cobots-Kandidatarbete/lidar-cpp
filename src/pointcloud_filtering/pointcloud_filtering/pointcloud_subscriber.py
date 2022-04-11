@@ -1,3 +1,4 @@
+from urllib import response
 from custom.msg import LidarMessage
 
 import rclpy
@@ -7,6 +8,7 @@ import matplotlib.pyplot as plt
 from probreg import cpd
 
 import copy
+import struct
 
 
 import numpy as np
@@ -138,6 +140,7 @@ def visualize_scene(pcd, max_label, labels, blue_box=None):
 
         if blue_box is not None:
             geometries.append(blue_box)
+            print(f"Blue bounding box volume: {blue_box.volume()}")
 
         o3d.visualization.draw_geometries(geometries)
 
@@ -162,6 +165,37 @@ def get_cloud(msg, use_example=False, store_example=False):
             o3d.io.write_point_cloud(path, o3d_pcd)
             
     return o3d_pcd
+
+
+def numpy_to_ros2_pcl(points, parent_frame):
+    ros_dtype = sensor_msgs.PointField.FLOAT32
+    dtype = np.float32
+    itemsize = np.dtype(dtype).itemsize # A 32-bit float takes 4 bytes.
+
+    data = points.astype(dtype).tobytes() 
+
+    # The fields specify what the bytes represents. The first 4 bytes 
+    # represents the x-coordinate, the next 4 the y-coordinate, etc.
+    fields = [sensor_msgs.PointField(
+        name=n, offset=i*itemsize, datatype=ros_dtype, count=1)
+        for i, n in enumerate('xyz')]
+
+    # The PointCloud2 message also has a header which specifies which 
+    # coordinate frame it is represented in. 
+    header = sensor_msgs.Header(frame_id=parent_frame)
+
+    return sensor_msgs.PointCloud2(
+        header=header,
+        height=1, 
+        width=points.shape[0],
+        is_dense=False,
+        is_bigendian=False,
+        fields=fields,
+        point_step=(itemsize * 3), # Every point consists of three float32s.
+        row_step=(itemsize * 3 * points.shape[0]), 
+        data=data
+    )
+ 
 
 
 class PCDListener(Node):
@@ -200,8 +234,10 @@ class PCDListener(Node):
             return
 
         blue_box_cluster = clusters[blue_box_index]
+        blue_box_cluster_slim = blue_box_cluster.voxel_down_sample(voxel_size=0.03)
         blue_box_model = get_box_model()
-        o3d.visualization.draw_geometries([blue_box_cluster])
+        blue_box_model = blue_box_model.scale(1E-3, blue_box_model.get_center()).translate(blue_box_cluster.get_center(), relative=False)
+        o3d.visualization.draw_geometries([blue_box_cluster_slim])
         o3d.visualization.draw_geometries([blue_box_model])
 
         # TODO Perform Coherent point drift on blue box and bo model
@@ -209,24 +245,33 @@ class PCDListener(Node):
         print("Starting coherent point drift...")
         # TODO Fix Coherent point drift and remove max_iter
         try:
-            tf_param, _, _ = cpd.registration_cpd(source=blue_box_model, target=blue_box_cluster, maxiter=40)
+            tf_param, _, _ = cpd.registration_cpd(source=blue_box_model, target=blue_box_cluster_slim, tf_type_name='affine', maxiter=1000, w=0.5, tol=0.1)
             print("Coherent point drift finished")
         except:
             print("Failed to do coherent point drift")
             return
 
-        fit_pcd = copy.deepcopy(blue_box_cluster)
-        fit_pcd.points = tf_param.transform(fit_pcd.points) # Todo see if necessary
+        fit_box = copy.deepcopy(blue_box_model)
+        fit_box.points = tf_param.transform(fit_box.points) # Todo see if necessary
 
-        blue_box_cluster.paint_uniform_color([1, 0, 0])
-        fit_pcd.paint_uniform_color([0, 1, 0])
+        blue_box_cluster_slim.paint_uniform_color([1, 0, 0])
+        fit_box.paint_uniform_color([0, 1, 0])
 
-        o3d.visualization.draw_geometries([blue_box_cluster])
-        o3d.visualization.draw_geometries([fit_pcd])
+        print("Showing CPD results. Red is before and green is after.")
+        o3d.visualization.draw_geometries([blue_box_cluster_slim, blue_box_cluster_slim.get_oriented_bounding_box()])
+        o3d.visualization.draw_geometries([fit_box])
+        o3d.visualization.draw_geometries([blue_box_cluster_slim, fit_box])
+
+        print(f"Volume before: {blue_box_cluster_slim.get_oriented_bounding_box().volume()}, volume after: {fit_box.get_oriented_bounding_box().volume()}")
+        print(f"Center before: {blue_box_cluster_slim.get_oriented_bounding_box().get_center()}, center after: {fit_box.get_oriented_bounding_box().get_center()}")
+
 
         print("Returning pointcloud")
+
+
+
+        msg.data = blue_box_message
         
-        # TODO Add response
 
 
 
