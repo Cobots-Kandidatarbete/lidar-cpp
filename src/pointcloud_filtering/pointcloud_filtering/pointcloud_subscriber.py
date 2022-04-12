@@ -215,10 +215,7 @@ class PCDListener(Node):
 
         o3d_pcd = get_cloud(msg, use_example=True)
 
-        o3d.visualization.draw_geometries([o3d_pcd]) 
-
-        slim_pcd = o3d_pcd.voxel_down_sample(voxel_size=0.03)
-        o3d.visualization.draw_geometries([slim_pcd]) 
+        #o3d.visualization.draw_geometries([o3d_pcd]) 
 
         #plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02, ransac_n=3, num_iterations=1000)
         #self.o3d_pcd = self.o3d_pcd.select_by_index(inliers, invert=True)
@@ -228,7 +225,7 @@ class PCDListener(Node):
 
         #slim_pcd = self.o3d_pcd.voxel_down_sample(voxel_size=0.05)
 
-        visualize_scene(o3d_pcd, max_label, labels, bound_blue_box)
+        #visualize_scene(o3d_pcd, max_label, labels, bound_blue_box)
 
         if bound_blue_box is None:
             return
@@ -236,8 +233,12 @@ class PCDListener(Node):
         blue_box_cluster = clusters[blue_box_index]
         blue_box_cluster_slim = blue_box_cluster.voxel_down_sample(voxel_size=0.03)
         blue_box_model = get_box_model()
-        blue_box_model = blue_box_model.scale(1E-3, blue_box_model.get_center()).translate(blue_box_cluster.get_center(), relative=False)
-        o3d.visualization.draw_geometries([blue_box_cluster_slim])
+
+        #blue_box_rotation = np.array([[1, 0, 0], [0, -1, 0], [0, 0, 1]])
+        #blue_box_model = blue_box_model.rotate(blue_box_rotation)
+
+        blue_box_model = blue_box_model.scale(1.5E-3, blue_box_model.get_center()).translate(blue_box_cluster.get_center(), relative=False)
+        #o3d.visualization.draw_geometries([blue_box_cluster_slim])
         o3d.visualization.draw_geometries([blue_box_model])
 
         # TODO Perform Coherent point drift on blue box and bo model
@@ -245,7 +246,7 @@ class PCDListener(Node):
         print("Starting coherent point drift...")
         # TODO Fix Coherent point drift and remove max_iter
         try:
-            tf_param, _, _ = cpd.registration_cpd(source=blue_box_model, target=blue_box_cluster_slim, tf_type_name='affine', maxiter=1000, w=0.5, tol=0.1)
+            tf_param, _, _ = cpd.registration_cpd(source=blue_box_model, target=blue_box_cluster_slim, tf_type_name='affine', maxiter=10000)
             print("Coherent point drift finished")
         except:
             print("Failed to do coherent point drift")
@@ -267,10 +268,12 @@ class PCDListener(Node):
 
 
         print("Returning pointcloud")
+        fit_bounding_box = fit_box.get_oriented_bounding_box()
+        o3d.visualization.draw_geometries([fit_box, fit_bounding_box])
 
+        # ros2_pcl = numpy_to_ros2_pcl()
+        
 
-
-        msg.data = blue_box_message
         
 
 
