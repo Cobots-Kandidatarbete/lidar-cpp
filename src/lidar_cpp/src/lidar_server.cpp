@@ -34,7 +34,7 @@ struct HSV {
     }
 
     bool is_blue() {
-        return h > 200 && h < 280 && s > 0.3 && v > 0.5;  
+        return h > 200 && h < 280 && s > 0.5 && v > 0.3;  
     }
 };
 
@@ -243,7 +243,23 @@ void take_picture(const std::shared_ptr<custom::srv::LidarService::Request> requ
 
     // Some parts of the was inspired from https://github.com/eMrazSVK/JetsonSLAM/blob/master/pcl_testing.cpp
 
-    const auto [pcl_pointcloud, points, color_frame] { setup_pointcloud()};
+    pcl_t::Ptr pcl_pointcloud {nullptr};
+    rs2::points points {nullptr};
+    rs2::video_frame color_frame {nullptr};
+
+    try
+    {
+        auto pcl_data {setup_pointcloud()};
+        pcl_pointcloud = std::get<0>(pcl_data);
+        points = std::get<1>(pcl_data);
+        color_frame = std::get<2>(pcl_data);
+    }
+    catch(const rs2::error& e)
+    {
+        std::cerr << e.what() << '\n';
+        return;
+    }
+    
     auto inliers {process_pointcloud(pcl_pointcloud, points, color_frame)};
     filter_pointcloud(pcl_pointcloud, inliers);
     auto message {create_message(pcl_pointcloud)};

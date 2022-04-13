@@ -25,14 +25,6 @@ include_directories(
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
-add_executable(lidar src/lidar_publisher.cpp)
-ament_target_dependencies(lidar
-  realsense2
-  rclcpp
-  sensor_msgs
-  PCL
-)
-
 add_executable(lidar_server src/lidar_server.cpp)
 ament_target_dependencies(lidar_server
   realsense2
@@ -53,11 +45,9 @@ ament_target_dependencies(lidar_client
 
 
 
-target_link_libraries(lidar realsense2)
 target_link_libraries(lidar_server realsense2 ${PCL_LIBRARIES} ${OpenCV_LIBS})
 
 install(TARGETS
-  lidar
   lidar_server
   lidar_client
   DESTINATION lib/${PROJECT_NAME})

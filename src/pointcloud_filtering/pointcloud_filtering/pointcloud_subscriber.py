@@ -1,8 +1,8 @@
-from urllib import response
 from custom.msg import LidarMessage
 
 import rclpy
 from rclpy.node import Node
+from rclpy.executors import MultiThreadedExecutor
 import sensor_msgs.msg as sensor_msgs
 from geometry_msgs.msg import Transform, TransformStamped
 from builtin_interfaces.msg import Time
@@ -10,18 +10,24 @@ import matplotlib.pyplot as plt
 from probreg import cpd
 
 import copy
-import struct
 
 
 import numpy as np
 import open3d as o3d
 
 import transforms3d
+
 from . import dangerzone
 
 from tf2_msgs.msg import TFMessage
+from tf2_ros import TransformBroadcaster
 
 import os
+
+
+class StampContainer:
+    stamps = []
+
 
 
 def get_square_dist(pcd: np.ndarray) -> np.ndarray:
@@ -47,6 +53,10 @@ def get_box_model():
     ws_path = '/home/student/kandidat/lidar-ws'
     if not os.path.isdir(ws_path):
         ws_path = os.getcwd()
+        if ws_path.split('/')[-2] != 'lidar-ws':
+            ws_path += "/src/lidar-ws"
+            if not os.path.isdir(ws_path):
+                raise Exception("Could not find folder. Make sure program is run from workspace.")
 
     box_path_rel = '/src/pointcloud_filtering/pointcloud_filtering/box.ply'
     box_path_full = ws_path + box_path_rel
@@ -206,14 +216,15 @@ def numpy_to_ros2_pcl(points, parent_frame):
 class PCDListener(Node):
 
     def __init__(self):
-        super().__init__('pcd_subsriber_node')
+        super().__init__('pcd_subscriber_node')
 
         self.o3d_pcd = o3d.geometry.PointCloud()
         self.pcd_subscriber = self.create_subscription(LidarMessage, 'pcl', self.listener_callback, 10)
-        self.tf_publisher = self.create_publisher(TFMessage, "/tf", 20)
-        self.timer = self.create_timer(0.1, self.timer_callback)
+        #self.tf_publisher = self.create_publisher(TFMessage, "/tf", 20)
+        #self.timer = self.create_timer(0.1, self.timer_callback)
+        #self.tf_broadcaster = TransformBroadcaster(self)
 
-        self.get_logger().info("Starting PCD listener.")
+        self.get_logger().info("PCD listener started")
 
     def listener_callback(self, msg):
         # https://github.com/ros/common_msgs/blob/noetic-devel/sensor_msgs/src/sensor_msgs/point_cloud2.py
@@ -222,7 +233,7 @@ class PCDListener(Node):
         #pcd = filter_pointcloud(pcd, max_distance=1.5)
         #o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(pcd[:, :3]))
 
-        o3d_pcd = get_cloud(msg, use_example=True)
+        o3d_pcd = get_cloud(msg, use_example=False)
 
         #o3d.visualization.draw_geometries([o3d_pcd]) 
 
@@ -234,13 +245,14 @@ class PCDListener(Node):
 
         #slim_pcd = self.o3d_pcd.voxel_down_sample(voxel_size=0.05)
 
-        #visualize_scene(o3d_pcd, max_label, labels, bound_blue_box)
+        visualize_scene(o3d_pcd, max_label, labels, bound_blue_box)
 
         if bound_blue_box is None:
             return
 
         blue_box_cluster = clusters[blue_box_index]
-        blue_box_cluster_slim = blue_box_cluster.voxel_down_sample(voxel_size=0.03)
+        #blue_box_cluster_slim = blue_box_cluster.voxel_down_sample(voxel_size=0.03)
+        blue_box_cluster_slim = blue_box_cluster.random_down_sample(0.06)
         blue_box_model = get_box_model()
 
         #blue_box_rotation = np.array([[1, 0, 0], [0, -1, 0], [0, 0, 1]])
@@ -264,28 +276,25 @@ class PCDListener(Node):
         blue_box_model.paint_uniform_color([0, 0, 1])
         corner_cloud.paint_uniform_color([1, 0, 0])
 
-        #o3d.visualization.draw_geometries([blue_box_cluster_slim])
+        o3d.visualization.draw_geometries([blue_box_cluster_slim])
         #o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
         
 
         blue_box_model = blue_box_model.scale(1.5E-3, blue_box_model.get_center()).translate(blue_box_cluster.get_center(), relative=False)
         corner_cloud = corner_cloud.scale(1.5E-3, corner_cloud.get_center()).translate(blue_box_cluster.get_center(), relative=False)
 
-        o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
+        #o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
         fit_box, _, _, rotation_matrix = self.fit_box_cpd(blue_box_cluster_slim, blue_box_model, corner_cloud)
 
 
         print("Returning pointcloud")
 
         translation = fit_box.get_center()        
-
         transform = self.get_transform(rotation_matrix=rotation_matrix, translation=translation)
-        transform_stamped = self.create_transform_stamp(0, transform)
 
-        tf_message = TFMessage()
-        tf_message.transforms = [transform_stamped]
+        self.publish_transform(transform, 0)
 
-        self.tf_publisher.publish(tf_message)
+
 
         #fit_bounding_box = fit_box.get_oriented_bounding_box()
         #o3d.visualization.draw_geometries([fit_box, fit_bounding_box])
@@ -297,7 +306,7 @@ class PCDListener(Node):
 
         # TODO Fix Coherent point drift and remove max_iter
         try:
-            tf_param, _, _ = cpd.registration_cpd(source=blue_box_model, target=blue_box_cluster_slim, tf_type_name='affine', maxiter=10000)
+            tf_param, _, _ = cpd.registration_cpd(source=blue_box_model, target=blue_box_cluster_slim, tf_type_name='rigid', maxiter=100)
             print("Coherent point drift finished")
         except:
             print("Failed to do coherent point drift")
@@ -350,19 +359,19 @@ class PCDListener(Node):
         # ros2_pcl = numpy_to_ros2_pcl()
         
 
-    def create_transform_stamp(self, box_id, transform):
+    def publish_transform(self, transform, box_id):
         transform_stamped = TransformStamped()
-        transform_stamped.header.frame_id = "L515"
-        transform_stamped.header.stamp = Time()
-                    
-        current_time = self.get_clock().now().seconds_nanoseconds()
-                    
-        transform_stamped.header.stamp.sec = current_time[0]
-        transform_stamped.header.stamp.nanosec = current_time[1]
 
-        transform_stamped.child_frame_id = f"blue_box_{box_id}"
+        transform_stamped.header.stamp = self.get_clock().now().to_msg()
+        transform_stamped.header.frame_id = "L515"
+        transform_stamped.child_frame_id = f"blue_box_x_{box_id}"
         transform_stamped.transform = transform
-        return transform_stamped
+
+        StampContainer.stamps.append(transform_stamped)
+        #self.tf_broadcaster.sendTransform(transform_stamped)
+        #self.tf_publisher.publish(tf_message)
+        
+
         
 
     def get_transform(self, rotation_matrix, translation):
@@ -373,14 +382,63 @@ class PCDListener(Node):
         return transform
 
 
+class LidarPublisher(Node):
+    def __init__(self):
+        super().__init__("lidar_publisher")
+
+        history_depth = 20
+        self.tf_publisher = self.create_publisher(TFMessage, "/tf", history_depth)
+        self.tf_broadcaster = TransformBroadcaster(self)
+        self.timer = self.create_timer(0.1, self.timer_callback)
+        
+        self.get_logger().info("Lidar publisher started")
+
+
+    def timer_callback(self):
+        if not StampContainer.stamps:
+            return 
+
+        messages = [t for t in StampContainer.stamps]
+
+        for message in messages:
+            message.header.stamp = self.get_clock().now().to_msg() 
+
+        tf_message = TFMessage()
+        tf_message.transforms = messages
+
+        #self.tf_publisher.publish(tf_message)
+        self.tf_broadcaster.sendTransform(messages)
+        print("PUBLISHING")
+
+        #StampContainer.clear()
+
+
 def main(args=None):
     rclpy.init(args=args)
-    pcd_listener = PCDListener()
+    try:
+        c1 = PCDListener()
+        c2 = LidarPublisher()
+        
+        executor = MultiThreadedExecutor()
+        executor.add_node(c1)
+        executor.add_node(c2)
 
-    rclpy.spin(pcd_listener)
+        try:
+            executor.spin()
+        finally:
+            executor.shutdown()
+            c1.destroy_node()
+            c2.destroy_node()            
 
-    pcd_listener.destroy_node()
-    rclpy.shutdown()
+    finally:
+        rclpy.shutdown()
+
+    #pcd_listener = PCDListener()
+
+    #rclpy.spin(pcd_listener)
+
+    #pcd_listener.destroy_node()
+    #rclpy.shutdown()
 
 
 if __name__ == '__main__':
