@@ -237,13 +237,43 @@ class PCDListener(Node):
         #blue_box_rotation = np.array([[1, 0, 0], [0, -1, 0], [0, 0, 1]])
         #blue_box_model = blue_box_model.rotate(blue_box_rotation)
 
-        blue_box_model = blue_box_model.scale(1.5E-3, blue_box_model.get_center()).translate(blue_box_cluster.get_center(), relative=False)
-        #o3d.visualization.draw_geometries([blue_box_cluster_slim])
-        o3d.visualization.draw_geometries([blue_box_model])
+        box_p1 = np.array([150, 200, 200])
+        box_p2 = np.array([150, -200, 200])
+        box_p3 = np.array([-150, -200, 200])
+        box_p4 = np.array([-150, 200, 200])
+        box_p5 = np.array([150, 200, 0])
+        box_p6 = np.array([150, -200, 0])
+        box_p7 = np.array([-150, -200, 0])
+        box_p8 = np.array([-150, 200, 0])
 
+        corner_points = np.array([box_p1, box_p2, box_p3, box_p4])
+        
+
+        corner_cloud = o3d.geometry.PointCloud()
+        corner_cloud.points = o3d.utility.Vector3dVector(corner_points)
+
+        blue_box_model.paint_uniform_color([0, 0, 1])
+        corner_cloud.paint_uniform_color([1, 0, 0])
+
+        #o3d.visualization.draw_geometries([blue_box_cluster_slim])
+        #o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
+        
+
+        blue_box_model = blue_box_model.scale(1.5E-3, blue_box_model.get_center()).translate(blue_box_cluster.get_center(), relative=False)
+        corner_cloud = corner_cloud.scale(1.5E-3, corner_cloud.get_center()).translate(blue_box_cluster.get_center(), relative=False)
+
+        o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
+        fit_box = self.fit_box_cpd(blue_box_cluster_slim, blue_box_model, corner_cloud)
+
+        #print("Returning pointcloud")
+        #fit_bounding_box = fit_box.get_oriented_bounding_box()
+        #o3d.visualization.draw_geometries([fit_box, fit_bounding_box])
+
+    def fit_box_cpd(self, blue_box_cluster_slim, blue_box_model, corner_points):
         # TODO Perform Coherent point drift on blue box and bo model
         # https://pypi.org/project/probreg/
         print("Starting coherent point drift...")
+
         # TODO Fix Coherent point drift and remove max_iter
         try:
             tf_param, _, _ = cpd.registration_cpd(source=blue_box_model, target=blue_box_cluster_slim, tf_type_name='affine', maxiter=10000)
@@ -253,23 +283,48 @@ class PCDListener(Node):
             return
 
         fit_box = copy.deepcopy(blue_box_model)
-        fit_box.points = tf_param.transform(fit_box.points) # Todo see if necessary
+        fit_corners = copy.deepcopy(corner_points)
+        fit_box.points = tf_param.transform(fit_box.points) 
+        fit_corners.points = tf_param.transform(fit_corners.points) 
+
+        line1 = fit_corners.points[0] - fit_corners.points[1]
+        line2 = fit_corners.points[0] - fit_corners.points[2] 
+        normal = np.cross(line1, line2)
+        pt_n = fit_corners.points[0] + normal
+
+        line_pts = [fit_corners.points[0], fit_corners.points[1], fit_corners.points[2], fit_corners.points[3], pt_n]
+        lines = [[0, 1], [0, 3], [0, 4]]
+        
+        normal_norm = normal / np.linalg.norm(normal)
+
+        unit_x = np.array([1, 0, 0])
+        unit_y = np.array([0, 1, 0])
+        unit_z = np.array([0, 0, 1])
+
+
+        theta_x = np.arccos(np.dot(normal_norm, unit_x))
+        theta_y = np.arccos(np.dot(normal_norm, unit_y))
+        theta_z = np.arccos(np.dot(normal_norm, unit_z))
+
+        rotation_matrix = o3d.geometry.get_rotation_matrix_from_xyz(np.array([theta_x, theta_y, theta_z]))
+
+        lineset = o3d.geometry.LineSet()
+        lineset.points = o3d.utility.Vector3dVector(line_pts)
+        lineset.lines = o3d.utility.Vector2iVector(lines)
+        
 
         blue_box_cluster_slim.paint_uniform_color([1, 0, 0])
         fit_box.paint_uniform_color([0, 1, 0])
+        fit_corners.paint_uniform_color([0, 0, 1])
 
         print("Showing CPD results. Red is before and green is after.")
-        o3d.visualization.draw_geometries([blue_box_cluster_slim, blue_box_cluster_slim.get_oriented_bounding_box()])
-        o3d.visualization.draw_geometries([fit_box])
-        o3d.visualization.draw_geometries([blue_box_cluster_slim, fit_box])
+        #o3d.visualization.draw_geometries([blue_box_cluster_slim, blue_box_cluster_slim.get_oriented_bounding_box()])
+        #o3d.visualization.draw_geometries([fit_box])
+        o3d.visualization.draw_geometries([blue_box_cluster_slim, fit_box, fit_corners, lineset])
 
         print(f"Volume before: {blue_box_cluster_slim.get_oriented_bounding_box().volume()}, volume after: {fit_box.get_oriented_bounding_box().volume()}")
         print(f"Center before: {blue_box_cluster_slim.get_oriented_bounding_box().get_center()}, center after: {fit_box.get_oriented_bounding_box().get_center()}")
-
-
-        print("Returning pointcloud")
-        fit_bounding_box = fit_box.get_oriented_bounding_box()
-        o3d.visualization.draw_geometries([fit_box, fit_bounding_box])
+        return fit_box
 
         # ros2_pcl = numpy_to_ros2_pcl()
         
