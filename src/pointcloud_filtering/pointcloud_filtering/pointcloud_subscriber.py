@@ -4,6 +4,8 @@ from custom.msg import LidarMessage
 import rclpy
 from rclpy.node import Node
 import sensor_msgs.msg as sensor_msgs
+from geometry_msgs.msg import Transform, TransformStamped
+from builtin_interfaces.msg import Time
 import matplotlib.pyplot as plt
 from probreg import cpd
 
@@ -14,7 +16,10 @@ import struct
 import numpy as np
 import open3d as o3d
 
+import transforms3d
 from . import dangerzone
+
+from tf2_msgs.msg import TFMessage
 
 import os
 
@@ -205,6 +210,10 @@ class PCDListener(Node):
 
         self.o3d_pcd = o3d.geometry.PointCloud()
         self.pcd_subscriber = self.create_subscription(LidarMessage, 'pcl', self.listener_callback, 10)
+        self.tf_publisher = self.create_publisher(TFMessage, "/tf", 20)
+        self.timer = self.create_timer(0.1, self.timer_callback)
+
+        self.get_logger().info("Starting PCD listener.")
 
     def listener_callback(self, msg):
         # https://github.com/ros/common_msgs/blob/noetic-devel/sensor_msgs/src/sensor_msgs/point_cloud2.py
@@ -263,9 +272,21 @@ class PCDListener(Node):
         corner_cloud = corner_cloud.scale(1.5E-3, corner_cloud.get_center()).translate(blue_box_cluster.get_center(), relative=False)
 
         o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
-        fit_box = self.fit_box_cpd(blue_box_cluster_slim, blue_box_model, corner_cloud)
+        fit_box, _, _, rotation_matrix = self.fit_box_cpd(blue_box_cluster_slim, blue_box_model, corner_cloud)
 
-        #print("Returning pointcloud")
+
+        print("Returning pointcloud")
+
+        translation = fit_box.get_center()        
+
+        transform = self.get_transform(rotation_matrix=rotation_matrix, translation=translation)
+        transform_stamped = self.create_transform_stamp(0, transform)
+
+        tf_message = TFMessage()
+        tf_message.transforms = [transform_stamped]
+
+        self.tf_publisher.publish(tf_message)
+
         #fit_bounding_box = fit_box.get_oriented_bounding_box()
         #o3d.visualization.draw_geometries([fit_box, fit_bounding_box])
 
@@ -324,13 +345,32 @@ class PCDListener(Node):
 
         print(f"Volume before: {blue_box_cluster_slim.get_oriented_bounding_box().volume()}, volume after: {fit_box.get_oriented_bounding_box().volume()}")
         print(f"Center before: {blue_box_cluster_slim.get_oriented_bounding_box().get_center()}, center after: {fit_box.get_oriented_bounding_box().get_center()}")
-        return fit_box
+        return fit_box, fit_corners, lines, rotation_matrix
 
         # ros2_pcl = numpy_to_ros2_pcl()
         
 
+    def create_transform_stamp(self, box_id, transform):
+        transform_stamped = TransformStamped()
+        transform_stamped.header.frame_id = "L515"
+        transform_stamped.header.stamp = Time()
+                    
+        current_time = self.get_clock().now().seconds_nanoseconds()
+                    
+        transform_stamped.header.stamp.sec = current_time[0]
+        transform_stamped.header.stamp.nanosec = current_time[1]
+
+        transform_stamped.child_frame_id = f"blue_box_{box_id}"
+        transform_stamped.transform = transform
+        return transform_stamped
         
 
+    def get_transform(self, rotation_matrix, translation):
+        transform = Transform()
+        transform.translation.x, transform.translation.y, transform.translation.z = translation
+        rotation_quaternion = transforms3d.quaternions.mat2quat(rotation_matrix)
+        transform.rotation.w, transform.rotation.x, transform.rotation.y, transform.rotation.z = rotation_quaternion
+        return transform
 
 
 def main(args=None):
