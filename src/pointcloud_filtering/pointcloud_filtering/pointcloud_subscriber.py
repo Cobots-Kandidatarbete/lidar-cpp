@@ -64,7 +64,7 @@ def get_box_model():
         raise FileNotFoundError("Could not file box file. Make sure the program is run from workspace")               
 
     box = o3d.io.read_point_cloud(box_path_full)
-    box = box.random_down_sample(sampling_ratio=1500/len(np.asarray(box.points)))
+    box = box.random_down_sample(sampling_ratio=1200/len(np.asarray(box.points)))
 
     return box
 
@@ -73,23 +73,28 @@ def process_clusters(pcd):
     clusters = []
     bounding_boxes = []
 
+    print("Computing clusters...")
     with o3d.utility.VerbosityContextManager(o3d.utility.VerbosityLevel.Debug) as cm:
         labels = np.array(pcd.cluster_dbscan(eps=0.02, min_points=15, print_progress=True))
+    print("Finished computing clusters")
 
     max_label = labels.max()
 
+    print("Parsing clusters...")
     if max_label > -1:
         for i in range(0, max_label + 1):
+            print(f"\tGetting box at cluster {i}")
             cluster_index = np.where(labels == i)[0]
             clusters.append(pcd.select_by_index(cluster_index))
             try:
-                bounding_boxes.append(clusters[i].get_oriented_bounding_box())
+                bounding_box = clusters[i].get_oriented_bounding_box()
+                bounding_boxes.append(bounding_box)
             except:
-                print(f"Attempted to add bounding box of cluster {i} but failed.")
-                bounding_boxes.pop()
+                print(f"Failed to get box at cluster {i}")
+                clusters.pop()
             
 
-    print(f"Found {max_label + 1} clusters in the Pointcloud")
+    print(f"Finished parsing clusters. Found {max_label + 1} clusters in the Pointcloud")
     return max_label, labels, clusters, bounding_boxes
 
 
@@ -252,7 +257,7 @@ class PCDListener(Node):
 
         blue_box_cluster = clusters[blue_box_index]
         #blue_box_cluster_slim = blue_box_cluster.voxel_down_sample(voxel_size=0.03)
-        blue_box_cluster_slim = blue_box_cluster.random_down_sample(0.06)
+        blue_box_cluster_slim = blue_box_cluster.random_down_sample(0.025)
         blue_box_model = get_box_model()
 
         #blue_box_rotation = np.array([[1, 0, 0], [0, -1, 0], [0, 0, 1]])
@@ -295,10 +300,6 @@ class PCDListener(Node):
         self.publish_transform(transform, 0)
 
 
-
-        #fit_bounding_box = fit_box.get_oriented_bounding_box()
-        #o3d.visualization.draw_geometries([fit_box, fit_bounding_box])
-
     def fit_box_cpd(self, blue_box_cluster_slim, blue_box_model, corner_points):
         # TODO Perform Coherent point drift on blue box and bo model
         # https://pypi.org/project/probreg/
@@ -306,42 +307,46 @@ class PCDListener(Node):
 
         # TODO Fix Coherent point drift and remove max_iter
         try:
-            tf_param, _, _ = cpd.registration_cpd(source=blue_box_model, target=blue_box_cluster_slim, tf_type_name='rigid', maxiter=100)
+            tf_param, _, _ = cpd.registration_cpd(source=blue_box_model, target=blue_box_cluster_slim, tf_type_name='rigid', maxiter=40)
             print("Coherent point drift finished")
         except:
             print("Failed to do coherent point drift")
             return
 
+        print("Beginning transformations...")
+        print("\tFix box:", blue_box_model)
+        print("\tcorner points:", corner_points)
         fit_box = copy.deepcopy(blue_box_model)
         fit_corners = copy.deepcopy(corner_points)
+        print("\tTransforming box model")
         fit_box.points = tf_param.transform(fit_box.points) 
+        print("\tFinished box model transformation successfully")
+        print("\tTransforming corner reference points...")
         fit_corners.points = tf_param.transform(fit_corners.points) 
+        print("\tFinished transforming corner points")
+        print("Finished transformations")
 
+        print("Getting rotation matrix...")
         line1 = fit_corners.points[0] - fit_corners.points[1]
         line2 = fit_corners.points[0] - fit_corners.points[2] 
-        normal = np.cross(line1, line2)
-        pt_n = fit_corners.points[0] + normal
+        normal = -np.cross(line1, line2)
+        normal_point = fit_corners.points[0] + normal
 
-        line_pts = [fit_corners.points[0], fit_corners.points[1], fit_corners.points[2], fit_corners.points[3], pt_n]
+        line_pts = [fit_corners.points[0], fit_corners.points[1], fit_corners.points[2], fit_corners.points[3], normal_point]
         lines = [[0, 1], [0, 3], [0, 4]]
         
         normal_norm = normal / np.linalg.norm(normal)
+        euler = np.arccos(np.dot(normal_norm, np.eye(3)))
+        #euler = np.array([euler[0], euler[2], euler[1]])
+        #euler = np.array([0, 0, 0])
 
-        unit_x = np.array([1, 0, 0])
-        unit_y = np.array([0, 1, 0])
-        unit_z = np.array([0, 0, 1])
-
-
-        theta_x = np.arccos(np.dot(normal_norm, unit_x))
-        theta_y = np.arccos(np.dot(normal_norm, unit_y))
-        theta_z = np.arccos(np.dot(normal_norm, unit_z))
-
-        rotation_matrix = o3d.geometry.get_rotation_matrix_from_xyz(np.array([theta_x, theta_y, theta_z]))
+        rotation_matrix = o3d.geometry.get_rotation_matrix_from_xyz(euler)
+        print(f"Rotation matrix found:\n\t{rotation_matrix}")
+        print(f"In euler [deg]:\n\t{euler * (180 / np.pi)}")
 
         lineset = o3d.geometry.LineSet()
         lineset.points = o3d.utility.Vector3dVector(line_pts)
         lineset.lines = o3d.utility.Vector2iVector(lines)
-        
 
         blue_box_cluster_slim.paint_uniform_color([1, 0, 0])
         fit_box.paint_uniform_color([0, 1, 0])
@@ -355,29 +360,25 @@ class PCDListener(Node):
         print(f"Volume before: {blue_box_cluster_slim.get_oriented_bounding_box().volume()}, volume after: {fit_box.get_oriented_bounding_box().volume()}")
         print(f"Center before: {blue_box_cluster_slim.get_oriented_bounding_box().get_center()}, center after: {fit_box.get_oriented_bounding_box().get_center()}")
         return fit_box, fit_corners, lines, rotation_matrix
-
-        # ros2_pcl = numpy_to_ros2_pcl()
         
 
     def publish_transform(self, transform, box_id):
+        print(f"Adding transform of box {box_id} to broadcast queue")
         transform_stamped = TransformStamped()
 
         transform_stamped.header.stamp = self.get_clock().now().to_msg()
         transform_stamped.header.frame_id = "L515"
-        transform_stamped.child_frame_id = f"blue_box_x_{box_id}"
+        transform_stamped.child_frame_id = f"blue_box_{box_id}"
         transform_stamped.transform = transform
 
         StampContainer.stamps.append(transform_stamped)
-        #self.tf_broadcaster.sendTransform(transform_stamped)
-        #self.tf_publisher.publish(tf_message)
-        
-
         
 
     def get_transform(self, rotation_matrix, translation):
         transform = Transform()
         transform.translation.x, transform.translation.y, transform.translation.z = translation
         rotation_quaternion = transforms3d.quaternions.mat2quat(rotation_matrix)
+        #rotation_quaternion = transforms3d.quaternions.mat2quat(np.eye(3))
         transform.rotation.w, transform.rotation.x, transform.rotation.y, transform.rotation.z = rotation_quaternion
         return transform
 
@@ -406,11 +407,7 @@ class LidarPublisher(Node):
         tf_message = TFMessage()
         tf_message.transforms = messages
 
-        #self.tf_publisher.publish(tf_message)
         self.tf_broadcaster.sendTransform(messages)
-        print("PUBLISHING")
-
-        #StampContainer.clear()
 
 
 def main(args=None):

@@ -19,6 +19,9 @@
 using pt_t = pcl::PointXYZRGB;
 using pcl_t = pcl::PointCloud<pt_t>;
 
+const std::string SERIAL_D435 = "836612070900";
+const std::string SERIAL_L515 = "f1120455";
+
 
 bool feq(float a, float b) {
     return fabs(a - b) < FLT_EPSILON;
@@ -34,7 +37,7 @@ struct HSV {
     }
 
     bool is_blue() {
-        return h > 200 && h < 280 && s > 0.5 && v > 0.3;  
+        return h > 200 && h < 280 && s > 0.45 && v > 0.25;  
     }
 };
 
@@ -132,7 +135,7 @@ void write_point(pt_t *point, const XYZ coord, const RGB color)
 std::tuple<pcl_t::Ptr, rs2::points, rs2::video_frame>  setup_pointcloud() {
     // Enable Lidar camera
     rs2::config config;
-    config.enable_device("f1120455");
+    config.enable_device(SERIAL_L515);
     config.enable_stream(RS2_STREAM_COLOR, RS2_FORMAT_BGR8);
     config.enable_stream(RS2_STREAM_DEPTH, RS2_FORMAT_Z16);
 
