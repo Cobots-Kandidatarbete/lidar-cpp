@@ -23,7 +23,7 @@ from tf2_msgs.msg import TFMessage
 from tf2_ros import TransformBroadcaster
 
 import os
-
+import sys
 
 class StampContainer:
     stamps = []
@@ -50,10 +50,11 @@ def filter_pointcloud(pcd: np.ndarray, max_distance: float) -> np.ndarray:
 
 
 def get_box_model():
+    print("Getting box model...")
     ws_path = '/home/student/kandidat/lidar-ws'
     if not os.path.isdir(ws_path):
         ws_path = os.getcwd()
-        if ws_path.split('/')[-2] != 'lidar-ws':
+        if ws_path.split('/')[-1] != 'lidar-ws':
             ws_path += "/src/lidar-ws"
             if not os.path.isdir(ws_path):
                 raise Exception("Could not find folder. Make sure program is run from workspace.")
@@ -66,6 +67,7 @@ def get_box_model():
     box = o3d.io.read_point_cloud(box_path_full)
     box = box.random_down_sample(sampling_ratio=1200/len(np.asarray(box.points)))
 
+    print("Returning model")
     return box
 
 
@@ -99,6 +101,7 @@ def process_clusters(pcd):
 
 
 def find_largest_cluster(bounding_boxes):
+    print("Finding blue box cluster")
     largest_volume = 0
     largest_index = -1
 
@@ -172,18 +175,23 @@ def get_cloud(msg, use_example=False, store_example=False):
 
     if use_example:
         try:
+            print("Reading cloud from file")
             o3d_pcd = o3d.io.read_point_cloud(path)
         except:
             print("Failed to read example.")
 
     else:
+        print("Capturing cloud from camera")
         pcd = np.array(list(dangerzone.read_points(msg.pcl_response)))
+        print("Successfully read cloud")
         pcd = filter_pointcloud(pcd, max_distance=1.5)
         o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(pcd[:, :3]))
 
         if store_example:
+            print("Saving cloud to file")
             o3d.io.write_point_cloud(path, o3d_pcd)
             
+    print("Using cloud")
     return o3d_pcd
 
 
@@ -220,11 +228,12 @@ def numpy_to_ros2_pcl(points, parent_frame):
 
 class PCDListener(Node):
 
-    def __init__(self):
+    def __init__(self, use_example=False):
         super().__init__('pcd_subscriber_node')
 
         self.o3d_pcd = o3d.geometry.PointCloud()
         self.pcd_subscriber = self.create_subscription(LidarMessage, 'pcl', self.listener_callback, 10)
+        self.use_example = use_example
         #self.tf_publisher = self.create_publisher(TFMessage, "/tf", 20)
         #self.timer = self.create_timer(0.1, self.timer_callback)
         #self.tf_broadcaster = TransformBroadcaster(self)
@@ -238,7 +247,7 @@ class PCDListener(Node):
         #pcd = filter_pointcloud(pcd, max_distance=1.5)
         #o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(pcd[:, :3]))
 
-        o3d_pcd = get_cloud(msg, use_example=False)
+        o3d_pcd = get_cloud(msg, use_example=self.use_example, store_example=False)
 
         #o3d.visualization.draw_geometries([o3d_pcd]) 
 
@@ -413,7 +422,12 @@ class LidarPublisher(Node):
 def main(args=None):
     rclpy.init(args=args)
     try:
-        c1 = PCDListener()
+        use_example = False
+        if args:
+            if args[0] == "example":
+                use_example = True
+
+        c1 = PCDListener(use_example=use_example)
         c2 = LidarPublisher()
         
         executor = MultiThreadedExecutor()
@@ -439,4 +453,4 @@ def main(args=None):
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
