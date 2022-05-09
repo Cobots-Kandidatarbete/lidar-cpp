@@ -9,6 +9,13 @@ from builtin_interfaces.msg import Time
 import matplotlib.pyplot as plt
 from probreg import cpd
 
+import rclpy
+from rclpy.node import Node
+from tf_tools_msgs.srv import LookupTransform
+from tf_tools_msgs.srv import ManipulateScene
+from std_srvs.srv import Trigger
+from rclpy.executors import MultiThreadedExecutor
+
 import copy
 
 
@@ -28,6 +35,9 @@ import sys
 
 class StampContainer:
     stamps = []
+
+    def clear(cls):
+        cls.stamps = []
 
 
 def get_square_dist(pcd: np.ndarray) -> np.ndarray:
@@ -241,31 +251,49 @@ class PCDListener(Node):
         self.pcd_subscriber = self.create_subscription(
             LidarMessage, 'pcl', self.listener_callback, 10)
         self.use_example = use_example
-        #self.tf_publisher = self.create_publisher(TFMessage, "/tf", 20)
-        #self.timer = self.create_timer(0.1, self.timer_callback)
-        #self.tf_broadcaster = TransformBroadcaster(self)
+        # self.tf_publisher = self.create_publisher(TFMessage, "/tf", 20)
+        # self.timer = self.create_timer(0.1, self.timer_callback)
+        # self.tf_broadcaster = TransformBroadcaster(self)
+
+        self.transform = TransformStamped()
+
+        self.lookup_client = self.create_client(LookupTransform, "tf_lookup")
+        self.lookup_request = LookupTransform.Request()
+        self.lookup_response = LookupTransform.Response()
+
+        self.sms_client = self.create_client(
+            ManipulateScene, "manipulate_scene")
+        self.sms_request = ManipulateScene.Request()
+        self.sms_response = ManipulateScene.Response()
+
+        while not self.lookup_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("tf lookup service not available, waiting again...")
+
+        while not self.sms_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("sms service not available, waiting again...")
 
         self.get_logger().info("PCD listener started")
 
     def listener_callback(self, msg):
+        print("Callback!!")
         # https://github.com/ros/common_msgs/blob/noetic-devel/sensor_msgs/src/sensor_msgs/point_cloud2.py
 
-        #pcd = np.array(list(dangerzone.read_points(msg.pcl_response)))
-        #pcd = filter_pointcloud(pcd, max_distance=1.5)
-        #o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(pcd[:, :3]))
+        # pcd = np.array(list(dangerzone.read_points(msg.pcl_response)))
+        # pcd = filter_pointcloud(pcd, max_distance=1.5)
+        # o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(pcd[:, :3]))
 
         o3d_pcd = get_cloud(
             msg, use_example=self.use_example, store_example=False)
 
         # o3d.visualization.draw_geometries([o3d_pcd])
 
-        #plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02, ransac_n=3, num_iterations=1000)
-        #self.o3d_pcd = self.o3d_pcd.select_by_index(inliers, invert=True)
+        # plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02, ransac_n=3, num_iterations=1000)
+        # self.o3d_pcd = self.o3d_pcd.select_by_index(inliers, invert=True)
 
         max_label, labels, clusters, bounding_boxes = process_clusters(o3d_pcd)
         blue_box_index, bound_blue_box = find_largest_cluster(bounding_boxes)
 
-        #slim_pcd = self.o3d_pcd.voxel_down_sample(voxel_size=0.05)
+        # slim_pcd = self.o3d_pcd.voxel_down_sample(voxel_size=0.05)
 
         visualize_scene(o3d_pcd, max_label, labels, bound_blue_box)
 
@@ -273,12 +301,12 @@ class PCDListener(Node):
             return
 
         blue_box_cluster = clusters[blue_box_index]
-        #blue_box_cluster_slim = blue_box_cluster.voxel_down_sample(voxel_size=0.03)
+        # blue_box_cluster_slim = blue_box_cluster.voxel_down_sample(voxel_size=0.03)
         blue_box_cluster_slim = blue_box_cluster.random_down_sample(0.025)
         blue_box_model = get_box_model()
 
-        #blue_box_rotation = np.array([[1, 0, 0], [0, -1, 0], [0, 0, 1]])
-        #blue_box_model = blue_box_model.rotate(blue_box_rotation)
+        # blue_box_rotation = np.array([[1, 0, 0], [0, -1, 0], [0, 0, 1]])
+        # blue_box_model = blue_box_model.rotate(blue_box_rotation)
 
         box_p1 = np.array([150, 200, 200])
         box_p2 = np.array([150, -200, 200])
@@ -298,7 +326,7 @@ class PCDListener(Node):
         corner_cloud.paint_uniform_color([1, 0, 0])
 
         o3d.visualization.draw_geometries([blue_box_cluster_slim])
-        #o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
+        # o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
 
         rotation_matrix2 = np.array([[1, 0, 0], [0, -1, 0], [0, 0, -1]])
 
@@ -314,17 +342,18 @@ class PCDListener(Node):
         corner_cloud = corner_cloud.translate(
             blue_box_cluster.get_center(), relative=False).translate(center_diff).rotate(rotation_matrix2)
 
-        #o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
-        fit_box, _, _, rotation_matrix = self.fit_box_cpd(
+        # o3d.visualization.draw_geometries([blue_box_model, corner_cloud])
+        fit_box, fit_corners, _, rotation_matrix = self.fit_box_cpd(
             blue_box_cluster_slim, blue_box_model, corner_cloud)
 
         print("Returning pointcloud")
 
-        translation = fit_box.get_center()
+        translation = fit_corners.get_center()
         transform = self.get_transform(
             rotation_matrix=rotation_matrix, translation=translation)
 
         self.publish_transform(transform, 0)
+        print("Exiting callback")
 
     def fit_box_cpd(self, blue_box_cluster_slim, blue_box_model, corner_points):
         # TODO Perform Coherent point drift on blue box and bo model
@@ -371,17 +400,17 @@ class PCDListener(Node):
                     fit_corners.points[2], fit_corners.points[3], normal_point]
         lines = [[0, 1], [0, 3], [0, 4]]
 
-        rotation_matrix = np.array(
-            [dy/np.linalg.norm(dy), dx/np.linalg.norm(dx), normal/np.linalg.norm(normal)]).T
+        rotation_matrix = np.matmul(np.array(
+            [dy/np.linalg.norm(dy), dx/np.linalg.norm(dx), normal/np.linalg.norm(normal)]).T, np.array([[0, 1, 0], [-1, 0, 0], [0, 0, 1]]))
 
-        #normal_norm = normal / np.linalg.norm(normal)
-        #euler = np.arccos(np.dot(normal_norm, np.eye(3)))
-        #euler = np.array([euler[0], euler[2], euler[1]])
-        #euler = np.array([0, 0, 0])
+        # normal_norm = normal / np.linalg.norm(normal)
+        # euler = np.arccos(np.dot(normal_norm, np.eye(3)))
+        # euler = np.array([euler[0], euler[2], euler[1]])
+        # euler = np.array([0, 0, 0])
 
-        #rotation_matrix = o3d.geometry.get_rotation_matrix_from_xyz(euler)
+        # rotation_matrix = o3d.geometry.get_rotation_matrix_from_xyz(euler)
         print(f"Rotation matrix found:\n\t{rotation_matrix}")
-        #print(f"In euler [deg]:\n\t{euler * (180 / np.pi)}")
+        # print(f"In euler [deg]:\n\t{euler * (180 / np.pi)}")
 
         lineset = o3d.geometry.LineSet()
         lineset.points = o3d.utility.Vector3dVector(line_pts)
@@ -391,7 +420,7 @@ class PCDListener(Node):
         fit_box.paint_uniform_color([0, 1, 0])
         fit_corners.paint_uniform_color([0, 0, 1])
         print("Showing CPD results. Red is before and green is after.")
-        #o3d.visualization.draw_geometries([blue_box_cluster_slim, blue_box_cluster_slim.get_oriented_bounding_box()])
+        # o3d.visualization.draw_geometries([blue_box_cluster_slim, blue_box_cluster_slim.get_oriented_bounding_box()])
         # o3d.visualization.draw_geometries([fit_box])
         mesh_frame = o3d.geometry.TriangleMesh.create_coordinate_frame(
             size=0.1, origin=fit_corners.get_center()).rotate(rotation_matrix, center=fit_corners.get_center())
@@ -406,23 +435,217 @@ class PCDListener(Node):
 
     def publish_transform(self, transform, box_id):
         print(f"Adding transform of box {box_id} to broadcast queue")
+
         transform_stamped = TransformStamped()
 
-        transform_stamped.header.stamp = self.get_clock().now().to_msg()
+        transform_stamped.header.stamp = Time()
         transform_stamped.header.frame_id = "L515"
-        transform_stamped.child_frame_id = f"blue_box_{box_id}"
+
+        current_time = self.get_clock().now().seconds_nanoseconds()
+
+        transform_stamped.header.stamp.sec = current_time[0]
+        transform_stamped.header.stamp.nanosec = current_time[1]
+
+        transform_stamped.child_frame_id = f"lidar_{box_id}"
+        #transform_stamped.child_frame_id = f"locked_lidar_{box_id}"
+
         transform_stamped.transform = transform
 
-        StampContainer.stamps.append(transform_stamped)
+        self.sms_request.command = "update"
+        self.sms_request.parent_frame = "L515"
+        self.sms_request.child_frame = f"locked_lidar_{box_id}"
+        self.sms_request.same_position_in_world = False
+        self.sms_request.transform = transform
+        self.sms_future = self.sms_client.call_async(self.sms_request)
+        self.get_logger().info(f"request sent: {self.sms_request}")
+        while rclpy.ok():
+            rclpy.spin_once(self, timeout_sec=5)
+            print("HELLO 1")
+            break
+            if self.sms_future.done():
+                try:
+                    self.get_logger().info(f"request sent: {self.sms_request}")
+
+                    #self.sms_request.command = "up"
+
+                except Exception as e:
+                    self.get_logger().error(
+                        f"service call failed with: {(e,)}")
+                else:
+                    self.get_logger().info(
+                        f"lookup result: {self.sms_response}")
+                finally:
+                    self.get_logger().info(f"service call completed")
+                break
+
+        self.sms_request.command = "update"
+        self.sms_request.parent_frame = "world"
+        self.sms_request.child_frame = f"locked_lidar_{box_id}"
+        self.sms_request.same_position_in_world = True
+        self.sms_request.transform = transform
+        self.sms_future = self.sms_client.call_async(
+            self.sms_request)
+        self.get_logger().info(f"request sent: {self.sms_request}")
+        while rclpy.ok():
+            rclpy.spin_once(self, timeout_sec=5)
+            print("HELLO 2")
+            break
+            if self.sms_future.done():
+
+                try:
+                    self.get_logger().info(f"request sent: {self.sms_request}")
+
+                    #self.sms_request.command = "up"
+
+                except Exception as e:
+                    self.get_logger().error(
+                        f"service call failed with: {(e,)}")
+                else:
+                    self.get_logger().info(
+                        f"lookup result: {self.sms_response}")
+                finally:
+                    self.get_logger().info(f"service call completed")
+                break
+
+        # StampContainer.stamps.append(transform_stamped)
+        # self.lock_lidar(box_id)
 
     def get_transform(self, rotation_matrix, translation):
         transform = Transform()
         transform.translation.x, transform.translation.y, transform.translation.z = translation
         rotation_quaternion = transforms3d.quaternions.mat2quat(
             rotation_matrix)
-        #rotation_quaternion = transforms3d.quaternions.mat2quat(np.eye(3))
+        # rotation_quaternion = transforms3d.quaternions.mat2quat(np.eye(3))
         transform.rotation.w, transform.rotation.x, transform.rotation.y, transform.rotation.z = rotation_quaternion
         return transform
+
+    def lock_lidar(self, box_id):
+        self.get_logger().info("Locking box transform position in TF")
+
+        self.lookup_request.parent_id = "world"
+        self.lookup_request.child_id = f"blue_box_{box_id}"
+        self.lookup_request.deadline = 4000
+        self.lookup_future = self.lookup_client.call_async(self.lookup_request)
+        self.get_logger().info(f"request sent: {self.lookup_request}")
+        print("Looking for lookup...")
+        while rclpy.ok():
+            print("Ohoj")
+            rclpy.spin_once(self)
+            print("Spin")
+            if self.lookup_future.done():
+                try:
+                    self.lookup_response = self.lookup_future.result()
+                    self.get_logger().info(f"successful TF lookup")
+                except Exception as e:
+                    self.get_logger().error(
+                        f"service call failed with: {(e,)}")
+                else:
+                    self.get_logger().info(
+                        f"lookup result: {self.lookup_response}")
+                finally:
+                    self.get_logger().info(f"service call completed")
+                break
+        print("???")
+
+        self.get_logger().info("BIG IF")
+        if self.lookup_response != None:
+            self.get_logger().info("BIG IF2")
+            if self.lookup_response.success:
+                self.get_logger().info("BIG IF3")
+                self.sms_request.command = "update"
+                self.sms_request.parent_frame = "world"
+                self.sms_request.child_frame = f"locked_lidar_{box_id}"
+                self.sms_request.transform = self.lookup_response.transform.transform
+                self.sms_request.same_position_in_world = False
+                self.sms_future = self.sms_client.call_async(self.sms_request)
+                self.get_logger().info(f"request sent: {self.sms_request}")
+                while rclpy.ok():
+                    rclpy.spin_once(self)
+                    if self.sms_future.done():
+                        try:
+                            self.sms_response = self.sms_future.result()
+                        except Exception as e:
+                            self.get_logger().error(
+                                f"service call failed with: {(e,)}")
+                        else:
+                            self.get_logger().info(
+                                f"lookup result: {self.sms_response}")
+                        finally:
+                            self.get_logger().info(f"service call completed")
+                        break
+
+
+class LidarLocker(Node):
+    def __init__(self):
+        super().__init__("lidar_locker")
+
+        self.transform = TransformStamped()
+
+        self.lookup_client = self.create_client(LookupTransform, "tf_lookup")
+        self.lookup_request = LookupTransform.Request()
+        self.lookup_response = LookupTransform.Response()
+
+        self.sms_client = self.create_client(
+            ManipulateScene, "manipulate_scene")
+        self.sms_request = ManipulateScene.Request()
+        self.sms_response = ManipulateScene.Response()
+
+        while not self.lookup_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("tf lookup service not available, waiting again...")
+
+        while not self.sms_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info("sms service not available, waiting again...")
+
+        self.get_logger().info(f"lidar_locker should be running")
+
+    def lock_boxes(self):
+        for id in range(0, 1):
+            self.lock_a_box(id)
+
+    def lock_a_box(self, id):
+        self.lookup_request.parent_id = "world"
+        self.lookup_request.child_id = f"lidar_{id}"
+        self.lookup_request.deadline = 4000
+        self.lookup_future = self.lookup_client.call_async(self.lookup_request)
+        self.get_logger().info(f"request sent: {self.lookup_request}")
+        while rclpy.ok():
+            rclpy.spin_once(self)
+            if self.lookup_future.done():
+                try:
+                    self.lookup_response = self.lookup_future.result()
+                except Exception as e:
+                    self.get_logger().error(
+                        f"service call failed with: {(e,)}")
+                else:
+                    self.get_logger().info(
+                        f"lookup result: {self.lookup_response}")
+                finally:
+                    self.get_logger().info(f"service call completed")
+                break
+
+        if self.lookup_response != None:
+            if self.lookup_response.success:
+                self.sms_request.command = "update"
+                self.sms_request.parent_frame = "world"
+                self.sms_request.child_frame = f"locked_lidar_{id}"
+                self.sms_request.transform = self.lookup_response.transform.transform
+                self.sms_request.same_position_in_world = False
+                self.sms_future = self.sms_client.call_async(self.sms_request)
+                self.get_logger().info(f"request sent: {self.sms_request}")
+                while rclpy.ok():
+                    rclpy.spin_once(self)
+                    if self.sms_future.done():
+                        try:
+                            self.sms_response = self.sms_future.result()
+                        except Exception as e:
+                            self.get_logger().error(
+                                f"service call failed with: {(e,)}")
+                        else:
+                            self.get_logger().info(
+                                f"lookup result: {self.sms_response}")
+                        finally:
+                            self.get_logger().info(f"service call completed")
+                        break
 
 
 class LidarPublisher(Node):
@@ -432,7 +655,7 @@ class LidarPublisher(Node):
         history_depth = 20
         self.tf_publisher = self.create_publisher(
             TFMessage, "/tf", history_depth)
-        self.tf_broadcaster = TransformBroadcaster(self)
+        #self.tf_broadcaster = TransformBroadcaster(self)
         self.timer = self.create_timer(0.1, self.timer_callback)
 
         self.get_logger().info("Lidar publisher started")
@@ -443,13 +666,16 @@ class LidarPublisher(Node):
 
         messages = [t for t in StampContainer.stamps]
 
-        for message in messages:
-            message.header.stamp = self.get_clock().now().to_msg()
+        # for message in messages:
+        #    message.header.stamp = self.get_clock().now().to_msg()
 
         tf_message = TFMessage()
         tf_message.transforms = messages
 
-        self.tf_broadcaster.sendTransform(messages)
+        # self.tf_broadcaster.sendTransform(messages)
+        self.tf_publisher.publish(tf_message)
+
+        StampContainer.stamps = []
 
 
 def main(args=None):
@@ -461,23 +687,26 @@ def main(args=None):
                 use_example = True
 
         c1 = PCDListener(use_example=use_example)
-        c2 = LidarPublisher()
+        # c2 = LidarPublisher()
+        # c3 = LidarLocker()
 
         executor = MultiThreadedExecutor()
         executor.add_node(c1)
-        executor.add_node(c2)
+        # executor.add_node(c2)
+        # executor.add_node(c3)
 
         try:
             executor.spin()
         finally:
             executor.shutdown()
             c1.destroy_node()
-            c2.destroy_node()
+            # c2.destroy_node()
+            # c3.destroy_node()
 
     finally:
         rclpy.shutdown()
 
-    #pcd_listener = PCDListener()
+    # pcd_listener = PCDListener()
 
     # rclpy.spin(pcd_listener)
 
