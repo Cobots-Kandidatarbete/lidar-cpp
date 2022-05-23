@@ -285,7 +285,7 @@ class PCDListener(Node):
         o3d_pcd = get_cloud(
             msg, use_example=self.use_example, store_example=False)
 
-        # o3d.visualization.draw_geometries([o3d_pcd])
+        o3d.visualization.draw_geometries([o3d_pcd])
 
         # plane_model, inliers = self.o3d_pcd.segment_plane(distance_threshold=0.02, ransac_n=3, num_iterations=1000)
         # self.o3d_pcd = self.o3d_pcd.select_by_index(inliers, invert=True)
@@ -447,7 +447,7 @@ class PCDListener(Node):
         transform_stamped.header.stamp.nanosec = current_time[1]
 
         transform_stamped.child_frame_id = f"lidar_{box_id}"
-        #transform_stamped.child_frame_id = f"locked_lidar_{box_id}"
+        # transform_stamped.child_frame_id = f"locked_lidar_{box_id}"
 
         transform_stamped.transform = transform
 
@@ -458,15 +458,16 @@ class PCDListener(Node):
         self.sms_request.transform = transform
         self.sms_future = self.sms_client.call_async(self.sms_request)
         self.get_logger().info(f"request sent: {self.sms_request}")
+        """
         while rclpy.ok():
-            rclpy.spin_once(self, timeout_sec=5)
+            # rclpy.spin_once(self)
             print("HELLO 1")
-            break
             if self.sms_future.done():
+                break
                 try:
                     self.get_logger().info(f"request sent: {self.sms_request}")
 
-                    #self.sms_request.command = "up"
+                    # self.sms_request.command = "up"
 
                 except Exception as e:
                     self.get_logger().error(
@@ -477,7 +478,7 @@ class PCDListener(Node):
                 finally:
                     self.get_logger().info(f"service call completed")
                 break
-
+"""
         self.sms_request.command = "update"
         self.sms_request.parent_frame = "world"
         self.sms_request.child_frame = f"locked_lidar_{box_id}"
@@ -486,16 +487,19 @@ class PCDListener(Node):
         self.sms_future = self.sms_client.call_async(
             self.sms_request)
         self.get_logger().info(f"request sent: {self.sms_request}")
+        """
         while rclpy.ok():
-            rclpy.spin_once(self, timeout_sec=5)
+            # rclpy.spin_once(self)
             print("HELLO 2")
-            break
-            if self.sms_future.done():
 
+            if self.sms_future.done():
+                break
+
+                
                 try:
                     self.get_logger().info(f"request sent: {self.sms_request}")
 
-                    #self.sms_request.command = "up"
+                    # self.sms_request.command = "up"
 
                 except Exception as e:
                     self.get_logger().error(
@@ -506,9 +510,9 @@ class PCDListener(Node):
                 finally:
                     self.get_logger().info(f"service call completed")
                 break
-
-        # StampContainer.stamps.append(transform_stamped)
-        # self.lock_lidar(box_id)
+                """
+    # StampContainer.stamps.append(transform_stamped)
+    # self.lock_lidar(box_id)
 
     def get_transform(self, rotation_matrix, translation):
         transform = Transform()
@@ -655,7 +659,7 @@ class LidarPublisher(Node):
         history_depth = 20
         self.tf_publisher = self.create_publisher(
             TFMessage, "/tf", history_depth)
-        #self.tf_broadcaster = TransformBroadcaster(self)
+        # self.tf_broadcaster = TransformBroadcaster(self)
         self.timer = self.create_timer(0.1, self.timer_callback)
 
         self.get_logger().info("Lidar publisher started")
